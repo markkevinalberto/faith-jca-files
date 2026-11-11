@@ -1,0 +1,1438 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>LCS_3RD QTR_LESSON 2_UNDERSTANDING WORKPLACE CONSIDERATIONS FOR CAREER SUCCESS_STUDENT COPY</title>
+<meta name="description" content="Student copy of the animated Life and Career Skills Lesson 2 deck: the basic rights of employees under P.D. 442 and occupational wellness.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..800;1,6..72,400..800&family=Hanken+Grotesk:wght@400..800&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Shared base for the LCS Lesson 2 and Lesson 3 decks: a 1920x1080 stage scaled to the window.
+   Editorial look: Newsreader serif headlines, Hanken Grotesk body, DM Mono labels, double-bezel cards.
+   Each theme file sets the palette (--paper, --ink, --night, --c1..--c6) and its own motifs.
+   Readability floor: nothing that carries content is set under 40px. */
+:root {
+  --serif: "Newsreader", "Iowan Old Style", Georgia, serif;
+  --sans: "Hanken Grotesk", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "DM Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --ease: cubic-bezier(0.32, 0.72, 0, 1);
+  --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --sway: cubic-bezier(0.45, 0.05, 0.55, 0.95);
+  --thud: cubic-bezier(0.2, 1.4, 0.4, 1);
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body { height: 100%; }
+body { margin: 0; background: var(--night); color: var(--ink); overflow: hidden; font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 4px solid var(--c3); outline-offset: 4px; }
+
+/* ---------- stage ---------- */
+.stage-wrap { position: fixed; left: 0; right: 0; top: env(safe-area-inset-top, 0px); bottom: env(safe-area-inset-bottom, 0px); overflow: hidden; }
+.stage { position: absolute; left: 50%; top: 50%; width: 1920px; height: 1080px; transform: translate(-50%, -50%) scale(var(--s, 0.5)); border-radius: 6px; overflow: hidden; background: var(--paper); box-shadow: 0 40px 140px -40px rgba(0, 0, 0, 0.8); }
+.stage::after { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 30; opacity: 0.06; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/></filter><rect width='240' height='240' filter='url(%23n)'/></svg>"); }
+.slide { position: absolute; inset: 0; visibility: hidden; overflow: hidden; }
+.slide.active { visibility: visible; }
+.slide.light { background: var(--paper); color: var(--ink); }
+.slide.dark { background: var(--night); color: var(--on); }
+.fx { position: absolute; inset: 0; width: 1920px; height: 1080px; pointer-events: none; z-index: 0; }
+.frame { position: absolute; inset: 0; z-index: 1; padding: 56px 72px 108px; display: flex; flex-direction: column; gap: 28px; }
+.slide h1, .slide h2, .slide h3, .slide p, .slide ul, .slide ol { margin: 0; }
+.notes { display: none; }
+
+/* transitions */
+.slide.enter-fade-f, .slide.enter-fade-b { animation: fadeIn 0.9s var(--ease) both; }
+.slide.leave-fade-f, .slide.leave-fade-b { visibility: visible; animation: fadeOut 0.6s var(--ease) both; }
+.slide.enter-rise-f { animation: riseIn 1s var(--ease) both; }
+.slide.enter-rise-b { animation: fadeIn 0.9s var(--ease) both; }
+.slide.leave-rise-f, .slide.leave-rise-b { visibility: visible; animation: fadeOut 0.7s var(--ease) both; }
+.slide.enter-page-f { animation: pageIn 1s var(--ease) both; transform-origin: 0 50%; }
+.slide.enter-page-b { animation: fadeIn 0.9s var(--ease) both; }
+.slide.leave-page-f { visibility: visible; animation: pageOut 0.9s var(--ease) both; }
+.slide.leave-page-b { visibility: visible; animation: fadeOut 0.7s var(--ease) both; }
+@keyframes fadeIn { from { opacity: 0; transform: scale(1.015); filter: blur(8px); } to { opacity: 1; transform: none; filter: none; } }
+@keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
+@keyframes riseIn { from { transform: translateY(100%); } to { transform: none; } }
+@keyframes pageIn { from { transform: translateX(42%) rotate(2.5deg); opacity: 0; box-shadow: -60px 0 120px rgba(0, 0, 0, 0.35); } to { transform: none; opacity: 1; box-shadow: none; } }
+@keyframes pageOut { from { transform: none; opacity: 1; } to { transform: translateX(-12%) scale(0.96); opacity: 0; } }
+
+/* builds: visible unless the script has taken over */
+[data-build] { transition: opacity 0.9s var(--ease), transform 1s var(--ease), filter 0.9s var(--ease); transition-delay: calc(var(--i, 0) * 110ms); }
+.js [data-build]:not(.shown) { opacity: 0; transform: translateY(48px); filter: blur(12px); }
+.js [data-build][data-fx="pop"]:not(.shown) { transform: scale(0.82); filter: blur(6px); }
+.js [data-build][data-fx="fade"]:not(.shown) { transform: none; }
+.js [data-build][data-fx="left"]:not(.shown) { transform: translateX(-90px); }
+.js [data-build][data-fx="right"]:not(.shown) { transform: translateX(90px); }
+.js [data-build][data-fx="drop"]:not(.shown) { transform: translateY(-70px) rotate(calc(var(--rot, 0deg) * -2)); }
+.js [data-build][data-fx="stamp"]:not(.shown) { transform: scale(2.3) rotate(-22deg); filter: blur(4px); }
+.js [data-build][data-fx="none"]:not(.shown) { opacity: 1; transform: none; filter: none; }
+[data-build][data-fx="pop"], [data-build][data-fx="drop"] { transition-timing-function: var(--ease), var(--spring), var(--ease); }
+[data-build][data-fx="stamp"] { transition: opacity 0.25s var(--ease), transform 0.55s var(--thud), filter 0.4s var(--ease); }
+.instant, .instant * { transition: none !important; animation: none !important; }
+
+/* ---------- type ---------- */
+.mega { font: 700 200px/0.9 var(--serif); letter-spacing: -0.035em; }
+.h1 { font: 680 128px/0.98 var(--serif); letter-spacing: -0.03em; text-wrap: balance; }
+.h2 { font: 650 84px/1.02 var(--serif); letter-spacing: -0.022em; text-wrap: balance; }
+.h3 { font: 650 56px/1.08 var(--serif); letter-spacing: -0.012em; text-wrap: balance; }
+.lead { font: 500 52px/1.3 var(--sans); text-wrap: pretty; }
+.body { font: 500 46px/1.32 var(--sans); text-wrap: pretty; }
+.small { font: 500 40px/1.35 var(--sans); text-wrap: pretty; }
+.light .lead, .light .body, .light .small { color: var(--ink-2); }
+.dark .lead, .dark .body, .dark .small { color: var(--on-2); }
+em { font-style: italic; font-family: var(--serif); font-weight: 650; }
+.light em { color: var(--c1); } .dark em { color: var(--c3l); }
+b, strong { font-weight: 750; }
+.light b, .light strong { color: var(--ink); } .dark b, .dark strong { color: var(--on); }
+.eyebrow { display: inline-flex; align-self: flex-start; align-items: center; gap: 14px; padding: 12px 24px 12px 20px; border-radius: 999px; font: 500 28px/1 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; white-space: nowrap; }
+.light .eyebrow { color: var(--ink-2); background: rgba(0, 0, 0, 0.035); box-shadow: inset 0 0 0 1.5px var(--rule); }
+.dark .eyebrow { color: var(--on-2); background: rgba(255, 255, 255, 0.05); box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.12); }
+.eyebrow i { width: 12px; height: 12px; border-radius: 50%; background: var(--c1); animation: breathe 2s var(--sway) infinite alternate; }
+.dark .eyebrow i { background: var(--c3l); }
+@keyframes breathe { from { opacity: 0.35; transform: scale(0.75); } to { opacity: 1; transform: scale(1.15); } }
+.foot { position: absolute; left: 72px; right: 72px; bottom: 40px; z-index: 2; display: flex; justify-content: space-between; align-items: center; font: 500 26px/1 var(--mono); letter-spacing: 0.06em; pointer-events: none; font-variant-numeric: tabular-nums; }
+.light .foot { color: var(--ink-3); } .dark .foot { color: var(--on-3); }
+.ic { width: 1em; height: 1em; fill: currentColor; stroke: currentColor; stroke-width: 0; flex: none; }
+
+/* slide header: big serif title left, label pill right */
+.hd { display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; }
+.hd .h2 { flex: 1; min-width: 0; }
+.hd .eyebrow { align-self: center; }
+
+/* ---------- double-bezel cards ---------- */
+.card { position: relative; border-radius: 38px; padding: 8px; min-width: 0; }
+.card > .core { position: relative; height: 100%; border-radius: 30px; padding: 34px 40px; display: flex; flex-direction: column; gap: 16px; }
+.light .card { background: rgba(0, 0, 0, 0.035); box-shadow: 0 0 0 1px var(--rule), 0 46px 90px -60px rgba(30, 30, 40, 0.45); }
+.light .card > .core { background: var(--core); box-shadow: inset 0 1px 1px #FFFFFF; }
+.dark .card { background: rgba(255, 255, 255, 0.035); box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.09), 0 50px 100px -60px rgba(0, 0, 0, 0.9); }
+.dark .card > .core { background: linear-gradient(160deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.025)); box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.10); }
+.k1 { --c: var(--c1); --cl: var(--c1l); } .k2 { --c: var(--c2); --cl: var(--c2l); } .k3 { --c: var(--c3); --cl: var(--c3l); }
+.k4 { --c: var(--c4); --cl: var(--c4l); } .k5 { --c: var(--c5); --cl: var(--c5l); } .k6 { --c: var(--c6); --cl: var(--c6l); }
+.light .card.tint > .core { background: color-mix(in oklab, var(--c) 9%, var(--core)); }
+.dark .card.tint > .core { background: linear-gradient(160deg, color-mix(in oklab, var(--cl) 18%, transparent), rgba(255, 255, 255, 0.03)); }
+
+/* layout helpers */
+.split { flex: 1; min-height: 0; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); gap: 56px; align-items: stretch; }
+.split.wl { grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); }
+.split.wr { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); }
+.split.w3 { grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr); }
+.stack { display: flex; flex-direction: column; gap: 26px; min-width: 0; min-height: 0; }
+.fill { flex: 1; min-height: 0; }
+.grid { flex: 1; min-height: 0; display: grid; gap: 24px; grid-auto-rows: minmax(0, 1fr); }
+.g2 { grid-template-columns: repeat(2, minmax(0, 1fr)); } .g3 { grid-template-columns: repeat(3, minmax(0, 1fr)); } .g4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.center { align-items: center; justify-content: center; text-align: center; }
+.chips { display: flex; flex-wrap: wrap; gap: 16px; }
+.chip { display: inline-flex; align-items: center; gap: 14px; padding: 16px 30px; border-radius: 999px; font: 650 40px/1.05 var(--sans); }
+.light .chip { background: color-mix(in oklab, var(--c, var(--ink)) 10%, transparent); color: color-mix(in oklab, var(--c, var(--ink)) 85%, black); box-shadow: inset 0 0 0 1.5px color-mix(in oklab, var(--c, var(--ink)) 30%, transparent); }
+.dark .chip { background: color-mix(in oklab, var(--cl, #fff) 14%, transparent); color: var(--cl, var(--on)); box-shadow: inset 0 0 0 1.5px color-mix(in oklab, var(--cl, #fff) 35%, transparent); }
+.chip .ic { width: 44px; height: 44px; }
+
+/* icon badge */
+.badge { flex: none; width: 96px; height: 96px; border-radius: 30px; display: grid; place-items: center; }
+.badge .ic { width: 56px; height: 56px; }
+.light .badge { background: color-mix(in oklab, var(--c) 14%, var(--core)); color: var(--c); box-shadow: inset 0 0 0 1.5px color-mix(in oklab, var(--c) 28%, transparent); }
+.dark .badge { background: color-mix(in oklab, var(--cl) 16%, transparent); color: var(--cl); box-shadow: inset 0 0 0 1.5px color-mix(in oklab, var(--cl) 34%, transparent); }
+
+/* bullet list with drawn markers */
+.ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 20px; }
+.ul li { position: relative; padding-left: 50px; font: 500 46px/1.3 var(--sans); text-wrap: pretty; }
+.ul li::before { content: ""; position: absolute; left: 6px; top: 0.5em; width: 20px; height: 20px; border-radius: 6px; transform: rotate(45deg); background: var(--c, var(--c1)); }
+.light .ul li { color: var(--ink-2); } .dark .ul li { color: var(--on-2); }
+.ul.tight li { font-size: 42px; }
+.ul.big li { font-size: 52px; } .ul.big { gap: 30px; }
+
+/* row list: key | text */
+.rows { flex: 1; min-height: 0; display: grid; grid-auto-rows: minmax(0, 1fr); gap: 20px; }
+.row > .core { flex-direction: row; align-items: center; gap: 40px; padding: 26px 40px; }
+.row .key { flex: none; width: 360px; display: flex; flex-direction: column; gap: 6px; }
+.row .key .t { font: 650 50px/1.04 var(--serif); letter-spacing: -0.01em; color: var(--c); }
+.dark .row .key .t { color: var(--cl); }
+.row .key .n { font: 700 72px/1 var(--serif); letter-spacing: -0.02em; color: var(--ink); }
+.dark .row .key .n { color: var(--on); }
+.row .txt { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 10px; }
+.row .txt p { font: 500 42px/1.28 var(--sans); color: var(--ink); text-wrap: pretty; }
+.dark .row .txt p { color: var(--on); }
+.row .txt .why { font: italic 600 40px/1.25 var(--serif); color: var(--c); }
+.dark .row .txt .why { color: var(--cl); }
+.row .rule { flex: none; align-self: stretch; width: 3px; border-radius: 3px; background: color-mix(in oklab, var(--c) 40%, transparent); }
+
+/* ---------- divider ---------- */
+.div { flex: 1; display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 80px; }
+.div .no { font: 300 460px/0.8 var(--serif); letter-spacing: -0.06em; color: transparent; -webkit-text-stroke: 3px color-mix(in oklab, var(--c3l) 70%, transparent); }
+.div .stack { gap: 34px; }
+.div .h1 { font-size: 120px; }
+.div .lead { max-width: 1100px; }
+
+/* ---------- timer ---------- */
+.timer > .core { align-items: center; justify-content: center; text-align: center; gap: 22px !important; }
+.ring-wrap { position: relative; width: 280px; height: 280px; }
+.ring { width: 100%; height: 100%; transform: rotate(-90deg); }
+.ring circle { fill: none; stroke-width: 10; }
+.ring .track { stroke: var(--rule); }
+.ring .prog { stroke: var(--c, var(--c2)); stroke-linecap: round; stroke-dasharray: 326.73; stroke-dashoffset: 0; }
+.digits { position: absolute; inset: 0; display: grid; place-items: center; font: 700 80px/1 var(--serif); color: var(--ink); font-variant-numeric: tabular-nums; }
+.dark .digits { color: var(--on); }
+.timer .lab { font: 650 40px/1.15 var(--sans); color: var(--ink-2); }
+.t-btns { display: flex; gap: 16px; }
+.timer .ic-pause { display: none; } .timer.running .ic-pause { display: block; } .timer.running .ic-play { display: none; }
+.timer.done .ring-wrap { animation: pulse 1.2s var(--sway) infinite alternate; }
+@keyframes pulse { from { transform: scale(0.97); } to { transform: scale(1.04); } }
+
+/* island buttons with nested trailing icon */
+.pill { display: inline-flex; align-items: center; gap: 18px; padding: 10px 10px 10px 32px; border: 0; border-radius: 999px; background: var(--ink); color: var(--paper); font: 700 34px/1 var(--sans); cursor: pointer; transition: transform 0.5s var(--ease), opacity 0.4s var(--ease); }
+.pill:active { transform: scale(0.98); }
+.pill .pi { width: 60px; height: 60px; border-radius: 50%; display: grid; place-items: center; background: rgba(255, 255, 255, 0.16); transition: transform 0.5s var(--spring); }
+.pill:hover .pi { transform: translate(3px, -2px) scale(1.06); }
+.pill .pi .ic { width: 28px; height: 28px; }
+.pill.ghost { padding: 12px 30px; background: rgba(0, 0, 0, 0.05); color: var(--ink); box-shadow: inset 0 0 0 2px var(--rule); font-size: 32px; }
+.pill.ghost .ic { width: 30px; height: 30px; }
+.pill:disabled { opacity: 0.35; cursor: default; }
+.dark .pill { background: var(--on); color: var(--night); }
+.dark .pill.ghost { background: rgba(255, 255, 255, 0.06); color: var(--on); box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.14); }
+
+/* ---------- quiz ---------- */
+.quiz { flex: 1; display: flex; flex-direction: column; gap: 22px; min-height: 0; }
+.qstage { position: relative; flex: 1; min-height: 0; }
+.qz { position: absolute; inset: 0; display: flex; flex-direction: column; gap: 24px; opacity: 0; transform: translateX(60px); pointer-events: none; transition: opacity 0.6s var(--ease), transform 0.8s var(--ease); }
+.qz.on { opacity: 1; transform: none; pointer-events: auto; }
+.qn { display: flex; align-items: center; gap: 18px; font: 500 30px/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); }
+.qn .part { padding: 10px 18px; border-radius: 999px; color: var(--c); background: color-mix(in oklab, var(--c) 12%, transparent); }
+.qq { font: 650 58px/1.18 var(--serif); letter-spacing: -0.012em; text-wrap: pretty; }
+.opts { flex: 1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: minmax(0, 1fr); gap: 20px; min-height: 0; }
+.qz.long .opts { grid-template-columns: minmax(0, 1fr); }
+.qz.many .opts { gap: 14px 20px; }
+.opt { display: flex; align-items: center; gap: 24px; padding: 16px 30px; border: 0; border-radius: 30px; background: var(--core); box-shadow: 0 0 0 1px var(--rule), 0 30px 60px -44px rgba(20, 30, 40, 0.5); color: var(--ink); text-align: left; font: 550 46px/1.18 var(--sans); cursor: pointer; transition: transform 0.5s var(--ease), background 0.5s var(--ease), opacity 0.5s var(--ease), box-shadow 0.5s var(--ease); }
+.qz.many .opt { font-size: 40px; padding: 8px 24px; gap: 20px; border-radius: 24px; }
+.opt:hover { transform: translateY(-3px); }
+.opt .L { flex: none; width: 76px; height: 76px; border-radius: 50%; display: grid; place-items: center; background: rgba(0, 0, 0, 0.06); font: 700 40px/1 var(--serif); }
+.qz.many .opt .L { width: 62px; height: 62px; font-size: 36px; }
+.answered .opt { cursor: default; }
+.answered .opt:not(.right):not(.wrong):not(.pick) { opacity: 0.42; }
+.opt.right { background: color-mix(in oklab, var(--ok) 14%, var(--core)); box-shadow: 0 0 0 4px var(--ok); } .opt.right .L { background: var(--ok); color: #FFF; }
+.opt.wrong { background: color-mix(in oklab, var(--no) 12%, var(--core)); box-shadow: 0 0 0 4px var(--no); } .opt.wrong .L { background: var(--no); color: #FFF; }
+.opt.pick { box-shadow: 0 0 0 4px var(--c5); } .opt.pick .L { background: var(--c5); color: #FFF; }
+.qbar { display: flex; align-items: center; gap: 18px; }
+.qdots { display: flex; flex-wrap: wrap; gap: 10px; margin-right: auto; max-width: 1180px; }
+.qdots i { width: 18px; height: 18px; border-radius: 50%; background: var(--rule); box-shadow: inset 0 0 0 1.5px rgba(0, 0, 0, 0.12); transition: transform 0.5s var(--spring), background 0.4s var(--ease); }
+.qdots i.p1 { box-shadow: inset 0 0 0 2px color-mix(in oklab, var(--c3) 60%, transparent); }
+.qdots i.seen { background: var(--ok); box-shadow: none; } .qdots i.on { background: var(--ink); transform: scale(1.4); box-shadow: none; }
+
+/* ---------- answer key ---------- */
+.ans { flex: 1; min-height: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); grid-auto-rows: minmax(0, 1fr); gap: 14px; }
+.ans .card { padding: 6px; border-radius: 30px; } .ans .card > .core { border-radius: 24px; }
+.ans .card > .core { flex-direction: row; align-items: center; justify-content: space-between; padding: 8px 30px; }
+.ans .no { font: 600 42px/1 var(--sans); color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.ans .let { font: 700 84px/1 var(--serif); color: var(--c); }
+.ans .let sup { font-size: 40px; vertical-align: top; margin-left: 2px; }
+
+
+/* ---------- shared slide patterns (both decks) ---------- */
+/* ---------- competency + lesson flow ---------- */
+.comp { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 44px; }
+.comp blockquote { margin: 0; font: 600 96px/1.06 var(--serif); letter-spacing: -0.025em; text-wrap: balance; max-width: 1650px; }
+.comp blockquote::before { content: "\201C"; display: block; height: 0.55em; font-size: 1.6em; line-height: 1; color: var(--c1); }
+.flow { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 22px; }
+.flow .card > .core { padding: 26px 28px; gap: 14px; }
+.flow .no { font: 500 30px/1 var(--mono); color: var(--c); letter-spacing: 0.08em; }
+.flow .t { font: 650 40px/1.12 var(--sans); color: var(--ink); }
+.flow .ic { width: 54px; height: 54px; color: var(--c); }
+
+.facts .card > .core { gap: 14px; padding: 30px 36px; }
+.facts .top { display: flex; align-items: center; gap: 20px; }
+.facts .badge { width: 80px; height: 80px; border-radius: 24px; } .facts .badge .ic { width: 46px; height: 46px; }
+.facts .t { font: 650 50px/1.05 var(--serif); color: var(--c); }
+.facts p { font: 500 42px/1.28 var(--sans); color: var(--ink); text-wrap: pretty; }
+
+/* rows: title on top, icon beside the key figure */
+.row .key { width: 380px; gap: 12px; }
+.row .key .t { font-size: 48px; }
+.row .key .n { display: flex; align-items: center; gap: 16px; font-size: 64px; }
+.row .key .n.w { font-size: 50px; }
+.row .key .ic { width: 56px; height: 56px; color: var(--c); }
+
+.ol { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 22px; counter-reset: s; }
+.ol li { position: relative; padding-left: 88px; min-height: 64px; font: 500 44px/1.28 var(--sans); color: var(--ink); counter-increment: s; text-wrap: pretty; }
+.ol li::before { content: counter(s); position: absolute; left: 0; top: -4px; width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; font: 700 36px/1 var(--serif); color: #FFF; background: var(--c, var(--c1)); }
+
+/* ---------- closing ---------- */
+.end { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 40px; text-align: center; }
+.end .mega { padding-top: 30px; }
+.dark .end .mega em { color: var(--c3l); }
+
+/* ---------- chrome: progress bar, island, panels ---------- */
+.bar { position: fixed; left: 0; right: 0; top: env(safe-area-inset-top, 0px); height: 3px; z-index: 30; pointer-events: none; }
+.bar-fill { height: 100%; width: 100%; transform-origin: left; transform: scaleX(0); background: linear-gradient(90deg, var(--c1), var(--c3), var(--c2)); transition: transform 0.8s var(--ease); }
+.island { position: fixed; left: 50%; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); z-index: 30; display: flex; align-items: center; gap: 2px; padding: 6px; border-radius: 999px; background: var(--glass); color: #F4F1EA; backdrop-filter: blur(22px) saturate(1.4); -webkit-backdrop-filter: blur(22px) saturate(1.4); box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12), 0 24px 50px -24px rgba(0, 0, 0, 0.7); transform: translateX(-50%); transition: opacity 0.6s var(--ease), transform 0.6s var(--ease); }
+.island.idle { opacity: 0; transform: translate(-50%, 14px); pointer-events: none; }
+.island button { width: 40px; height: 40px; border: 0; border-radius: 50%; background: transparent; display: grid; place-items: center; cursor: pointer; transition: background 0.4s var(--ease), transform 0.4s var(--ease); }
+.island button:hover { background: rgba(255, 255, 255, 0.1); }
+.island button:active { transform: scale(0.94); }
+.island button .ic { width: 21px; height: 21px; }
+.island .sep { width: 1px; height: 22px; background: rgba(255, 255, 255, 0.18); margin: 0 4px; }
+.counter { min-width: 66px; text-align: center; font: 500 13px/1 var(--mono); letter-spacing: 0.06em; font-variant-numeric: tabular-nums; }
+.panel { position: fixed; z-index: 40; right: 14px; top: calc(14px + env(safe-area-inset-top, 0px)); bottom: calc(76px + env(safe-area-inset-bottom, 0px)); width: min(440px, calc(100vw - 28px)); display: flex; flex-direction: column; border-radius: 26px; background: var(--glass); color: #F4F1EA; backdrop-filter: blur(24px) saturate(1.4); -webkit-backdrop-filter: blur(24px) saturate(1.4); box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12), 0 30px 60px -30px rgba(0, 0, 0, 0.7); transform: translateX(calc(100% + 40px)); transition: transform 0.7s var(--ease); }
+.panel.open { transform: none; }
+.panel.left { right: auto; left: 14px; transform: translateX(calc(-100% - 40px)); }
+.panel.left.open { transform: none; }
+.panel-head { display: flex; justify-content: space-between; align-items: center; padding: 16px 16px 10px 22px; font: 500 12px/1 var(--mono); letter-spacing: 0.16em; text-transform: uppercase; color: rgba(244, 241, 234, 0.7); }
+.panel-head button { width: 34px; height: 34px; border: 0; border-radius: 50%; background: rgba(255, 255, 255, 0.08); display: grid; place-items: center; cursor: pointer; }
+.panel-head .ic { width: 18px; height: 18px; }
+.panel-body { flex: 1; overflow-y: auto; padding: 4px 22px 22px; font: 400 15px/1.6 var(--sans); white-space: pre-wrap; }
+.panel-body h4 { margin: 0 0 8px; font: 650 20px/1.3 var(--serif); white-space: normal; }
+.sorter { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; white-space: normal; }
+.sorter button { width: 100%; display: flex; gap: 12px; align-items: baseline; padding: 9px 10px; border: 0; border-radius: 12px; background: transparent; text-align: left; font: 500 14px/1.35 var(--sans); cursor: pointer; }
+.sorter button:hover { background: rgba(255, 255, 255, 0.08); }
+.sorter button.cur { background: rgba(255, 255, 255, 0.16); font-weight: 700; }
+.sorter .no { min-width: 22px; opacity: 0.6; font-variant-numeric: tabular-nums; }
+.sorter .sec { display: block; padding: 12px 10px 4px; font: 500 11px/1 var(--mono); letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.6; }
+.kbhint { position: fixed; left: 50%; bottom: calc(70px + env(safe-area-inset-bottom, 0px)); z-index: 30; transform: translateX(-50%); padding: 9px 16px; border-radius: 999px; background: var(--glass); color: #F4F1EA; box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12); font: 500 12px/1 var(--sans); white-space: nowrap; transition: opacity 0.8s var(--ease); max-width: calc(100vw - 32px); overflow: hidden; text-overflow: ellipsis; }
+.kbhint.gone { opacity: 0; pointer-events: none; }
+@media (max-width: 520px) { .kbhint { display: none; } .island button { width: 36px; height: 36px; } .counter { min-width: 54px; } }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; transition-delay: 0s !important; }
+}
+
+/* Lesson 2 "Ledger": ruled paper with a red margin line, deep-ink dark slides, a rotating P.D. 442 seal,
+   rubber stamps for upheld / violated, and an animated 8-hour workday bar. */
+:root {
+  --paper: #F5EFE4; --paper-2: #EDE4D4; --core: #FFFCF6;
+  --ink: #1B2430; --ink-2: #434D5B; --ink-3: #7A8290; --rule: rgba(27, 36, 48, 0.10);
+  --night: #111922; --night-2: #1B2633; --on: #F5EFE4; --on-2: #CFC8BA; --on-3: #8D95A2;
+  --c1: #C9402A; --c1l: #FF8C70;
+  --c2: #1C7553; --c2l: #63D4A3;
+  --c3: #B8791C; --c3l: #F4C25E;
+  --c4: #2B5A8A; --c4l: #8DB8EA;
+  --c5: #774A90; --c5l: #CBA3E6;
+  --c6: #1F7C78; --c6l: #6DD5CE;
+  --ok: var(--c2); --no: var(--c1);
+  --glass: rgba(17, 25, 34, 0.84);
+  color-scheme: light;
+}
+.slide.light:not(.eq) { background:
+  linear-gradient(90deg, transparent 0 34px, rgba(201, 64, 42, 0.30) 34px 36px, transparent 36px 42px, rgba(201, 64, 42, 0.30) 42px 44px, transparent 44px),
+  repeating-linear-gradient(180deg, transparent 0 58px, rgba(43, 90, 138, 0.075) 58px 60px),
+  radial-gradient(120% 90% at 90% 0%, #FBF6EC 0%, var(--paper) 55%, #EFE6D6 100%); }
+.slide.dark:not(.eq) { background: radial-gradient(90% 80% at 85% 10%, #22324A 0%, #151F2B 45%, var(--night) 100%); }
+.slide.dark:not(.eq)::before { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: repeating-linear-gradient(180deg, transparent 0 58px, rgba(245, 239, 228, 0.035) 58px 60px); }
+
+/* ---------- seal (title, divider, summary) ---------- */
+.seal-box { position: relative; display: grid; place-items: center; }
+.seal { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.seal .ring-o { fill: none; stroke: color-mix(in oklab, var(--c3l) 55%, transparent); stroke-width: 2; }
+.seal .ring-i { fill: color-mix(in oklab, var(--c3l) 8%, transparent); stroke: color-mix(in oklab, var(--c3l) 40%, transparent); stroke-width: 2; stroke-dasharray: 4 10; }
+.seal text { font: 500 30px var(--mono); letter-spacing: 0.1em; fill: var(--c3l); }
+.light .seal text { fill: var(--c3); } .light .seal .ring-o { stroke: color-mix(in oklab, var(--c3) 45%, transparent); }
+.light .seal .ring-i { fill: color-mix(in oklab, var(--c3) 6%, transparent); stroke: color-mix(in oklab, var(--c3) 35%, transparent); }
+.seal .spin { transform-origin: 300px 300px; animation: spin 70s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.seal-core { position: relative; width: 40%; aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center; color: var(--c3l);
+  background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.02)); box-shadow: inset 0 0 0 2px color-mix(in oklab, var(--c3l) 45%, transparent), 0 40px 80px -30px rgba(0, 0, 0, 0.6); }
+.light .seal-core { color: var(--c3); background: var(--core); box-shadow: inset 0 0 0 2px color-mix(in oklab, var(--c3) 35%, transparent), 0 40px 80px -40px rgba(80, 50, 10, 0.4); }
+.seal-core .ic { width: 52%; height: 52%; animation: tilt 5s var(--sway) infinite alternate; }
+@keyframes tilt { from { transform: rotate(-7deg); } to { transform: rotate(7deg); } }
+
+/* ---------- title ---------- */
+.l2-title { flex: 1; display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr); align-items: center; gap: 30px; }
+.l2-title .stack { gap: 34px; }
+.l2-title .h1 { font-size: 112px; }
+.l2-title .lead { max-width: 900px; }
+.title-art { position: relative; width: 780px; height: 780px; justify-self: center; }
+.title-art .seal-box { position: absolute; inset: 110px; }
+.slip { position: absolute; display: flex; align-items: center; gap: 16px; padding: 18px 28px 18px 20px; border-radius: 22px; background: var(--core); color: var(--ink); font: 650 40px/1 var(--sans); white-space: nowrap;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06), 0 30px 50px -24px rgba(0, 0, 0, 0.55); transform: rotate(var(--rot, 0deg)); }
+.slip .ic { width: 50px; height: 50px; color: var(--c); }
+.slip.shown { animation: bob 5.5s var(--sway) infinite alternate; animation-delay: calc(var(--i) * 0.7s + 1.2s); }
+@keyframes bob { from { translate: 0 0; } to { translate: 0 -16px; } }
+
+/* ---------- rights check with stamps ---------- */
+.chk { flex: 1; min-height: 0; display: grid; grid-auto-rows: auto; align-content: stretch; gap: 16px; }
+.chkr > .core { flex-direction: row; align-items: center; gap: 30px; padding: 10px 14px 10px 34px; }
+.chkr .no { flex: none; width: 70px; font: 700 64px/1 var(--serif); color: var(--ink-3); }
+.chkr .s { flex: 1; min-width: 0; font: 500 42px/1.24 var(--sans); color: var(--ink); text-wrap: pretty; }
+.chkr .slot { flex: none; width: 370px; height: 100%; display: grid; place-items: center; border-radius: 22px; background: repeating-linear-gradient(135deg, transparent 0 14px, rgba(27, 36, 48, 0.035) 14px 16px); box-shadow: inset 0 0 0 2px var(--rule); }
+.stamp { display: inline-flex; align-items: center; gap: 12px; padding: 10px 20px; border-radius: 16px; border: 5px solid currentColor; font: 500 40px/1 var(--mono); letter-spacing: 0.04em; text-transform: uppercase; rotate: -6deg; opacity: 0.92; mix-blend-mode: multiply; position: relative; }
+.stamp .ic { width: 44px; height: 44px; }
+.stamp.st-ok { color: var(--c2); } .stamp.st-x { color: var(--c1); }
+.stamp::after { content: ""; position: absolute; inset: -12px; border-radius: 22px; border: 3px solid currentColor; opacity: 0; }
+.stamp.shown::after { animation: ink 0.9s var(--ease) 0.15s both; }
+@keyframes ink { from { opacity: 0.6; transform: scale(0.9); } to { opacity: 0; transform: scale(1.35); } }
+.legend { display: flex; gap: 14px; }
+.legend .chip { font-size: 36px; padding: 12px 24px; }
+
+/* ---------- workday bar ---------- */
+.day { display: flex; flex-direction: column; gap: 14px; }
+.daybar { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)) minmax(0, 2.6fr); gap: 10px; height: 150px; }
+.hr { display: grid; place-items: center; border-radius: 22px; font: 700 54px/1 var(--serif); color: #FFF; background: linear-gradient(180deg, color-mix(in oklab, var(--c2) 80%, white), var(--c2)); transform-origin: 50% 100%; }
+.hr.ot { background: repeating-linear-gradient(135deg, var(--c1) 0 22px, color-mix(in oklab, var(--c1) 85%, black) 22px 44px); gap: 0; align-content: center; text-align: center; }
+.hr.ot b { color: #FFF; font: 700 66px/1 var(--serif); }
+.hr.ot span { font: 600 40px/1.05 var(--sans); }
+.js .day:not(.shown) .hr { transform: scaleY(0); }
+.js .day.shown .hr { animation: grow 0.8s var(--spring) both; animation-delay: calc(var(--h) * 110ms + 300ms); }
+@keyframes grow { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+.braces { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)) minmax(0, 2.6fr); gap: 10px; }
+.brace { grid-column: span 8; position: relative; padding-top: 22px; text-align: center; font: 650 40px/1.1 var(--sans); color: var(--c2); }
+.brace.ot { grid-column: span 1; color: var(--c1); }
+.brace::before { content: ""; position: absolute; left: 6px; right: 6px; top: 0; height: 16px; border: 3px solid currentColor; border-top: 0; border-radius: 0 0 14px 14px; }
+
+/* ---------- three-up law cards ---------- */
+.law .card > .core { gap: 22px; padding: 38px 40px; }
+.law .card { transform: rotate(var(--rot, 0deg)); }
+.law .t { font: 650 64px/1.05 var(--serif); color: var(--c); }
+.law p { font: 500 52px/1.3 var(--sans); color: var(--ink); text-wrap: pretty; }
+.law .badge { width: 110px; height: 110px; } .law .badge .ic { width: 64px; height: 64px; }
+
+
+
+/* ---------- summary ---------- */
+.sum { flex: 1; display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 0.55fr); align-items: center; gap: 50px; }
+.sum p { font: 500 72px/1.3 var(--serif); letter-spacing: -0.01em; color: var(--on); text-wrap: pretty; }
+.sum mark { color: inherit; background: linear-gradient(var(--c3l), var(--c3l)) no-repeat 0 92% / 0% 0.16em; transition: background-size 0.9s var(--ease); transition-delay: calc(0.9s + var(--m) * 0.32s); }
+.sum .shown mark { background-size: 100% 0.16em; }
+.sum .seal-box { width: 520px; height: 520px; justify-self: center; }
+
+/* ---------- apply-it activities ---------- */
+.place-grid { flex: 1; min-height: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: minmax(0, 1fr); gap: 20px; }
+.place { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; border: 0; border-radius: 34px; background: var(--core); cursor: pointer; color: var(--ink);
+  box-shadow: 0 0 0 1px var(--rule), 0 40px 70px -50px rgba(30, 30, 40, 0.55); transition: transform 0.6s var(--ease), box-shadow 0.6s var(--ease), background 0.6s var(--ease); }
+.place .ic { width: 120px; height: 120px; color: var(--c); transition: transform 0.7s var(--spring); }
+.place .t { font: 650 54px/1 var(--serif); }
+.place:hover .ic { transform: translateY(-6px) scale(1.05); }
+.place .tick { position: absolute; top: 22px; right: 22px; width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; background: var(--c); color: #FFF; transform: scale(0); transition: transform 0.6s var(--spring); }
+.place .tick .ic { width: 38px; height: 38px; color: #FFF; }
+.place.on { background: color-mix(in oklab, var(--c) 10%, var(--core)); box-shadow: 0 0 0 5px var(--c), 0 40px 70px -40px rgba(30, 30, 40, 0.5); }
+.place.on .tick { transform: scale(1); }
+.dur { display: flex; gap: 16px; flex-wrap: wrap; }
+.timers2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+
+
+/* Subtopic 2 "Equilibrium" (slides with class .eq): sage-mist paper, deep forest dark slides, lilac and coral accents.
+   Motifs: orbiting work/life icons, a teetering seesaw, appointment timelines, stacked pay layers,
+   counting peso amounts, two-circle work/life glyphs, and day timelines. */
+.slide.eq {
+  --paper: #EEF3EE; --paper-2: #E2EBE4; --core: #FBFDFB;
+  --ink: #13231F; --ink-2: #3E524C; --ink-3: #72847D; --rule: rgba(19, 35, 31, 0.10);
+  --night: #0D1915; --night-2: #15261F; --on: #EDF4EF; --on-2: #B9C9C0; --on-3: #7F938A;
+  --c1: #23754F; --c1l: #6FD6A4;
+  --c2: #6A57D9; --c2l: #B8ACFF;
+  --c3: #CF5A3F; --c3l: #FFA28A;
+  --c4: #B07F12; --c4l: #F4CC6A;
+  --c5: #2F6FB0; --c5l: #8EC1F3;
+  --c6: #B6457B; --c6l: #F39CC4;
+  --ok: var(--c1); --no: var(--c3);
+  --glass: rgba(13, 25, 21, 0.84);
+  color-scheme: light;
+}
+.slide.eq.light { background:
+  radial-gradient(42% 52% at 96% 4%, rgba(184, 172, 255, 0.30), transparent 70%),
+  radial-gradient(40% 50% at 0% 100%, rgba(111, 214, 164, 0.26), transparent 70%),
+  radial-gradient(circle at 1px 1px, rgba(19, 35, 31, 0.07) 1.4px, transparent 1.6px) 0 0 / 36px 36px,
+  var(--paper); }
+.slide.eq.dark { background: radial-gradient(60% 70% at 80% 20%, rgba(106, 87, 217, 0.30), transparent 70%), radial-gradient(60% 70% at 10% 90%, rgba(35, 117, 79, 0.40), transparent 70%), var(--night); }
+.slide.eq.dark::before { content: ""; position: absolute; right: -320px; top: -320px; width: 1200px; height: 1200px; border-radius: 50%; pointer-events: none;
+  background: repeating-radial-gradient(circle, transparent 0 58px, rgba(237, 244, 239, 0.05) 58px 60px); animation: breathe-rings 9s var(--sway) infinite alternate; }
+@keyframes breathe-rings { from { transform: scale(0.96); opacity: 0.7; } to { transform: scale(1.04); opacity: 1; } }
+@keyframes spin { to { transform: rotate(360deg); } }
+.eq.dark em { color: var(--c2l); }
+.eq.dark .eyebrow i { background: var(--c1l); }
+
+/* ---------- title orbit ---------- */
+.l3-title { flex: 1; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); align-items: center; gap: 30px; }
+.l3-title .stack { gap: 36px; }
+.l3-title .h1 { font-size: 150px; }
+.orbit { position: relative; width: 800px; height: 800px; justify-self: center; }
+.orbit .rg { position: absolute; border-radius: 50%; box-shadow: inset 0 0 0 2px rgba(237, 244, 239, 0.12); animation: spin var(--t) linear infinite; }
+.orbit .rg.r1 { inset: 0; --t: 70s; animation-delay: -8s; } .orbit .rg.r2 { inset: 120px; --t: 48s; animation-direction: reverse; animation-delay: -15s; } .orbit .rg.r3 { inset: 230px; --t: 34s; animation-delay: -21s; }
+.orbit .rg .pl { animation-delay: inherit; }
+.orbit .pl { position: absolute; left: 50%; top: 0; width: 104px; height: 104px; margin: -52px 0 0 -52px; border-radius: 50%; display: grid; place-items: center; color: var(--cl);
+  background: color-mix(in oklab, var(--cl) 16%, var(--night)); box-shadow: inset 0 0 0 2px color-mix(in oklab, var(--cl) 50%, transparent), 0 20px 40px -14px rgba(0, 0, 0, 0.7); animation: spin var(--t) linear infinite reverse; }
+.orbit .rg.r2 .pl { animation-direction: normal; }
+.orbit .pl.b { top: 100%; }
+.orbit .pl .ic { width: 54px; height: 54px; }
+.orbit .core { position: absolute; inset: 310px; border-radius: 50%; display: grid; place-items: center; color: var(--c1l); background: radial-gradient(circle at 35% 30%, rgba(111, 214, 164, 0.28), rgba(111, 214, 164, 0.06)); box-shadow: inset 0 0 0 2px rgba(111, 214, 164, 0.5), 0 0 80px rgba(111, 214, 164, 0.25); animation: pulse 3.6s var(--sway) infinite alternate; }
+.orbit .core .ic { width: 96px; height: 96px; }
+
+/* ---------- seesaw ---------- */
+.seesaw { position: relative; height: 330px; margin-top: auto; }
+.seesaw .beam { position: absolute; left: 4%; right: 4%; top: 170px; height: 16px; border-radius: 8px; background: var(--ink); transform-origin: 50% 50%; animation: teeter 5s var(--sway) infinite alternate; }
+.seesaw .w { position: absolute; bottom: 16px; padding: 14px 24px; border-radius: 20px; font: 700 40px/1 var(--sans); color: #FFF; background: var(--c); white-space: nowrap; box-shadow: 0 16px 30px -16px rgba(0, 0, 0, 0.5); }
+.seesaw .w.l1 { left: 0; } .seesaw .w.l2 { left: 0; bottom: 90px; } .seesaw .w.r1 { right: 0; } .seesaw .w.r2 { right: 0; bottom: 90px; }
+.seesaw .fulcrum { position: absolute; left: 50%; top: 186px; width: 150px; height: 120px; transform: translateX(-50%); background: var(--c1); clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+.seesaw .tag { position: absolute; top: 250px; font: italic 600 44px/1 var(--serif); color: var(--ink-2); }
+.seesaw .tag.a { left: 6%; } .seesaw .tag.b { right: 6%; }
+@keyframes teeter { from { transform: rotate(-6deg); } to { transform: rotate(6deg); } }
+.q-big { font: 600 60px/1.2 var(--serif); letter-spacing: -0.012em; color: var(--ink); text-wrap: pretty; }
+.q-big em { font-weight: 650; }
+
+/* ---------- steps flow ---------- */
+.steps { display: flex; flex-direction: column; gap: 22px; flex: 1; min-height: 0; }
+.steps .card > .core { flex-direction: row; align-items: flex-start; gap: 26px; padding: 28px 34px; }
+.steps .card { flex: 1; }
+.steps .card:not(:last-child)::after { content: ""; position: absolute; left: 70px; bottom: -22px; width: 3px; height: 22px; background: color-mix(in oklab, var(--c) 50%, transparent); }
+.steps .n { flex: none; width: 76px; height: 76px; border-radius: 50%; display: grid; place-items: center; font: 700 40px/1 var(--serif); color: #FFF; background: var(--c); }
+.steps p { font: 500 44px/1.28 var(--sans); color: var(--ink); text-wrap: pretty; }
+.steps .chips { margin-top: 14px; }
+
+/* ---------- appointments ---------- */
+.appt .card > .core { gap: 16px; padding: 32px 40px; }
+.top { display: flex; align-items: center; gap: 22px; }
+.appt .t, .fwa .t { font: 650 58px/1 var(--serif); letter-spacing: -0.012em; color: var(--c); }
+.appt p { font: 500 44px/1.28 var(--sans); color: var(--ink); text-wrap: pretty; }
+.glyph { position: relative; height: 44px; margin-top: auto; border-radius: 22px; background: color-mix(in oklab, var(--c) 10%, transparent); overflow: hidden; flex: none; }
+.glyph i { position: absolute; top: 8px; bottom: 8px; left: 8px; border-radius: 14px; background: var(--c); transform-origin: 0 50%; transition: transform 1.4s var(--ease) 0.5s; }
+.js [data-build]:not(.shown) .glyph i { transform: scaleX(0); }
+.g-perm i { right: 8px; background: linear-gradient(90deg, var(--c), color-mix(in oklab, var(--c) 30%, transparent)); }
+.g-temp i { width: 58%; background: repeating-linear-gradient(90deg, var(--c) 0 calc(100% / 12 - 4px), transparent calc(100% / 12 - 4px) calc(100% / 12)); }
+.g-cot { height: 64px; }
+.g-cot i { width: 74%; bottom: 36px; } .g-cot i + i { top: 36px; bottom: 8px; background: color-mix(in oklab, var(--c) 55%, white); }
+.g-cot::after { content: ""; position: absolute; left: calc(74% + 8px); top: 4px; bottom: 4px; width: 4px; border-radius: 2px; background: var(--ink); }
+.g-sub i { width: 30%; } .g-sub i + i { left: calc(30% + 8px); width: 36%; background: repeating-linear-gradient(135deg, var(--c) 0 12px, color-mix(in oklab, var(--c) 60%, white) 12px 24px); }
+.g-sub i + i + i { left: calc(66% + 8px); right: 8px; width: auto; background: var(--c); }
+
+/* definition + example */
+.def > .core { gap: 20px; }
+.cap { font: 500 30px/1 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--c); }
+.def p { font: 500 46px/1.3 var(--sans); color: var(--ink); text-wrap: pretty; }
+.def .note { font: italic 600 42px/1.25 var(--serif); color: var(--c); }
+.ex > .core { gap: 18px; }
+.ex .h3 { color: var(--ink); }
+.ex p { font: 500 42px/1.3 var(--sans); color: var(--ink); text-wrap: pretty; }
+.kv { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 16px 26px; align-items: baseline; margin: 0; }
+.kv dt { font: 750 40px/1.25 var(--sans); color: var(--c); max-width: 330px; }
+.kv dd { margin: 0; font: 500 42px/1.26 var(--sans); color: var(--ink); text-wrap: pretty; }
+.kv.tight dd, .kv.tight dt { font-size: 40px; }
+.kv.big dt { font-size: 46px; max-width: 360px; } .kv.big dd { font-size: 46px; } .kv.big { gap: 18px 30px; }
+.kv.stk { grid-template-columns: minmax(0, 1fr); gap: 4px; } .kv.stk dt { max-width: none; } .kv.stk dd { margin-bottom: 20px; font-size: 44px; }
+
+/* timeline bars */
+.months { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 6px; height: 64px; }
+.months i { border-radius: 10px; background: var(--c); transform-origin: 50% 100%; }
+.js [data-build]:not(.shown) .months i { transform: scaleY(0); }
+[data-build].shown .months i { transition: transform 0.6s var(--spring) calc(var(--m) * 70ms + 400ms); }
+.mlab { display: flex; justify-content: space-between; font: 650 40px/1 var(--sans); color: var(--c); }
+.pair { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 14px 22px; align-items: center; }
+.pair .who { font: 700 40px/1.1 var(--sans); color: var(--ink); }
+.pair .pbar { height: 50px; border-radius: 14px; background: var(--c); transform-origin: 0 50%; transition: transform 1.3s var(--ease) 0.5s; }
+.pair .pbar.b2 { background: color-mix(in oklab, var(--c) 55%, white); transition-delay: 0.8s; }
+.js [data-build]:not(.shown) .pair .pbar { transform: scaleX(0); }
+.pair .pend { grid-column: 2; justify-self: end; font: italic 650 42px/1 var(--serif); color: var(--c); }
+.cover { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 14px 22px; align-items: center; }
+.cover .who { font: 700 40px/1.1 var(--sans); color: var(--ink); }
+.cover .track { position: relative; height: 54px; border-radius: 14px; background: color-mix(in oklab, var(--c) 10%, transparent); }
+.cover .seg { position: absolute; top: 0; bottom: 0; border-radius: 14px; display: grid; place-items: center; font: 650 40px/1 var(--sans); color: #FFF; transform-origin: 0 50%; transition: transform 1.1s var(--ease); }
+.cover .seg.a { left: 0; width: 28%; background: var(--c); transition-delay: 0.4s; } .cover .seg.c { left: 72%; right: 0; background: var(--c); transition-delay: 1.4s; }
+.cover .seg.gap { left: 28%; width: 44%; background: repeating-linear-gradient(135deg, transparent 0 12px, color-mix(in oklab, var(--c) 18%, transparent) 12px 24px); color: var(--c); box-shadow: inset 0 0 0 2px color-mix(in oklab, var(--c) 40%, transparent); }
+.cover .seg.sub { left: 28%; width: 44%; background: var(--c2); transition-delay: 0.9s; }
+.js [data-build]:not(.shown) .cover .seg.a, .js [data-build]:not(.shown) .cover .seg.c, .js [data-build]:not(.shown) .cover .seg.sub { transform: scaleX(0); }
+
+/* coverage + statement */
+.statement { font: 550 58px/1.26 var(--serif); letter-spacing: -0.01em; color: var(--ink); text-wrap: pretty; }
+.cov { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.cov .chip { justify-content: center; text-align: center; padding: 22px 20px; border-radius: 26px; font-size: 42px; }
+
+/* rows: icon badge as key */
+.row .key.ik { flex-direction: row; align-items: center; gap: 22px; width: 470px; }
+.row .key.ik .t { font-size: 50px; }
+.row .key.ik .badge { width: 104px; height: 104px; } .row .key.ik .badge .ic { width: 60px; height: 60px; }
+.rows.fwa-rows .txt p { font-size: 46px; }
+
+/* FWA cards */
+.fwa .card > .core { gap: 16px; padding: 30px 38px; }
+.fwa .t { font-size: 52px; }
+.fwa p { font: 500 42px/1.28 var(--sans); color: var(--ink); text-wrap: pretty; }
+
+/* pay layers */
+.layers { flex: 1; min-height: 0; display: flex; flex-direction: column-reverse; gap: 14px; }
+.layer { flex: 1; align-self: center; width: var(--w); }
+.layer > .core { flex-direction: row; align-items: center; gap: 30px; padding: 18px 36px; }
+.layer .n { flex: none; width: 76px; height: 76px; border-radius: 22px; display: grid; place-items: center; font: 700 44px/1 var(--serif); color: #FFF; background: var(--c); }
+.layer .t { flex: none; width: 520px; font: 650 46px/1.06 var(--serif); color: var(--c); }
+.layer p { font: 500 40px/1.25 var(--sans); color: var(--ink); text-wrap: pretty; }
+.js .layer[data-build]:not(.shown) { transform: translateY(-80px) scale(0.96); }
+.sub-lead { font: 500 42px/1.25 var(--sans); color: var(--ink-2); }
+
+/* money cards */
+.money .card > .core { gap: 10px; padding: 28px 38px; }
+.money .t { font: 650 48px/1.05 var(--serif); color: var(--c); }
+.money .amt { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+.money .amt b { font: 700 96px/1 var(--serif); letter-spacing: -0.02em; color: var(--ink); font-variant-numeric: tabular-nums; }
+.money .amt > span { font: 650 40px/1.1 var(--sans); color: var(--c); }
+.money p { font: 500 40px/1.28 var(--sans); color: var(--ink-2); text-wrap: pretty; }
+
+/* two-column lists */
+.cols2 { columns: 2; column-gap: 40px; display: block; }
+.cols2 li { break-inside: avoid; margin-bottom: 18px; }
+.lead-def { font: 500 46px/1.3 var(--sans); color: var(--ink); text-wrap: pretty; }
+
+/* ---------- work-life ---------- */
+.venn { position: relative; height: 150px; display: grid; place-items: center; }
+.venn i { position: absolute; top: 15px; left: calc(50% - 60px); width: 120px; height: 120px; border-radius: 50%; mix-blend-mode: multiply; transition: transform 1.3s var(--spring) 0.4s; }
+.venn i:first-child { background: color-mix(in oklab, var(--c5) 55%, white); transform: translateX(calc(var(--d) * -1)); }
+.venn i:last-child { background: color-mix(in oklab, var(--c3) 55%, white); transform: translateX(var(--d)); }
+.js [data-build]:not(.shown) .venn i:first-child { transform: translateX(-120px); }
+.js [data-build]:not(.shown) .venn i:last-child { transform: translateX(120px); }
+.venn .ic { position: absolute; width: 120px; height: 120px; color: var(--c); }
+.five .card > .core { align-items: center; justify-content: center; text-align: center; gap: 20px; padding: 26px 22px; }
+.five .t { font: 650 54px/1.05 var(--serif); color: var(--c); }
+.five p { font: 500 46px/1.25 var(--sans); color: var(--ink); text-wrap: pretty; }
+.wall { display: grid; grid-template-columns: 1fr 22px 1fr; gap: 18px; height: 160px; flex: none; }
+.wall span { display: grid; place-items: center; border-radius: 26px; font: 700 52px/1 var(--serif); color: #FFF; }
+.wall .w1 { background: var(--c5); } .wall .w2 { background: var(--c3); }
+.wall i { border-radius: 11px; background: repeating-linear-gradient(180deg, var(--ink) 0 26px, transparent 26px 34px); }
+.tline { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; justify-content: space-around; gap: 14px; position: relative; flex: 1; }
+.tline::before { content: ""; position: absolute; left: 289px; top: 30px; bottom: 30px; width: 3px; border-radius: 3px; background: var(--rule); }
+.tline li { display: grid; grid-template-columns: 250px 46px minmax(0, 1fr); gap: 0 18px; align-items: center; }
+.tline .tm { font: 700 40px/1.1 var(--sans); color: var(--ink); text-align: right; }
+.tline .dot { width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; background: var(--c); color: #FFF; z-index: 1; }
+.tline .dot .ic { width: 26px; height: 26px; }
+.tline .what { font: 500 42px/1.25 var(--sans); color: var(--ink); text-wrap: pretty; }
+.keylegend { display: flex; gap: 14px; }
+.keylegend .chip { font-size: 36px; padding: 10px 22px; }
+
+/* ---------- assessment ---------- */
+.colb { list-style: none; margin: 0; padding: 0; display: grid; grid-auto-rows: minmax(0, 1fr); gap: 6px; flex: 1; min-height: 0; }
+.colb li { display: flex; align-items: center; gap: 20px; font: 600 40px/1.1 var(--sans); color: var(--ink); }
+.colb li b { flex: none; width: 54px; height: 54px; border-radius: 16px; display: grid; place-items: center; font: 700 36px/1 var(--serif); color: #FFF; background: var(--c3); }
+.qz.many .opts { grid-template-rows: repeat(5, minmax(0, 1fr)); grid-auto-flow: column; }
+.part-card p { font: 500 44px/1.3 var(--sans); color: var(--ink); text-wrap: pretty; }
+.part-card .t { font: 650 54px/1.05 var(--serif); color: var(--c); }
+
+/* six-step lesson flow as a 3 x 2 grid */
+.flow.f6 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.flow.f6 .card > .core { flex-direction: row; align-items: center; gap: 22px; padding: 24px 30px; }
+.flow.f6 .t { font-size: 44px; }
+.chips.big .chip { font-size: 44px; padding: 20px 32px; }
+
+/* summary cards: title, short definition, example (appointments, work-life approaches) */
+.ax > .core { gap: 16px; padding: 32px 38px; }
+.ax .t { font: 650 54px/1.02 var(--serif); letter-spacing: -0.012em; color: var(--c); }
+.ax .d { font: 600 42px/1.28 var(--sans); color: var(--ink); text-wrap: pretty; padding-left: 22px; border-left: 5px solid color-mix(in oklab, var(--c) 45%, transparent); }
+.ax .e { font: 500 42px/1.3 var(--sans); color: var(--ink-2); text-wrap: pretty; }
+.ax .cap { margin-top: 10px; }
+.ax .ul li { font-size: 42px; }
+.ax .tline li { grid-template-columns: 270px 46px minmax(0, 1fr); }
+.ax .tline::before { left: 309px; }
+/* six government FWAs on one slide */
+.fwa6 .card > .core { gap: 14px; padding: 28px 32px; }
+.fwa6 .top { gap: 18px; }
+.fwa6 .badge { width: 84px; height: 84px; border-radius: 26px; } .fwa6 .badge .ic { width: 50px; height: 50px; }
+.fwa6 .t { font: 650 46px/1.04 var(--serif); letter-spacing: -0.01em; color: var(--c); }
+.fwa6 p { font: 500 42px/1.28 var(--sans); color: var(--ink); text-wrap: pretty; }
+
+#notesBtn, #notesPanel { display: none !important; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-Scales" viewBox="0 0 256 256"><path d="M237.57,133.77l-32-80h0a6,6,0,0,0-6.86-3.63L134,64.52V40a6,6,0,0,0-12,0V67.19l-67.3,15a6,6,0,0,0-4.27,3.63h0v0l-32,80A6.1,6.1,0,0,0,18,168c0,21.86,23.31,30,38,30s38-8.14,38-30a6.1,6.1,0,0,0-.43-2.23L64.19,92.33,122,79.48V210H104a6,6,0,0,0,0,12h48a6,6,0,0,0,0-12H134V76.81l56.21-12.49-27.78,69.45A6.1,6.1,0,0,0,162,136c0,21.86,23.31,30,38,30s38-8.14,38-30A6.1,6.1,0,0,0,237.57,133.77ZM56,186a36.89,36.89,0,0,1-17.48-4.56c-5.37-3.13-8.15-7.18-8.49-12.37l26-64.91,26,64.91C81.06,182.85,62.58,186,56,186Zm144-32a36.89,36.89,0,0,1-17.48-4.56c-5.37-3.13-8.15-7.18-8.49-12.37l26-64.91,26,64.91C225.06,150.85,206.58,154,200,154Z"></path></symbol><symbol id="i-Clock" viewBox="0 0 256 256"><path d="M128,26A102,102,0,1,0,230,128,102.12,102.12,0,0,0,128,26Zm0,192a90,90,0,1,1,90-90A90.1,90.1,0,0,1,128,218Zm62-90a6,6,0,0,1-6,6H128a6,6,0,0,1-6-6V72a6,6,0,0,1,12,0v50h50A6,6,0,0,1,190,128Z"></path></symbol><symbol id="i-Coins" viewBox="0 0 256 256"><path d="M224.56,103.81C213.43,97.75,198.47,93.39,182,91.34V84c0-12.12-9.58-23.1-27-30.93C139.16,45.93,118.2,42,96,42S52.84,45.93,37,53.07C19.58,60.9,10,71.88,10,84v40c0,12.12,9.58,23.1,27,30.93,10.49,4.72,23.21,8,37,9.73V172c0,12.12,9.58,23.1,27,30.93C116.84,210.07,137.8,214,160,214s43.16-3.93,59-11.07c17.39-7.83,27-18.81,27-30.93V132C246,121.35,238.39,111.34,224.56,103.81Zm-5.74,10.54C228.61,119.68,234,126,234,132c0,14.19-30.39,30-74,30a166.9,166.9,0,0,1-21.21-1.34A110.79,110.79,0,0,0,155,154.93c17.39-7.83,27-18.81,27-30.93V103.43C196.4,105.36,209.3,109.16,218.82,114.35ZM108.16,153.58c-3.92.27-8,.42-12.16.42-5.3,0-10.4-.24-15.28-.67a2.22,2.22,0,0,0-.37,0c-3.58-.33-7-.77-10.35-1.3V124.12A178,178,0,0,0,96,126a178,178,0,0,0,26-1.88V152c-4.34.69-8.91,1.22-13.69,1.56ZM170,105.89V124c0,9.54-13.75,19.8-36,25.51V121.85a115,115,0,0,0,21-6.92A66.2,66.2,0,0,0,170,105.89ZM96,54c43.61,0,74,15.81,74,30s-30.39,30-74,30S22,98.19,22,84,52.39,54,96,54ZM22,124V105.89a66.2,66.2,0,0,0,15,9,115,115,0,0,0,21,6.92v27.66C35.75,143.8,22,133.54,22,124Zm64,48v-6.28c3.3.18,6.63.28,10,.28q5.91,0,11.66-.37A123.17,123.17,0,0,0,122,169.84v27.67C99.75,191.8,86,181.54,86,172Zm48,28V172.1a177.84,177.84,0,0,0,26,1.9,178,178,0,0,0,26-1.88V200a170,170,0,0,1-52,0Zm64-2.49V169.85a115,115,0,0,0,21-6.92,66.2,66.2,0,0,0,15-9V172C234,181.54,220.25,191.8,198,197.51Z"></path></symbol><symbol id="i-CalendarCheck" viewBox="0 0 256 256"><path d="M208,34H182V24a6,6,0,0,0-12,0V34H86V24a6,6,0,0,0-12,0V34H48A14,14,0,0,0,34,48V208a14,14,0,0,0,14,14H208a14,14,0,0,0,14-14V48A14,14,0,0,0,208,34ZM48,46H74V56a6,6,0,0,0,12,0V46h84V56a6,6,0,0,0,12,0V46h26a2,2,0,0,1,2,2V82H46V48A2,2,0,0,1,48,46ZM208,210H48a2,2,0,0,1-2-2V94H210V208A2,2,0,0,1,208,210Zm-39.76-86.24a6,6,0,0,1,0,8.48l-48,48a6,6,0,0,1-8.48,0l-24-24a6,6,0,0,1,8.48-8.48L116,167.51l43.76-43.75A6,6,0,0,1,168.24,123.76Z"></path></symbol><symbol id="i-ShieldCheck" viewBox="0 0 256 256"><path d="M208,42H48A14,14,0,0,0,34,56v56c0,51.94,25.12,83.4,46.2,100.64,22.73,18.6,45.27,24.89,46.22,25.15a6,6,0,0,0,3.16,0c.95-.26,23.49-6.55,46.22-25.15C196.88,195.4,222,163.94,222,112V56A14,14,0,0,0,208,42Zm2,70c0,37.76-13.94,68.39-41.44,91.06A131.17,131.17,0,0,1,128,225.72a130.94,130.94,0,0,1-40.56-22.66C59.94,180.39,46,149.76,46,112V56a2,2,0,0,1,2-2H208a2,2,0,0,1,2,2ZM172.24,99.76a6,6,0,0,1,0,8.48l-56,56a6,6,0,0,1-8.48,0l-24-24a6,6,0,0,1,8.48-8.48L112,151.51l51.76-51.75A6,6,0,0,1,172.24,99.76Z"></path></symbol><symbol id="i-Stamp" viewBox="0 0 256 256"><path d="M222,224a6,6,0,0,1-6,6H40a6,6,0,0,1,0-12H216A6,6,0,0,1,222,224Zm0-80v40a14,14,0,0,1-14,14H48a14,14,0,0,1-14-14V144a14,14,0,0,1,14-14h58.9L90.68,54.29A30,30,0,0,1,120,18h16a30,30,0,0,1,29.33,36.29L149.1,130H208A14,14,0,0,1,222,144ZM119.17,130h17.66l16.76-78.23A18,18,0,0,0,136,30H120a18,18,0,0,0-17.6,21.77ZM210,144a2,2,0,0,0-2-2H48a2,2,0,0,0-2,2v40a2,2,0,0,0,2,2H208a2,2,0,0,0,2-2Z"></path></symbol><symbol id="i-Buildings" viewBox="0 0 256 256"><path d="M240,210H222V96a14,14,0,0,0-14-14H142V32a14,14,0,0,0-21.77-11.64l-80,53.33A14,14,0,0,0,34,85.34V210H16a6,6,0,0,0,0,12H240a6,6,0,0,0,0-12ZM208,94a2,2,0,0,1,2,2V210H142V94ZM46,85.34a2,2,0,0,1,.89-1.66l80-53.34A2,2,0,0,1,130,32V210H46ZM110,112v16a6,6,0,0,1-12,0V112a6,6,0,0,1,12,0Zm-32,0v16a6,6,0,0,1-12,0V112a6,6,0,0,1,12,0Zm0,56v16a6,6,0,0,1-12,0V168a6,6,0,0,1,12,0Zm32,0v16a6,6,0,0,1-12,0V168a6,6,0,0,1,12,0Z"></path></symbol><symbol id="i-Plant" viewBox="0 0 256 256"><path d="M245.63,48A6,6,0,0,0,240,42.37c-51-3-91.88,12.42-109.35,41.26-11.63,19.21-11.38,42.68.53,65a69.42,69.42,0,0,0-15.48,30.59L95.9,159.41c8.15-16.1,8.1-32.95-.32-46.85C82.77,91.41,53,80.07,15.9,82.27a6,6,0,0,0-5.63,5.64C8.09,125,19.41,154.77,40.56,167.58A43.75,43.75,0,0,0,63.44,174a53.17,53.17,0,0,0,24-6L114,194.48V224a6,6,0,0,0,12,0V194.51A57.55,57.55,0,0,1,139.76,157c11.21,5.93,22.72,8.91,33.82,8.91a58.9,58.9,0,0,0,30.79-8.57C233.21,139.89,248.63,99,245.63,48ZM46.78,157.31C30.47,147.44,21.39,124,22,94c30-.65,53.41,8.44,63.28,24.75,5.68,9.37,6.16,20.38,1.54,31.59L60.24,123.75a6,6,0,0,0-8.49,8.49l26.62,26.61C67.16,163.47,56.15,163,46.78,157.31Zm151.38-10.22c-14.74,8.92-32.14,9.18-49.67.9l55.76-55.75a6,6,0,0,0-8.49-8.49L140,139.51c-8.28-17.53-8-34.93.9-49.66,14.52-24,49.06-37.18,93-35.75C235.33,98,222.14,132.56,198.16,147.09Z"></path></symbol><symbol id="i-UsersThree" viewBox="0 0 256 256"><path d="M243.6,148.8a6,6,0,0,1-8.4-1.2A53.58,53.58,0,0,0,192,126a6,6,0,0,1,0-12,26,26,0,1,0-25.18-32.5,6,6,0,0,1-11.62-3,38,38,0,1,1,59.91,39.63A65.69,65.69,0,0,1,244.8,140.4,6,6,0,0,1,243.6,148.8ZM189.19,213a6,6,0,0,1-2.19,8.2,5.9,5.9,0,0,1-3,.81,6,6,0,0,1-5.2-3,59,59,0,0,0-101.62,0,6,6,0,1,1-10.38-6A70.1,70.1,0,0,1,103,182.55a46,46,0,1,1,50.1,0A70.1,70.1,0,0,1,189.19,213ZM128,178a34,34,0,1,0-34-34A34,34,0,0,0,128,178ZM70,120a6,6,0,0,0-6-6A26,26,0,1,1,89.18,81.49a6,6,0,1,0,11.62-3,38,38,0,1,0-59.91,39.63A65.69,65.69,0,0,0,11.2,140.4a6,6,0,1,0,9.6,7.2A53.58,53.58,0,0,1,64,126,6,6,0,0,0,70,120Z"></path></symbol><symbol id="i-CheckFat" viewBox="0 0 256 256"><path d="M241.87,69.66l-24-23.56a14,14,0,0,0-19.77,0L104,139,65.9,102.1a14,14,0,0,0-19.8,0l-24,24a14,14,0,0,0,0,19.79l71.62,72a14,14,0,0,0,19.8,0L241.91,89.5A14,14,0,0,0,241.87,69.66ZM233.42,81,105,209.41a2,2,0,0,1-2.81,0l-71.62-72a2,2,0,0,1,0-2.82l24-24A2,2,0,0,1,56,110a2.12,2.12,0,0,1,1.5.64l42.35,41.08a6,6,0,0,0,8.39,0l98.37-97.11a2,2,0,0,1,2.87,0l24,23.56A2,2,0,0,1,233.42,81Z"></path></symbol><symbol id="i-XCircle" viewBox="0 0 256 256"><path d="M164.24,100.24,136.48,128l27.76,27.76a6,6,0,1,1-8.48,8.48L128,136.48l-27.76,27.76a6,6,0,0,1-8.48-8.48L119.52,128,91.76,100.24a6,6,0,0,1,8.48-8.48L128,119.52l27.76-27.76a6,6,0,0,1,8.48,8.48ZM230,128A102,102,0,1,1,128,26,102.12,102.12,0,0,1,230,128Zm-12,0a90,90,0,1,0-90,90A90.1,90.1,0,0,0,218,128Z"></path></symbol><symbol id="i-Handshake" viewBox="0 0 256 256"><path d="M252.51,108.8,227,57.75a14,14,0,0,0-18.78-6.27L182.66,64.26,129.53,50.2a6.1,6.1,0,0,0-3.06,0L73.34,64.26,47.79,51.48A14,14,0,0,0,29,57.75L3.49,108.8a14,14,0,0,0,6.26,18.78L36.9,141.16l55.61,39.72a6,6,0,0,0,2,.94l64,16A6.08,6.08,0,0,0,160,198a6,6,0,0,0,4.24-1.76l55.31-55.31,26.7-13.35a14,14,0,0,0,6.26-18.78Zm-53,35.16-35.8-28.68a6,6,0,0,0-8,.45c-18.65,18.79-39.5,16.42-52.79,7.92a2,2,0,0,1-.94-1.5,1.9,1.9,0,0,1,.51-1.55L146.43,78h33.86l28.41,56.82ZM14.11,115.69a2,2,0,0,1,.11-1.52L39.74,63.11a2,2,0,0,1,1.8-1.1,2,2,0,0,1,.89.21l22.21,11.1L37.32,128l-22.21-11.1A2,2,0,0,1,14.11,115.69Zm144.05,69.67-59.6-14.9L47.66,134.1,76.84,75.75,128,62.21l14.8,3.92a5.92,5.92,0,0,0-3,1.57L94.1,112.05a14,14,0,0,0,2.39,21.72c20.22,12.92,44.75,10.49,63.8-5.89L191,152.5Zm83.73-69.67a2,2,0,0,1-1,1.16L218.68,128,191.36,73.32l22.21-11.1a2,2,0,0,1,1.53-.11,2,2,0,0,1,1.16,1l25.52,51.06A2,2,0,0,1,241.89,115.69Zm-112,101.76a6,6,0,0,1-7.27,4.37L80.89,211.39a5.88,5.88,0,0,1-2-.94L52.52,191.64a6,6,0,1,1,7-9.77L84.91,200l40.61,10.15A6,6,0,0,1,129.88,217.45Z"></path></symbol><symbol id="i-HeartStraight" viewBox="0 0 256 256"><path d="M221.6,58.38a56.06,56.06,0,0,0-79.12-.08L128,71.78,113.52,58.3a56,56,0,0,0-79.15,79.25l89.36,90.66a6,6,0,0,0,8.54,0l89.33-90.62a56,56,0,0,0,0-79.21Zm-8.52,70.75L128,215.45,42.89,129.1a44,44,0,0,1,62.22-62.23,1.07,1.07,0,0,0,.16.14l18.64,17.36a6,6,0,0,0,8.18,0L150.73,67a1.07,1.07,0,0,0,.16-.14,44,44,0,1,1,62.19,62.26Z"></path></symbol><symbol id="i-Moon" viewBox="0 0 256 256"><path d="M232.13,143.64a6,6,0,0,0-6-1.49A90.07,90.07,0,0,1,113.86,29.85a6,6,0,0,0-7.49-7.48A102.88,102.88,0,0,0,54.48,58.68,102,102,0,0,0,197.32,201.52a102.88,102.88,0,0,0,36.31-51.89A6,6,0,0,0,232.13,143.64Zm-42,48.29a90,90,0,0,1-126-126A90.9,90.9,0,0,1,99.65,37.66,102.06,102.06,0,0,0,218.34,156.35,90.9,90.9,0,0,1,190.1,191.93Z"></path></symbol><symbol id="i-Armchair" viewBox="0 0 256 256"><path d="M214,90.48V72a38,38,0,0,0-38-38H80A38,38,0,0,0,42,72V90.48a38,38,0,0,0,0,75.05V200a14,14,0,0,0,14,14H200a14,14,0,0,0,14-14V165.53a38,38,0,0,0,0-75ZM80,46h96a26,26,0,0,1,26,26V90.48A38.05,38.05,0,0,0,170,128v2H86v-2A38.05,38.05,0,0,0,54,90.48V72A26,26,0,0,1,80,46ZM208.35,154H208a6,6,0,0,0-6,6v40a2,2,0,0,1-2,2H56a2,2,0,0,1-2-2V160h0a6,6,0,0,0-6-6h-.35A26,26,0,1,1,74,128v40a6,6,0,0,0,12,0V142h84v26a6,6,0,0,0,12,0V128a26,26,0,1,1,26.35,26Z"></path></symbol><symbol id="i-CalendarStar" viewBox="0 0 256 256"><path d="M208,34H182V24a6,6,0,0,0-12,0V34H86V24a6,6,0,0,0-12,0V34H48A14,14,0,0,0,34,48V208a14,14,0,0,0,14,14H208a14,14,0,0,0,14-14V48A14,14,0,0,0,208,34Zm2,174a2,2,0,0,1-2,2H48a2,2,0,0,1-2-2V48a2,2,0,0,1,2-2H74V56a6,6,0,0,0,12,0V46h84V56a6,6,0,0,0,12,0V46h26a2,2,0,0,1,2,2Zm-33.54-92.37-31-2.4L133.51,85.62a6,6,0,0,0-11,0l-11.91,27.61-31,2.4a6,6,0,0,0-3.36,10.61l23.49,19.39-7.16,28.93a6,6,0,0,0,8.87,6.61L128,165.5l26.62,15.67a6,6,0,0,0,8.87-6.61l-7.16-28.93,23.49-19.39a6,6,0,0,0-3.36-10.61Zm-30.68,23.15a6,6,0,0,0-2,6.07l4.63,18.74L131,153.37a6,6,0,0,0-6.08,0l-17.37,10.22,4.63-18.74a6,6,0,0,0-2-6.07L95.28,126.45l19.83-1.53a6,6,0,0,0,5-3.61L128,103.14l7.84,18.17a6,6,0,0,0,5,3.61l19.83,1.53Z"></path></symbol><symbol id="i-SunHorizon" viewBox="0 0 256 256"><path d="M240,154H197.28a70.91,70.91,0,0,0,.72-10,70,70,0,0,0-140,0,70.91,70.91,0,0,0,.72,10H16a6,6,0,0,0,0,12H240a6,6,0,0,0,0-12ZM70,144a58,58,0,1,1,115.13,10H70.87A58.63,58.63,0,0,1,70,144Zm144,56a6,6,0,0,1-6,6H48a6,6,0,0,1,0-12H208A6,6,0,0,1,214,200ZM74.63,42.69a6,6,0,0,1,10.74-5.37l8,16a6,6,0,0,1-10.74,5.36Zm-56,50.63a6,6,0,0,1,8.05-2.69l16,8a6,6,0,0,1-5.36,10.74l-16-8A6,6,0,0,1,18.63,93.32Zm192,13.36a6,6,0,0,1,2.69-8.05l16-8a6,6,0,1,1,5.36,10.74l-16,8a6,6,0,0,1-8.05-2.69Zm-48-53.36,8-16a6,6,0,0,1,10.74,5.37l-8,16a6,6,0,1,1-10.74-5.36Z"></path></symbol><symbol id="i-HandHeart" viewBox="0 0 256 256"><path d="M229.12,142.65a22.43,22.43,0,0,0-19.55-3.88l-4.32,1C227,119.55,238,99.51,238,80c0-25.36-20.39-46-45.46-46A45.51,45.51,0,0,0,156,52a45.51,45.51,0,0,0-36.54-18C94.39,34,74,54.64,74,80c0,11.38,3.63,22.49,11.29,34.36a29.73,29.73,0,0,0-16.56,8.43L45.52,146H16A14,14,0,0,0,2,160v40a14,14,0,0,0,14,14H120a6,6,0,0,0,1.46-.18l64-16a7.16,7.16,0,0,0,.89-.3L225.17,181l.33-.15a22.6,22.6,0,0,0,3.62-38.18ZM119.46,46a33.16,33.16,0,0,1,31,20.28,6,6,0,0,0,11.1,0,33.16,33.16,0,0,1,31-20.28C210.68,46,226,61.57,226,80c0,20.24-16.18,43-46.8,65.75l-14.87,3.42A26,26,0,0,0,140,114H99.67C90.36,101.67,86,90.81,86,80,86,61.57,101.32,46,119.46,46ZM14,200V160a2,2,0,0,1,2-2H42v44H16A2,2,0,0,1,14,200Zm206.28-30-38.2,16.27L119.26,202H54V154.49l23.21-23.22A17.88,17.88,0,0,1,89.94,126H140a14,14,0,0,1,0,28H112a6,6,0,0,0,0,12h32a6,6,0,0,0,1.34-.15l67-15.41.24-.06A10.6,10.6,0,0,1,220.28,170Z"></path></symbol><symbol id="i-Money" viewBox="0 0 256 256"><path d="M128,166a38,38,0,1,0-38-38A38,38,0,0,0,128,166Zm0-64a26,26,0,1,1-26,26A26,26,0,0,1,128,102ZM240,58H16a6,6,0,0,0-6,6V192a6,6,0,0,0,6,6H240a6,6,0,0,0,6-6V64A6,6,0,0,0,240,58ZM22,108.82A54.73,54.73,0,0,0,60.82,70H195.18A54.73,54.73,0,0,0,234,108.82v38.36A54.73,54.73,0,0,0,195.18,186H60.82A54.73,54.73,0,0,0,22,147.18ZM234,96.29A42.8,42.8,0,0,1,207.71,70H234ZM48.29,70A42.8,42.8,0,0,1,22,96.29V70ZM22,159.71A42.8,42.8,0,0,1,48.29,186H22ZM207.71,186A42.8,42.8,0,0,1,234,159.71V186Z"></path></symbol><symbol id="i-Prohibit" viewBox="0 0 256 256"><path d="M128,26A102,102,0,1,0,230,128,102.12,102.12,0,0,0,128,26Zm90,102a89.6,89.6,0,0,1-22.29,59.22L68.78,60.29A89.95,89.95,0,0,1,218,128ZM38,128A89.6,89.6,0,0,1,60.29,68.78L187.22,195.71A89.95,89.95,0,0,1,38,128Z"></path></symbol><symbol id="i-Gavel" viewBox="0 0 256 256"><path d="M241.91,118.1l-16-16a14,14,0,0,0-19.55-.23L154.13,49.64a14,14,0,0,0-.23-19.55l-16-16a14,14,0,0,0-19.8,0l-64,64a14,14,0,0,0,0,19.8l16,16a14,14,0,0,0,19.55.23L99.52,124,32.73,190.79a23,23,0,0,0,32.48,32.49L132,156.49l9.87,9.87a14,14,0,0,0,.23,19.55l16,16a14,14,0,0,0,19.8,0l64-64A14,14,0,0,0,241.91,118.1Zm-91.56,39.76-52.21-52.2,47.52-47.52,52.2,52.2ZM78.59,105.41l-16-16a2,2,0,0,1,0-2.83l64-64a2,2,0,0,1,2.83,0l16,16a2,2,0,0,1,0,2.83l-64,64A2,2,0,0,1,78.59,105.41ZM56.73,214.8a11,11,0,0,1-15.52-15.52L108,132.49,123.52,148Zm176.69-85.38-64,64a2,2,0,0,1-2.83,0l-16-16a2,2,0,0,1,0-2.83l64-64a2,2,0,0,1,2.83,0l16,16A2,2,0,0,1,233.42,129.42Z"></path></symbol><symbol id="i-Check" viewBox="0 0 256 256"><path d="M228.24,76.24l-128,128a6,6,0,0,1-8.48,0l-56-56a6,6,0,0,1,8.48-8.48L96,191.51,219.76,67.76a6,6,0,0,1,8.48,8.48Z"></path></symbol><symbol id="i-HouseLine" viewBox="0 0 256 256"><path d="M240,210H222V131.17l5.76,5.76a6,6,0,0,0,8.48-8.49L137.9,30.09a14,14,0,0,0-19.8,0L19.76,128.44a6,6,0,0,0,8.48,8.49L34,131.17V210H16a6,6,0,0,0,0,12H240a6,6,0,0,0,0-12ZM46,119.17l80.58-80.59a2,2,0,0,1,2.84,0L210,119.17V210H158V152a6,6,0,0,0-6-6H104a6,6,0,0,0-6,6v58H46ZM146,210H110V158h36Z"></path></symbol><symbol id="i-AirplaneTilt" viewBox="0 0 256 256"><path d="M183,113.65l30.1-28.32.13-.13A30,30,0,0,0,170.8,42.77l-.13.13L142.35,73,58.05,42.35a6,6,0,0,0-6.29,1.39l-24,24A6,6,0,0,0,28.67,77l65.92,43.94L77.52,138H56a6,6,0,0,0-4.24,1.76l-24,24a6,6,0,0,0,2,9.82l37.62,15,15,37.56,0,.12a6,6,0,0,0,7.81,3.27,5.94,5.94,0,0,0,2.07-1.41l23.91-23.91A6,6,0,0,0,118,200V178.48l17.07-17.07L179,227.33a6,6,0,0,0,9.23.91l24-24a6,6,0,0,0,1.39-6.29Zm1.94,100.93L141,148.66a6,6,0,0,0-4.4-2.64l-.59,0a6,6,0,0,0-4.24,1.76l-24,24A6,6,0,0,0,106,176v21.52L90.2,213.32,77.57,181.77a6,6,0,0,0-3.34-3.35L42.68,165.8,58.49,150H80a6,6,0,0,0,4.25-1.76l24-24a6,6,0,0,0-.92-9.23L41.42,71.06,57.54,54.93,142,85.63a6,6,0,0,0,6.42-1.53l31-32.9A18,18,0,0,1,204.8,76.66l-32.9,31a6,6,0,0,0-1.53,6.42l30.7,84.41Z"></path></symbol><symbol id="i-Chalkboard" viewBox="0 0 256 256"><path d="M240,194H230V56a14,14,0,0,0-14-14H40A14,14,0,0,0,26,56V194H16a6,6,0,0,0,0,12H240a6,6,0,0,0,0-12ZM38,56a2,2,0,0,1,2-2H216a2,2,0,0,1,2,2V194H198V168a6,6,0,0,0-6-6H120a6,6,0,0,0-6,6v26H70V86H186v50a6,6,0,0,0,12,0V80a6,6,0,0,0-6-6H64a6,6,0,0,0-6,6V194H38ZM186,194H126V174h60Z"></path></symbol><symbol id="i-Briefcase" viewBox="0 0 256 256"><path d="M106,112a6,6,0,0,1,6-6h32a6,6,0,0,1,0,12H112A6,6,0,0,1,106,112ZM230,72V200a14,14,0,0,1-14,14H40a14,14,0,0,1-14-14V72A14,14,0,0,1,40,58H82V48a22,22,0,0,1,22-22h48a22,22,0,0,1,22,22V58h42A14,14,0,0,1,230,72ZM94,58h68V48a10,10,0,0,0-10-10H104A10,10,0,0,0,94,48ZM38,72v42.79A186,186,0,0,0,128,138a185.91,185.91,0,0,0,90-23.22V72a2,2,0,0,0-2-2H40A2,2,0,0,0,38,72ZM218,200V128.37A198.12,198.12,0,0,1,128,150a198.05,198.05,0,0,1-90-21.62V200a2,2,0,0,0,2,2H216A2,2,0,0,0,218,200Z"></path></symbol><symbol id="i-ChatsCircle" viewBox="0 0 256 256"><path d="M229.93,186.58A78,78,0,0,0,168.16,74.42,78,78,0,1,0,26.07,138.58L18.58,164A14,14,0,0,0,36,181.42l25.46-7.49a78,78,0,0,0,26.39,7.63,78,78,0,0,0,106.77,40.37L220,229.42A14,14,0,0,0,237.42,212ZM62,161.5a6.05,6.05,0,0,0-1.69.24l-27.77,8.17a2,2,0,0,1-2.48-2.48l8.17-27.77a6.05,6.05,0,0,0-.47-4.53,66,66,0,1,1,27.08,27.08A6,6,0,0,0,62,161.5Zm155.71,26.16,8.17,27.77a2,2,0,0,1-2.48,2.48l-27.77-8.17a6.06,6.06,0,0,0-4.53.47,66,66,0,0,1-90-28.4,77.92,77.92,0,0,0,71-94.68,66,66,0,0,1,46.07,96A6.05,6.05,0,0,0,217.74,187.66Z"></path></symbol><symbol id="i-IdentificationBadge" viewBox="0 0 256 256"><path d="M151.11,166.13a38,38,0,1,0-46.22,0A65.75,65.75,0,0,0,75.2,188.4a6,6,0,0,0,9.6,7.2,54,54,0,0,1,86.4,0,6,6,0,0,0,9.6-7.2A65.75,65.75,0,0,0,151.11,166.13ZM128,110a26,26,0,1,1-26,26A26,26,0,0,1,128,110Zm72-84H56A14,14,0,0,0,42,40V216a14,14,0,0,0,14,14H200a14,14,0,0,0,14-14V40A14,14,0,0,0,200,26Zm2,190a2,2,0,0,1-2,2H56a2,2,0,0,1-2-2V40a2,2,0,0,1,2-2H200a2,2,0,0,1,2,2ZM90,64a6,6,0,0,1,6-6h64a6,6,0,0,1,0,12H96A6,6,0,0,1,90,64Z"></path></symbol><symbol id="i-ClockCountdown" viewBox="0 0 256 256"><path d="M230,136.49A102.12,102.12,0,1,1,119.51,26a6,6,0,0,1,1,12A90.13,90.13,0,1,0,218,135.51a6,6,0,1,1,12,1ZM122,72v56a6,6,0,0,0,6,6h56a6,6,0,0,0,0-12H134V72a6,6,0,0,0-12,0Zm38-26a10,10,0,1,0-10-10A10,10,0,0,0,160,46Zm36,24a10,10,0,1,0-10-10A10,10,0,0,0,196,70Zm24,36a10,10,0,1,0-10-10A10,10,0,0,0,220,106Z"></path></symbol><symbol id="i-Exam" viewBox="0 0 256 256"><path d="M216,42H40A14,14,0,0,0,26,56V216a6,6,0,0,0,8.68,5.37L64,206.71l29.32,14.66a6,6,0,0,0,5.36,0L128,206.71l29.32,14.66a6,6,0,0,0,5.36,0L192,206.71l29.32,14.66A6,6,0,0,0,224,222a5.93,5.93,0,0,0,3.15-.9A6,6,0,0,0,230,216V56A14,14,0,0,0,216,42Zm2,164.29-23.32-11.66a6,6,0,0,0-5.36,0L160,209.29l-29.32-14.66a6,6,0,0,0-5.36,0L96,209.29,66.68,194.63a6,6,0,0,0-5.36,0L38,206.29V56a2,2,0,0,1,2-2H216a2,2,0,0,1,2,2Zm-116.63-113a6,6,0,0,0-10.74,0l-32,64a6,6,0,1,0,10.74,5.36L75.71,150h40.58l6.34,12.68a6,6,0,1,0,10.74-5.36ZM81.71,138,96,109.42,110.29,138ZM198,128a6,6,0,0,1-6,6H174v18a6,6,0,0,1-12,0V134H144a6,6,0,0,1,0-12h18V104a6,6,0,0,1,12,0v18h18A6,6,0,0,1,198,128Z"></path></symbol><symbol id="i-SealCheck" viewBox="0 0 256 256"><path d="M224.42,104.2c-3.9-4.07-7.93-8.27-9.55-12.18-1.5-3.63-1.58-9-1.67-14.68-.14-9.38-.3-20-7.42-27.12S188,42.94,178.66,42.8c-5.68-.09-11-.17-14.68-1.67-3.91-1.62-8.11-5.65-12.18-9.55C145.16,25.22,137.64,18,128,18s-17.16,7.22-23.8,13.58c-4.07,3.9-8.27,7.93-12.18,9.55-3.63,1.5-9,1.58-14.68,1.67-9.38.14-20,.3-27.12,7.42S42.94,68,42.8,77.34c-.09,5.68-.17,11-1.67,14.68-1.62,3.91-5.65,8.11-9.55,12.18C25.22,110.84,18,118.36,18,128s7.22,17.16,13.58,23.8c3.9,4.07,7.93,8.27,9.55,12.18,1.5,3.63,1.58,9,1.67,14.68.14,9.38.3,20,7.42,27.12S68,213.06,77.34,213.2c5.68.09,11,.17,14.68,1.67,3.91,1.62,8.11,5.65,12.18,9.55C110.84,230.78,118.36,238,128,238s17.16-7.22,23.8-13.58c4.07-3.9,8.27-7.93,12.18-9.55,3.63-1.5,9-1.58,14.68-1.67,9.38-.14,20-.3,27.12-7.42s7.28-17.74,7.42-27.12c.09-5.68.17-11,1.67-14.68,1.62-3.91,5.65-8.11,9.55-12.18C230.78,145.16,238,137.64,238,128S230.78,110.84,224.42,104.2Zm-8.66,39.3c-4.67,4.86-9.5,9.9-12,15.9-2.38,5.74-2.48,12.52-2.58,19.08-.11,7.44-.23,15.14-3.9,18.82s-11.38,3.79-18.82,3.9c-6.56.1-13.34.2-19.08,2.58-6,2.48-11,7.31-15.91,12-5.25,5-10.68,10.24-15.49,10.24s-10.24-5.21-15.5-10.24c-4.86-4.67-9.9-9.5-15.9-12-5.74-2.38-12.52-2.48-19.08-2.58-7.44-.11-15.14-.23-18.82-3.9s-3.79-11.38-3.9-18.82c-.1-6.56-.2-13.34-2.58-19.08-2.48-6-7.31-11-12-15.91C35.21,138.24,30,132.81,30,128s5.21-10.24,10.24-15.5c4.67-4.86,9.5-9.9,12-15.9,2.38-5.74,2.48-12.52,2.58-19.08.11-7.44.23-15.14,3.9-18.82s11.38-3.79,18.82-3.9c6.56-.1,13.34-.2,19.08-2.58,6-2.48,11-7.31,15.91-12C117.76,35.21,123.19,30,128,30s10.24,5.21,15.5,10.24c4.86,4.67,9.9,9.5,15.9,12,5.74,2.38,12.52,2.48,19.08,2.58,7.44.11,15.14.23,18.82,3.9s3.79,11.38,3.9,18.82c.1,6.56.2,13.34,2.58,19.08,2.48,6,7.31,11,12,15.91,5,5.25,10.24,10.68,10.24,15.49S220.79,138.24,215.76,143.5ZM172.24,99.76a6,6,0,0,1,0,8.48l-56,56a6,6,0,0,1-8.48,0l-24-24a6,6,0,0,1,8.48-8.48L112,151.51l51.76-51.75A6,6,0,0,1,172.24,99.76Z"></path></symbol><symbol id="i-Hourglass" viewBox="0 0 256 256"><path d="M198,75.64V40a14,14,0,0,0-14-14H72A14,14,0,0,0,58,40V76a14.06,14.06,0,0,0,5.6,11.2L118,128,63.6,168.8A14.06,14.06,0,0,0,58,180v36a14,14,0,0,0,14,14H184a14,14,0,0,0,14-14V180.36a14.08,14.08,0,0,0-5.56-11.17L138,128l54.49-41.19A14.08,14.08,0,0,0,198,75.64ZM186,180.36V216a2,2,0,0,1-2,2H72a2,2,0,0,1-2-2V180a2,2,0,0,1,.8-1.6L128,135.51l57.22,43.25A2,2,0,0,1,186,180.36Zm0-104.72a2,2,0,0,1-.79,1.6L128,120.49,70.8,77.6A2,2,0,0,1,70,76V40a2,2,0,0,1,2-2H184a2,2,0,0,1,2,2Z"></path></symbol><symbol id="i-LinkSimple" viewBox="0 0 256 256"><path d="M164.25,91.75a6,6,0,0,1,0,8.49l-64,64a6,6,0,0,1-8.49-8.48l64-64A6,6,0,0,1,164.25,91.75ZM214.2,41.8a54.07,54.07,0,0,0-76.38,0L107.75,71.85a6,6,0,0,0,8.49,8.49l30.07-30.06a42,42,0,0,1,59.41,59.41l-30.08,30.07a6,6,0,1,0,8.49,8.49l30.07-30.07A54,54,0,0,0,214.2,41.8ZM139.76,175.64l-30.07,30.08a42,42,0,0,1-59.41-59.41l30.06-30.07a6,6,0,0,0-8.49-8.49l-30,30.07a54,54,0,0,0,76.38,76.39l30.07-30.08a6,6,0,0,0-8.49-8.49Z"></path></symbol><symbol id="i-ArrowsLeftRight" viewBox="0 0 256 256"><path d="M212.24,171.76a6,6,0,0,1,0,8.48l-32,32a6,6,0,0,1-8.48-8.48L193.51,182H48a6,6,0,0,1,0-12H193.51l-21.75-21.76a6,6,0,0,1,8.48-8.48ZM75.76,116.24a6,6,0,0,0,8.48-8.48L62.49,86H208a6,6,0,0,0,0-12H62.49L84.24,52.24a6,6,0,0,0-8.48-8.48l-32,32a6,6,0,0,0,0,8.48Z"></path></symbol><symbol id="i-CalendarDots" viewBox="0 0 256 256"><path d="M208,34H182V24a6,6,0,0,0-12,0V34H86V24a6,6,0,0,0-12,0V34H48A14,14,0,0,0,34,48V208a14,14,0,0,0,14,14H208a14,14,0,0,0,14-14V48A14,14,0,0,0,208,34ZM48,46H74V56a6,6,0,0,0,12,0V46h84V56a6,6,0,0,0,12,0V46h26a2,2,0,0,1,2,2V82H46V48A2,2,0,0,1,48,46ZM208,210H48a2,2,0,0,1-2-2V94H210V208A2,2,0,0,1,208,210Zm-70-78a10,10,0,1,1-10-10A10,10,0,0,1,138,132Zm44,0a10,10,0,1,1-10-10A10,10,0,0,1,182,132ZM94,172a10,10,0,1,1-10-10A10,10,0,0,1,94,172Zm44,0a10,10,0,1,1-10-10A10,10,0,0,1,138,172Zm44,0a10,10,0,1,1-10-10A10,10,0,0,1,182,172Z"></path></symbol><symbol id="i-ArrowsClockwise" viewBox="0 0 256 256"><path d="M222,48V96a6,6,0,0,1-6,6H168a6,6,0,0,1,0-12h33.52L183.47,72a81.51,81.51,0,0,0-57.53-24h-.46A81.5,81.5,0,0,0,68.19,71.28a6,6,0,1,1-8.38-8.58,93.38,93.38,0,0,1,65.67-26.76H126a93.45,93.45,0,0,1,66,27.53l18,18V48a6,6,0,0,1,12,0ZM187.81,184.72a81.5,81.5,0,0,1-57.29,23.34h-.46a81.51,81.51,0,0,1-57.53-24L54.48,166H88a6,6,0,0,0,0-12H40a6,6,0,0,0-6,6v48a6,6,0,0,0,12,0V174.48l18,18.05a93.45,93.45,0,0,0,66,27.53h.52a93.38,93.38,0,0,0,65.67-26.76,6,6,0,1,0-8.38-8.58Z"></path></symbol><symbol id="i-Stack" viewBox="0 0 256 256"><path d="M229.18,173a6,6,0,0,1-2.16,8.2l-96,56a6,6,0,0,1-6,0l-96-56a6,6,0,0,1,6-10.36l93,54.23,93-54.23A6,6,0,0,1,229.18,173ZM221,122.82l-93,54.23L35,122.82a6,6,0,0,0-6,10.36l96,56a6,6,0,0,0,6,0l96-56a6,6,0,0,0-6-10.36ZM26,80a6,6,0,0,1,3-5.18l96-56a6,6,0,0,1,6,0l96,56a6,6,0,0,1,0,10.36l-96,56a6,6,0,0,1-6,0l-96-56A6,6,0,0,1,26,80Zm17.91,0L128,129.05,212.09,80,128,31Z"></path></symbol><symbol id="i-UsersFour" viewBox="0 0 256 256"><path d="M28.4,124.8a6,6,0,0,0,8.4-1.2,54,54,0,0,1,86.4,0,6,6,0,0,0,8.4,1.19,5.59,5.59,0,0,0,1.19-1.19h0a54,54,0,0,1,86.4,0,6,6,0,0,0,9.6-7.21,65.74,65.74,0,0,0-29.69-22.26,38,38,0,1,0-46.22,0A65.32,65.32,0,0,0,128,110.7a65.32,65.32,0,0,0-24.89-16.57,38,38,0,1,0-46.22,0A65.69,65.69,0,0,0,27.2,116.4,6,6,0,0,0,28.4,124.8ZM176,38a26,26,0,1,1-26,26A26,26,0,0,1,176,38ZM80,38A26,26,0,1,1,54,64,26,26,0,0,1,80,38ZM199.11,198.13a38,38,0,1,0-46.22,0A65.32,65.32,0,0,0,128,214.7a65.32,65.32,0,0,0-24.89-16.57,38,38,0,1,0-46.22,0A65.69,65.69,0,0,0,27.2,220.4a6,6,0,1,0,9.6,7.2,54,54,0,0,1,86.4,0,6,6,0,0,0,8.4,1.19,5.59,5.59,0,0,0,1.19-1.19h0a54,54,0,0,1,86.4,0,6,6,0,0,0,9.6-7.21A65.74,65.74,0,0,0,199.11,198.13ZM80,142a26,26,0,1,1-26,26A26,26,0,0,1,80,142Zm96,0a26,26,0,1,1-26,26A26,26,0,0,1,176,142Z"></path></symbol><symbol id="i-Wallet" viewBox="0 0 256 256"><path d="M216,66H56a10,10,0,0,1,0-20H192a6,6,0,0,0,0-12H56A22,22,0,0,0,34,56V184a22,22,0,0,0,22,22H216a14,14,0,0,0,14-14V80A14,14,0,0,0,216,66Zm2,126a2,2,0,0,1-2,2H56a10,10,0,0,1-10-10V75.59A21.84,21.84,0,0,0,56,78H216a2,2,0,0,1,2,2Zm-28-60a10,10,0,1,1-10-10A10,10,0,0,1,190,132Z"></path></symbol><symbol id="i-TShirt" viewBox="0 0 256 256"><path d="M246.64,63,194.87,34.74A5.93,5.93,0,0,0,192,34H160a6,6,0,0,0-6,6,26,26,0,0,1-52,0,6,6,0,0,0-6-6H64a5.93,5.93,0,0,0-2.88.74L9.36,63A13.77,13.77,0,0,0,3.58,81.55l19.28,36.81A14.38,14.38,0,0,0,35.67,126H58v82a14,14,0,0,0,14,14H184a14,14,0,0,0,14-14V126h22.34a14.38,14.38,0,0,0,12.81-7.64l19.28-36.81A13.77,13.77,0,0,0,246.64,63Zm-211,51a2.42,2.42,0,0,1-2.18-1.21L14.21,76a1.82,1.82,0,0,1,.9-2.47L58,50.11V114ZM186,208a2,2,0,0,1-2,2H72a2,2,0,0,1-2-2V46H90.48a38,38,0,0,0,75,0H186Zm55.8-132-19.28,36.8a2.42,2.42,0,0,1-2.18,1.21H198V50.11l42.9,23.4A1.83,1.83,0,0,1,241.79,76Z"></path></symbol><symbol id="i-Gift" viewBox="0 0 256 256"><path d="M216,74H174.74a46.41,46.41,0,0,0,6-4.48,27.56,27.56,0,0,0,9.22-20A30.63,30.63,0,0,0,158.5,18a27.56,27.56,0,0,0-20,9.22A57.1,57.1,0,0,0,128,45.76a57.1,57.1,0,0,0-10.48-18.53A27.56,27.56,0,0,0,97.5,18,30.63,30.63,0,0,0,66,49.51a27.56,27.56,0,0,0,9.22,20,45.74,45.74,0,0,0,6,4.48H40A14,14,0,0,0,26,88v32a14,14,0,0,0,14,14h2v66a14,14,0,0,0,14,14H200a14,14,0,0,0,14-14V134h2a14,14,0,0,0,14-14V88A14,14,0,0,0,216,74ZM135.77,63c2.25-12.12,6.29-21.75,11.69-27.85A15.68,15.68,0,0,1,158.86,30h.55A18.6,18.6,0,0,1,178,49.14a15.68,15.68,0,0,1-5.18,11.4C162.1,70,143.92,72.83,134.34,73.65,134.59,70.76,135,67.08,135.77,63ZM83.45,35.45A18.69,18.69,0,0,1,96.59,30h.55a15.68,15.68,0,0,1,11.4,5.18C118,45.9,120.83,64.08,121.65,73.66c-2.89-.25-6.57-.68-10.61-1.43C98.92,70,89.29,65.94,83.19,60.53A15.64,15.64,0,0,1,78,49.14,18.65,18.65,0,0,1,83.45,35.45ZM38,120V88a2,2,0,0,1,2-2h82v36H40A2,2,0,0,1,38,120Zm16,80V134h68v68H56A2,2,0,0,1,54,200Zm148,0a2,2,0,0,1-2,2H134V134h68Zm16-80a2,2,0,0,1-2,2H134V86h82a2,2,0,0,1,2,2Z"></path></symbol><symbol id="i-FirstAidKit" viewBox="0 0 256 256"><path d="M216,58H174V48a22,22,0,0,0-22-22H104A22,22,0,0,0,82,48V58H40A14,14,0,0,0,26,72V200a14,14,0,0,0,14,14H216a14,14,0,0,0,14-14V72A14,14,0,0,0,216,58ZM94,48a10,10,0,0,1,10-10h48a10,10,0,0,1,10,10V58H94ZM218,200a2,2,0,0,1-2,2H40a2,2,0,0,1-2-2V72a2,2,0,0,1,2-2H216a2,2,0,0,1,2,2Zm-60-64a6,6,0,0,1-6,6H134v18a6,6,0,0,1-12,0V142H104a6,6,0,0,1,0-12h18V112a6,6,0,0,1,12,0v18h18A6,6,0,0,1,158,136Z"></path></symbol><symbol id="i-Trophy" viewBox="0 0 256 256"><path d="M232,66H206V48a6,6,0,0,0-6-6H56a6,6,0,0,0-6,6V66H24A14,14,0,0,0,10,80V96a38,38,0,0,0,38,38h5.14A78,78,0,0,0,122,189.75V218H96a6,6,0,0,0,0,12h64a6,6,0,0,0,0-12H134V189.75c32.44-2.52,59.43-25.3,68.62-55.75H208a38,38,0,0,0,38-38V80A14,14,0,0,0,232,66ZM48,122A26,26,0,0,1,22,96V80a2,2,0,0,1,2-2H50v34a80.87,80.87,0,0,0,.65,10Zm146-10.9c0,36.62-29.38,66.63-65.5,66.9A66,66,0,0,1,62,112V54H194ZM234,96a26,26,0,0,1-26,26h-2.77a78.45,78.45,0,0,0,.77-10.9V78h26a2,2,0,0,1,2,2Z"></path></symbol><symbol id="i-Baby" viewBox="0 0 256 256"><path d="M92,138a10,10,0,1,1,10-10A10,10,0,0,1,92,138Zm72-20a10,10,0,1,0,10,10A10,10,0,0,0,164,118Zm-11.2,44.92a47,47,0,0,1-49.6,0,6,6,0,0,0-6.4,10.16,59,59,0,0,0,62.4,0,6,6,0,1,0-6.4-10.16ZM230,128A102,102,0,1,1,128,26,102.12,102.12,0,0,1,230,128Zm-12,0a90.11,90.11,0,0,0-87.07-89.95C118.3,55.23,118,71.85,118,72a10,10,0,0,0,20,0,6,6,0,0,1,12,0,22,22,0,0,1-44,0c0-.75.15-15.82,10.14-33.22A90,90,0,1,0,218,128Z"></path></symbol><symbol id="i-SignOut" viewBox="0 0 256 256"><path d="M118,216a6,6,0,0,1-6,6H48a6,6,0,0,1-6-6V40a6,6,0,0,1,6-6h64a6,6,0,0,1,0,12H54V210h58A6,6,0,0,1,118,216Zm110.24-92.24-40-40a6,6,0,0,0-8.48,8.48L209.51,122H112a6,6,0,0,0,0,12h97.51l-29.75,29.76a6,6,0,1,0,8.48,8.48l40-40A6,6,0,0,0,228.24,123.76Z"></path></symbol><symbol id="i-CaretLeft" viewBox="0 0 256 256"><path d="M164.24,203.76a6,6,0,1,1-8.48,8.48l-80-80a6,6,0,0,1,0-8.48l80-80a6,6,0,0,1,8.48,8.48L88.49,128Z"></path></symbol><symbol id="i-CaretRight" viewBox="0 0 256 256"><path d="M180.24,132.24l-80,80a6,6,0,0,1-8.48-8.48L167.51,128,91.76,52.24a6,6,0,0,1,8.48-8.48l80,80A6,6,0,0,1,180.24,132.24Z"></path></symbol><symbol id="i-SquaresFour" viewBox="0 0 256 256"><path d="M104,42H56A14,14,0,0,0,42,56v48a14,14,0,0,0,14,14h48a14,14,0,0,0,14-14V56A14,14,0,0,0,104,42Zm2,62a2,2,0,0,1-2,2H56a2,2,0,0,1-2-2V56a2,2,0,0,1,2-2h48a2,2,0,0,1,2,2Zm94-62H152a14,14,0,0,0-14,14v48a14,14,0,0,0,14,14h48a14,14,0,0,0,14-14V56A14,14,0,0,0,200,42Zm2,62a2,2,0,0,1-2,2H152a2,2,0,0,1-2-2V56a2,2,0,0,1,2-2h48a2,2,0,0,1,2,2Zm-98,34H56a14,14,0,0,0-14,14v48a14,14,0,0,0,14,14h48a14,14,0,0,0,14-14V152A14,14,0,0,0,104,138Zm2,62a2,2,0,0,1-2,2H56a2,2,0,0,1-2-2V152a2,2,0,0,1,2-2h48a2,2,0,0,1,2,2Zm94-62H152a14,14,0,0,0-14,14v48a14,14,0,0,0,14,14h48a14,14,0,0,0,14-14V152A14,14,0,0,0,200,138Zm2,62a2,2,0,0,1-2,2H152a2,2,0,0,1-2-2V152a2,2,0,0,1,2-2h48a2,2,0,0,1,2,2Z"></path></symbol><symbol id="i-Note" viewBox="0 0 256 256"><path d="M90,96a6,6,0,0,1,6-6h64a6,6,0,0,1,0,12H96A6,6,0,0,1,90,96Zm6,38h64a6,6,0,0,0,0-12H96a6,6,0,0,0,0,12Zm32,20H96a6,6,0,0,0,0,12h32a6,6,0,0,0,0-12ZM222,48V156.69a13.94,13.94,0,0,1-4.1,9.9L166.59,217.9a13.94,13.94,0,0,1-9.9,4.1H48a14,14,0,0,1-14-14V48A14,14,0,0,1,48,34H208A14,14,0,0,1,222,48ZM48,210H154V160a6,6,0,0,1,6-6h50V48a2,2,0,0,0-2-2H48a2,2,0,0,0-2,2V208A2,2,0,0,0,48,210Zm153.52-44H166v35.52Z"></path></symbol><symbol id="i-ArrowsOut" viewBox="0 0 256 256"><path d="M214,48V96a6,6,0,0,1-12,0V62.48l-45.76,45.76a6,6,0,0,1-8.48-8.48L193.52,54H160a6,6,0,0,1,0-12h48A6,6,0,0,1,214,48ZM99.76,147.76,54,193.52V160a6,6,0,0,0-12,0v48a6,6,0,0,0,6,6H96a6,6,0,0,0,0-12H62.48l45.76-45.76a6,6,0,0,0-8.48-8.48ZM208,154a6,6,0,0,0-6,6v33.52l-45.76-45.76a6,6,0,0,0-8.48,8.48L193.52,202H160a6,6,0,0,0,0,12h48a6,6,0,0,0,6-6V160A6,6,0,0,0,208,154ZM62.48,54H96a6,6,0,0,0,0-12H48a6,6,0,0,0-6,6V96a6,6,0,0,0,12,0V62.48l45.76,45.76a6,6,0,0,0,8.48-8.48Z"></path></symbol><symbol id="i-X" viewBox="0 0 256 256"><path d="M204.24,195.76a6,6,0,1,1-8.48,8.48L128,136.49,60.24,204.24a6,6,0,0,1-8.48-8.48L119.51,128,51.76,60.24a6,6,0,0,1,8.48-8.48L128,119.51l67.76-67.75a6,6,0,0,1,8.48,8.48L136.49,128Z"></path></symbol></svg>
+<div class="stage-wrap" id="stageWrap"><div class="stage" id="stage" data-burst="28,30">
+<section class="slide dark" data-fx="dust" data-transition="fade" data-section="Opening">
+<div class="frame">
+  <div class="l2-title">
+    <div class="stack">
+      <span class="eyebrow" data-build="auto" data-fx="rise" data-i="0"><i></i>Life and Career Skills · Lesson 2</span>
+      <h1 class="h1" data-build="auto" data-fx="rise" data-i="1" data-title="Understanding Workplace Considerations for Career Success">Understanding <em>Workplace Considerations</em> for Career Success</h1>
+      <p class="lead" data-build="auto" data-fx="rise" data-i="2">The basic rights of employees under P.D. 442, the Labor Code of the Philippines, and occupational wellness</p>
+    </div>
+    <div class="title-art" data-build="auto" data-fx="pop" data-i="2">
+      <div class="seal-box"><svg class="seal" viewBox="0 0 600 600" aria-hidden="true"><defs><path id="sp1" d="M300,300 m-246,0 a246,246 0 1,1 492,0 a246,246 0 1,1 -492,0"/></defs><circle class="ring-o" cx="300" cy="300" r="292"/><circle class="ring-i" cx="300" cy="300" r="206"/><g class="spin"><text><textPath href="#sp1" textLength="1535" lengthAdjust="spacing">P.D. 442 · LABOR CODE OF THE PHILIPPINES · P.D. 442 · LABOR CODE OF THE PHILIPPINES ·</textPath></text></g></svg><div class="seal-core"><svg class="ic " aria-hidden="true"><use href="#i-Scales"/></svg></div></div>
+      <span class="slip k2" style="--rot:-6deg;left:0;top:70px" data-build="auto" data-fx="drop" data-i="3"><svg class="ic " aria-hidden="true"><use href="#i-Clock"/></svg>Fair working hours</span>
+      <span class="slip k3" style="--rot:5deg;right:0;top:220px" data-build="auto" data-fx="drop" data-i="4"><svg class="ic " aria-hidden="true"><use href="#i-Coins"/></svg>Proper pay</span>
+      <span class="slip k4" style="--rot:-4deg;left:10px;bottom:190px" data-build="auto" data-fx="drop" data-i="5"><svg class="ic " aria-hidden="true"><use href="#i-CalendarCheck"/></svg>Rest days and holidays</span>
+      <span class="slip k1" style="--rot:4deg;right:20px;bottom:40px" data-build="auto" data-fx="drop" data-i="6"><svg class="ic " aria-hidden="true"><use href="#i-ShieldCheck"/></svg>Protection against abuse</span>
+    </div>
+  </div></div>
+<div class="foot"><span>LCS_3RD QTR_LESSON 2</span><span class="num"></span></div>
+<aside class="notes"></aside>
+</section>
+<section class="slide light" data-fx="none" data-transition="fade">
+<div class="frame">
+  <div class="comp">
+    <span class="eyebrow" data-build="auto" data-fx="rise" data-i="0"><i></i>Learning competency</span>
+    <blockquote data-build="auto" data-fx="rise" data-i="1" data-title="Learning competency">Analyze the <em>importance</em> of workplace considerations on career success</blockquote>
+    <div class="flow">
+      <div class="card k2" data-build="auto" data-fx="pop" data-i="2"><div class="core"><span class="no">01</span><svg class="ic " aria-hidden="true"><use href="#i-Stamp"/></svg><span class="t">Employee Rights Check</span></div></div><div class="card k3" data-build="auto" data-fx="pop" data-i="2.6"><div class="core"><span class="no">02</span><svg class="ic " aria-hidden="true"><use href="#i-Scales"/></svg><span class="t">Basic rights under P.D. 442</span></div></div><div class="card k6" data-build="auto" data-fx="pop" data-i="3.2"><div class="core"><span class="no">03</span><svg class="ic " aria-hidden="true"><use href="#i-Buildings"/></svg><span class="t">My Suitable Workplace</span></div></div><div class="card k5" data-build="auto" data-fx="pop" data-i="3.8"><div class="core"><span class="no">04</span><svg class="ic " aria-hidden="true"><use href="#i-Plant"/></svg><span class="t">Subtopic 2: Occupational wellness</span></div></div><div class="card k4" data-build="auto" data-fx="pop" data-i="4.4"><div class="core"><span class="no">05</span><svg class="ic " aria-hidden="true"><use href="#i-UsersThree"/></svg><span class="t">Lesson quiz and Career Vision Presentation</span></div></div>
+    </div>
+  </div></div>
+<div class="foot"><span>LCS_3RD QTR_LESSON 2</span><span class="num"></span></div>
+<aside class="notes"></aside>
+</section>
+<section class="slide dark" data-fx="dust" data-transition="fade" data-section="Subtopic 1: Basic rights of employees">
+<div class="frame">
+  <div class="div">
+    <span class="no" data-build="auto" data-fx="fade" data-i="0">01</span>
+    <div class="stack">
+      <span class="eyebrow" data-build="auto" data-fx="rise" data-i="1"><i></i>Activity</span>
+      <h2 class="h1" data-build="auto" data-fx="rise" data-i="2">Employee Rights Check</h2>
+      <p class="lead" data-build="auto" data-fx="rise" data-i="3">Warm up on what matters in a workplace.</p>
+    </div>
+  </div></div>
+<div class="foot"><span>LCS_3RD QTR_LESSON 2</span><span class="num"></span></div>
+<aside class="notes"></aside>
+</section>
+<section class="slide light" data-fx="none" data-transition="page">
+<div class="frame">
+  <div class="hd"><h2 class="h2" data-build="auto" data-fx="rise" data-i="0">Employee Rights Check</h2><div class="legend" data-build="auto" data-fx="fade" data-i="0.5"><span class="chip k2"><svg class="ic " aria-hidden="true"><use href="#i-CheckFat"/></svg>Upheld</span><span class="chip k1"><svg class="ic " aria-hidden="true"><use href="#i-XCircle"/></svg>Violated</span></div></div>
+  <div class="chk">
+    <div class="card chkr" data-build="auto" data-fx="left" data-i="1"><div class="core"><span class="no">1</span><p class="s">Jenny, an employee who always works overtime but does not receive any overtime pay.</p><span class="slot"><span class="stamp st-x" data-build="1" data-fx="stamp" data-i="0"><svg class="ic " aria-hidden="true"><use href="#i-XCircle"/></svg>Violated</span></span></div></div><div class="card chkr" data-build="auto" data-fx="left" data-i="1.4"><div class="core"><span class="no">2</span><p class="s">A company with a toxic working culture and environment.</p><span class="slot"><span class="stamp st-x" data-build="2" data-fx="stamp" data-i="0"><svg class="ic " aria-hidden="true"><use href="#i-XCircle"/></svg>Violated</span></span></div></div><div class="card chkr" data-build="auto" data-fx="left" data-i="1.8"><div class="core"><span class="no">3</span><p class="s">You are employed in a company with a good work-life balance.</p><span class="slot"><span class="stamp st-ok" data-build="3" data-fx="stamp" data-i="0"><svg class="ic " aria-hidden="true"><use href="#i-CheckFat"/></svg>Upheld</span></span></div></div><div class="card chkr" data-build="auto" data-fx="left" data-i="2.2"><div class="core"><span class="no">4</span><p class="s">Employees are experiencing an unfair system in the company.</p><span class="slot"><span class="stamp st-x" data-build="4" data-fx="stamp" data-i="0"><svg class="ic " aria-hidden="true"><use href="#i-XCircle"/></svg>Violated</span></span></div></div><div class="card chkr" data-build="auto" data-fx="left" data-i="2.6"><div class="core"><span class="no">5</span><p class="s">Employees are happy: they work light in a good working environment where they can express themselves and reach their full potential.</p><span class="slot"><span class="stamp st-ok" data-build="5" data-fx="stamp" data-i="0"><svg class="ic " aria-hidden="true"><use href="#i-CheckFat"/></svg>Upheld</span></span></div></div>
+  </div></div>
+<div class="foot"><span>LCS_3RD QTR_LESSON 2</span><span class="num"></span></div>
+<aside class="notes"></aside>
+</section>
+<section class="slide dark" data-fx="dust" data-transition="fade" data-section="Basic rights of employees">
+<div class="frame">
+  <div class="div">
+    <span class="no" data-build="auto" data-fx="fade" data-i="0">02</span>
+    <div class="stack">
+      <span class="eyebrow" data-build="auto" data-fx="rise" data-i="1"><i></i>Discussion</span>
+      <h2 class="h1" data-build="auto" data-fx="rise" data-i="2">Basic Rights of Employees</h2>
+      <p class="lead" data-build="auto" data-fx="rise" data-i="3">According to P.D. 442, the Labor Code of the Philippines</p>
+    </div>
+  </div></div>
+<div class="foot"><span>LCS_3RD QTR_LESSON 2</span><span class="num"></span></div>
+<aside class="notes"></aside>
+</section>
+<section class="slide light" data-fx="none" data-transition="page">
+<div class="frame">
+  <div class="hd"><h2 class="h2" data-build="auto" data-fx="rise" data-i="0">P.D. 442: Why It Was Established</h2></div>
+  <div class="grid g3 law" style="align-items:stretch">
+    <div class="card k2" style="--rot:-1.2deg" data-build="auto" data-fx="drop" data-i="1"><div class="core"><span class="badge"><svg class="ic " aria-hidden="true"><use href="#i-ShieldCheck"/></svg></span><span class="t">Safeguards</span><p>Filipino workers’ rights, <b>equity</b> in the workplace, and <b>social justice</b> between employers and employees</p></div></div>
+    <div class="card k4" style="--rot:0.8deg" data-build="auto" data-fx="drop" data-i="2"><div class="core"><span class="badge"><svg class="ic " aria-hidden="true"><use href="#i-Handshake"/></svg></span><span class="t">Guides</span><p>Positive working relationships, with clear guidelines for <b>working hours, pay, benefits,</b> and <b>job security</b></p></div></div>
+    <div class="card k3" style="--rot:-0.6deg" data-build="auto" data-fx="drop" data-i="3"><div class="core"><span class="badge"><svg class="ic " aria-hidden="true"><use href="#i-Scales"/></svg></span><span class="t">Balances</span><p><b>Business expansion</b> and <b>worker welfare</b>, to keep industrial harmony and productivity</p></div></div>
+  </div></div>
+<div class="foot"><span>LCS_3RD QTR_LESSON 2</span><span class="num"></span></div>
+<aside class="notes"></aside>
+</section>
+<section class="slide light" data-fx="none" data-transition="fade" data-section="Time at work">
+<div class="frame">
+  <div class="hd"><h2 class="h2" data-build="auto" data-fx="rise" data-i="0">Normal Hours of Work and Overtime</h2></div>
+  <div class="day" data-build="auto" data-fx="fade" data-i="1">
+    <div class="daybar"><span class="hr" style="--h:1">1</span><span class="hr" style="--h:2">2</span><span class="hr" style="--h:3">3</span><span class="hr" style="--h:4">4</span><span class="hr" style="--h:5">5</span><span class="hr" style="--h:6">6</span><span class="hr" style="--h:7">7</span><span class="hr" style="--h:8">8</span><span class="hr ot" style="--h:10"><b>+25%</b><span>or more</span></span></div>
+    <div class="braces"><span class="brace">8 hours a day: normal hours of work</span><span class="brace ot">Beyond 8 hours</span></div>
+  </div>
+  <div class="grid g3 facts">
+    <div class="card k2" data-build="auto" data-fx="rise" data-i="2"><div class="core"><div class="top"><span class="badge"><svg class="ic " aria-hidden="true"><use href="#i-Clock"/></svg></span><span class="t">Normal hours</span></div><p>Employees should normally work <b>8 hours a day</b>. Work beyond 8 hours is <b>overtime</b>, which must be paid extra.</p></div></div>
+    <div class="card k1" data-build="auto" data-fx="rise" data-i="2.5"><div class="core"><div class="top"><span class="badge"><svg class="ic " aria-hidden="true"><use href="#i-Coins"/></svg></span><span class="t">Overtime pay</span></div><p>At least <b>25% more</b> than the regular hourly rate; at least <b>30% more</b> on a holiday or rest day.</p></div></div>
+    <div class="card k4" data-build="auto" data-fx="rise" data-i="3"><div class="core"><div class="top"><span class="badge"><svg class="ic " aria-hidden="true"><use href="#i-HeartStraight"/></svg></span><span class="t">Why it matters</span></div><p>Workers are <b>not overworked</b> and are <b>paid fairly</b> for extra work.</p></div></div>
+  </div></div>
+<div class="foot"><span>LCS_3RD QTR_LESSON 2</span><span class="num"></span></div>
+<aside class="notes"></aside>
+</section>
+<section class="slide light" data-fx="none" data-transition="fade" data-section="Rest and holidays">
+<div class="frame">
+  <div class="hd"><h2 class="h2" data-build="auto" data-fx="rise" data-i="0">Night Shift, Rest Days and Holidays</h2></div>
+  <div class="rows">
+    <div class="card row k4" data-build="auto" data-fx="left" data-i="1"><div class="core"><div class="key"><span class="t">Night Shift Differential</span><span class="n"><svg class="ic " aria-hidden="true"><use href="#i-Moon"/></svg>+10%</span></div><span class="rule"></span><div class="txt"><p>Employees working between <b>10 PM and 6 AM</b> must get extra pay, not less than <b>10% of their hourly rate</b>.</p><p class="why">Night workers deserve added compensation.</p></div></div></div>
+    <div class="card row k2" data-build="auto" data-fx="left" data-i="2"><div class="core"><div class="key"><span class="t">Rest Day</span><span class="n w"><svg class="ic " aria-hidden="true"><use href="#i-Armchair"/></svg>1 a week</span></div><span class="rule"></span><div class="txt"><p>Workers must have <b>at least one rest day every week</b>. Employers should respect the employee’s <b>religious beliefs</b> when setting rest days.</p><p class="why">Rest days let workers recover and spend time with their families.</p></div></div></div>
+    <div class="card row k3" data-build="auto" data-fx="left" data-i="3"><div class="core"><div class="key"><span class="t">Holidays</span><span class="n w"><svg class="ic " aria-hidden="true"><use href="#i-CalendarStar"/></svg>Double pay</span></div><span class="rule"></span><div class="txt"><p>Employees are paid on <b>regular holidays</b> even if they don’t work. If they work during a holiday, they get <b>double pay</b>.</p><p class="why">It protects the right to rest and rewards those who work.</p></div></div></div>
+  </div></div>
+<div class="foot"><span>LCS_3RD QTR_LESSON 2</span><span class="num"></span></div>
+<aside class="notes"></aside>
+</section>
+<section class="slide light" data-fx="none" data-transition="fade" data-section="Leave and protection">
+<div class="frame">
+  <div class="hd"><h2 class="h2" data-build="auto" data-fx="rise" data-i="0">Leave and Special Protection</h2></div>
+  <div class="rows">
+    <div class="card row k6" data-build="auto" data-fx="left" data-i="1"><div class="core"><div class="key"><span class="t">Service Incentive Leave</span><span class="n"><svg class="ic " aria-hidden="true"><use href="#i-SunHorizon"/></svg>5 days</span></div><span class="rule"></span><div class="txt"><p>Workers who have served for <b>at least 1 year</b> get <b>5 days of paid leave</b> per year.</p><p class="why">A chance to rest or attend to personal matters.</p></div></div></div>
+    <div class="card row k5" data-build="auto" data-fx="left" data-i="2"><div class="core"><div class="key"><span class="t">Women and Minors</span><span class="n w"><svg class="ic " aria-hidden="true"><use href="#i-ShieldCheck"/></svg>Below 15</span></div><span class="rule"></span><div class="txt"><p>Special protection for women and minors. Children <b>below 15</b> are not allowed to work, except in <b>family businesses under safe conditions</b>.</p><p class="why">Women and young workers are treated fairly and protected from abuse.</p></div></div></div>
+    <div class="card row k1" data-build="auto" data-fx="left" data-i="3"><div class="core"><div class="key"><span class="t">Benefits for Special Groups</span><span class="n w"><svg class="ic " aria-hidden="true"><use href="#i-HandHeart"/></svg>More rights</span></div><span class="rule"></span><div class="txt"><p>Special laws give additional rights to <b>women</b> (e.g., maternity leave), <b>minors</b>, and <b>persons with disabilities</b>.</p><p class="why">Some groups need more protection in the workplace.</p></div></div></div>
+  </div></div>
+<div class="foot"><span>LCS_3RD QTR_LESSON 2</span><span class="num"></span></div>
+<aside class="notes"></aside>
+</section>
+<section class="slide light" data-fx="none" data-transition="fade" data-section="Pay">
+<div class="frame">
+  <div class="hd"><h2 class="h2" data-build="auto" data-fx="rise" data-i="0">Wages: Paid Right and On Time</h2></div>
+  <div class="rows">
+    <div class="card row k2" data-build="auto" data-fx="left" data-i="1"><div class="core"><div class="key"><span class="t">Wages</span><span class="n"><svg class="ic " aria-hidden="true"><use href="#i-Money"/></svg>₱ only</span></div><span class="rule"></span><div class="txt"><p>Paid in <b>legal tender (Philippine pesos)</b>, not in products or promises. Employers must give <b>payslips</b> showing salary and deductions.</p><p class="why">This guarantees fairness and transparency.</p></div></div></div>
+    <div class="card row k4" data-build="auto" data-fx="left" data-i="2"><div class="core"><div class="key"><span class="t">Payment of Wages</span><span class="n w"><svg class="ic " aria-hidden="true"><use href="#i-CalendarCheck"/></svg>2× a month</span></div><span class="rule"></span><div class="txt"><p>At least <b>once every two weeks or twice a month</b>, paid <b>directly to the worker</b> at or near the workplace.</p><p class="why">Employees receive their earnings regularly and conveniently.</p></div></div></div>
+    <div class="card row k1" data-build="auto" data-fx="left" data-i="3"><div class="core"><div class="key"><span class="t">Prohibition of Deductions</span><span class="n w"><svg class="ic " aria-hidden="true"><use href="#i-Prohibit"/></svg>By law only</span></div><span class="rule"></span><div class="txt"><p>No deductions from wages <b>unless allowed by law</b> (e.g., taxes, SSS, Pag-IBIG, PhilHealth contributions).</p><p class="why">It prevents unfair wage cuts and protects employees’ income.</p></div></div></div>
+  </div></div>
+<div class="foot"><span>LCS_3RD QTR_LESSON 2</span><span class="num"></span></div>
+<aside class="notes"></aside>
+</section>
+<section class="slide dark" data-fx="dust" data-transition="fade" data-section="Summary">
+<div class="frame">
+  <div class="sum">
+    <div class="stack" style="gap:34px">
+      <span class="eyebrow" data-build="auto" data-fx="rise" data-i="0"><i></i>In summary · Book Three of the Labor Code</span>
+      <p data-build="auto" data-fx="rise" data-i="1" data-title="Book Three of the Labor Code">Book Three of the Labor Code makes sure employees have <mark style="--m:0">fair working hours</mark>, <mark style="--m:1">proper pay</mark>, <mark style="--m:2">rest days</mark>, <mark style="--m:3">holidays</mark>, <mark style="--m:4">leave benefits</mark>, and <mark style="--m:5">protection against abuse</mark>. It also ensures that <mark style="--m:6">wages are paid correctly and on time</mark>.</p>
+    </div>
+    <div data-build="auto" data-fx="pop" data-i="2"><div class="seal-box"><svg class="seal" viewBox="0 0 600 600" aria-hidden="true"><defs><path id="sp2" d="M300,300 m-246,0 a246,246 0 1,1 492,0 a246,246 0 1,1 -492,0"/></defs><circle class="ring-o" cx="300" cy="300" r="292"/><circle class="ring-i" cx="300" cy="300" r="206"/><g class="spin"><text><textPath href="#sp2" textLength="1535" lengthAdjust="spacing">P.D. 442 · LABOR CODE OF THE PHILIPPINES · P.D. 442 · LABOR CODE OF THE PHILIPPINES ·</textPath></text></g></svg><div class="seal-core"><svg class="ic " aria-hidden="true"><use href="#i-Gavel"/></svg></div></div></div>
+  </div></div>
+<div class="foot"><span>LCS_3RD QTR_LESSON 2</span><span class="num"></span></div>
+<aside class="notes"></aside>
+</section>
+<section class="slide dark" data-fx="dust" data-transition="fade" data-section="Apply it">
+<div class="frame">
+  <div class="div">
+    <span class="no" data-build="auto" data-fx="fade" data-i="0">03</span>
+    <div class="stack">
+      <span class="eyebrow" data-build="auto" data-fx="rise" data-i="1"><i></i>Activity</span>
+      <h2 class="h1" data-build="auto" data-fx="rise" data-i="2">My Suitable Workplace</h2>
+      
+    </div>
+  </div></div>
+<div class="foot"><span>LCS_3RD QTR_LESSON 2</span><span class="num"></span></div>
+<aside class="notes"></aside>
+</section>
+<section class="slide light" data-fx="none" data-transition="page">
+<div class="frame">
+  <div class="hd"><h2 class="h2" data-build="auto" data-fx="rise" data-i="0">My Suitable Workplace</h2><span class="eyebrow" data-build="auto" data-fx="fade" data-i="0.5"><i></i>Activity · Individual</span></div>
+  <div class="split" style="grid-template-columns:minmax(0,1.05fr) minmax(0,0.95fr)">
+    <div class="card " data-build="auto" data-fx="rise" data-i="1"><div class="core"><ol class="ol">
+      <li>Get <b>one whole sheet of paper</b> and write your answers.</li>
+      <li><b>Compare</b> the different workplace settings presented.</li>
+      <li><b>Choose</b> the workplace setting you prefer.</li>
+      <li><b>Explain your choice</b> by identifying and justifying the workplace considerations that are important for your career.</li>
+    </ol></div></div>
+    <div class="place-grid">
+      <button class="place ck k4" type="button" aria-pressed="false" data-build="auto" data-fx="pop" data-i="2"><span class="tick"><svg class="ic " aria-hidden="true"><use href="#i-Check"/></svg></span><svg class="ic " aria-hidden="true"><use href="#i-HouseLine"/></svg><span class="t">Work-from-home</span></button><button class="place ck k6" type="button" aria-pressed="false" data-build="auto" data-fx="pop" data-i="2.5"><span class="tick"><svg class="ic " aria-hidden="true"><use href="#i-Check"/></svg></span><svg class="ic " aria-hidden="true"><use href="#i-AirplaneTilt"/></svg><span class="t">Abroad</span></button><button class="place ck k3" type="button" aria-pressed="false" data-build="auto" data-fx="pop" data-i="3"><span class="tick"><svg class="ic " aria-hidden="true"><use href="#i-Check"/></svg></span><svg class="ic " aria-hidden="true"><use href="#i-Buildings"/></svg><span class="t">Office</span></button><button class="place ck k1" type="button" aria-pressed="false" data-build="auto" data-fx="pop" data-i="3.5"><span class="tick"><svg class="ic " aria-hidden="true"><use href="#i-Check"/></svg></span><svg class="ic " aria-hidden="true"><use href="#i-Chalkboard"/></svg><span class="t">School</span></button>
+    </div>
+  </div></div>
+<div class="foot"><span>LCS_3RD QTR_LESSON 2</span><span class="num"></span></div>
+<aside class="notes"></aside>
+</section>
+<section class="slide dark eq" data-fx="mist" data-transition="fade" data-section="Subtopic 2: Occupational wellness">
+<div class="frame">
+  <div class="l3-title">
+    <div class="stack">
+      <span class="eyebrow" data-build="auto" data-fx="rise" data-i="0"><i></i>Lesson 2 · Subtopic 2</span>
+      <h1 class="h1" data-build="auto" data-fx="rise" data-i="1" data-title="Occupational Wellness">Occupational <em>Wellness</em></h1>
+      <p class="lead" data-build="auto" data-fx="rise" data-i="2">Appointments, flexible work, pay and benefits, and the ways we manage work and life</p>
+    </div>
+    <div class="orbit" data-build="auto" data-fx="pop" data-i="2" aria-hidden="true">
+      <div class="rg r1"><span class="pl k5"><svg class="ic " aria-hidden="true"><use href="#i-Briefcase"/></svg></span><span class="pl b k3"><svg class="ic " aria-hidden="true"><use href="#i-HouseLine"/></svg></span></div>
+      <div class="rg r2"><span class="pl k4"><svg class="ic " aria-hidden="true"><use href="#i-Coins"/></svg></span><span class="pl b k2"><svg class="ic " aria-hidden="true"><use href="#i-Clock"/></svg></span></div>
+      <div class="rg r3"><span class="pl k6"><svg class="ic " aria-hidden="true"><use href="#i-HeartStraight"/></svg></span></div>
+      <div class="core"><svg class="ic " aria-hidden="true"><use href="#i-Plant"/></svg></div>
+    </div>
+  </div></div>
+<div class="foot"><span>LCS_3RD QTR_LESSON 2</span><span class="num"></span></div>
+<aside class="notes"></aside>
+</section>
+<section class="slide light eq" data-fx="none" data-transition="fade">
+<div class="frame">
+  <div class="comp">
+    <span class="eyebrow" data-build="auto" data-fx="rise" data-i="0"><i></i>Subtopic 2 · Learning competency</span>
+    <blockquote data-build="auto" data-fx="rise" data-i="1" data-title="Learning competency">Analyze the <em>importance</em> of workplace considerations on career success</blockquote>
+    <div class="flow f6">
+      <div class="card k3" data-build="auto" data-fx="pop" data-i="2"><div class="core"><span class="no">01</span><svg class="ic " aria-hidden="true"><use href="#i-ChatsCircle"/></svg><span class="t">Personal connection</span></div></div><div class="card k1" data-build="auto" data-fx="pop" data-i="2.5"><div class="core"><span class="no">02</span><svg class="ic " aria-hidden="true"><use href="#i-IdentificationBadge"/></svg><span class="t">Appointments in civil service</span></div></div><div class="card k5" data-build="auto" data-fx="pop" data-i="3"><div class="core"><span class="no">03</span><svg class="ic " aria-hidden="true"><use href="#i-ClockCountdown"/></svg><span class="t">Flexible work arrangements</span></div></div><div class="card k4" data-build="auto" data-fx="pop" data-i="3.5"><div class="core"><span class="no">04</span><svg class="ic " aria-hidden="true"><use href="#i-Coins"/></svg><span class="t">Compensation and allowances</span></div></div><div class="card k2" data-build="auto" data-fx="pop" data-i="4"><div class="core"><span class="no">05</span><svg class="ic " aria-hidden="true"><use href="#i-Scales"/></svg><span class="t">Work-life approaches</span></div></div><div class="card k6" data-build="auto" data-fx="pop" data-i="4.5"><div class="core"><span class="no">06</span><svg class="ic " aria-hidden="true"><use href="#i-Exam"/></svg><span class="t">Lesson quiz and role-play</span></div></div>
+    </div>
+  </div></div>
+<div class="foot"><span>LCS_3RD QTR_LESSON 2</span><span class="num"></span></div>
+<aside class="notes"></aside>
+</section>
+<section class="slide light eq" data-fx="none" data-transition="rise" data-section="Activity">
+<div class="frame">
+  <div class="hd"><h2 class="h2" data-build="auto" data-fx="rise" data-i="0">Personal Connection and Sharing</h2><span class="eyebrow" data-build="auto" data-fx="fade" data-i="0.5"><i></i>Activity</span></div>
+  <div class="split" style="grid-template-columns:minmax(0,1.05fr) minmax(0,0.95fr)">
+    <div class="card k3" data-build="auto" data-fx="rise" data-i="1"><div class="core"><span class="cap">Reflect</span><p class="q-big">Think about your <em>school-life balance</em> today. How do you manage study, rest, family time, and hobbies? Do you feel <em>balanced</em> or <em>overloaded</em>?</p>
+    <div class="seesaw" aria-hidden="true"><div class="beam"><span class="w l1 k5">Study</span><span class="w l2 k1">Rest</span><span class="w r1 k3">Family time</span><span class="w r2 k2">Hobbies</span></div><span class="fulcrum"></span></div></div></div>
+    <div class="steps">
+      <div class="card k1" data-build="auto" data-fx="right" data-i="2"><div class="core"><span class="n">1</span><p><b>Discuss</b> your thoughts with a partner or in your assigned small group.</p></div></div>
+      <div class="card k2" data-build="auto" data-fx="right" data-i="3"><div class="core"><span class="n">2</span><div><p><b>Explain</b> how your experiences relate to:</p><div class="chips"><span class="chip k1">work-life balance</span><span class="chip k2">occupational wellness</span><span class="chip k3">wise career decisions in the future</span></div></div></div></div>
+    </div>
+  </div></div>
+<div class="foot"><span>LCS_3RD QTR_LESSON 2</span><span class="num"></span></div>
+<aside class="notes"></aside>
+</section>
+<section class="slide dark eq" data-fx="mist" data-transition="fade" data-section="Appointments in civil service">
+<div class="frame">
+  <div class="div">
+    <span class="no" data-build="auto" data-fx="fade" data-i="0">04</span>
+    <div class="stack">
+      <span class="eyebrow" data-build="auto" data-fx="rise" data-i="1"><i></i>Employment status</span>
+      <h2 class="h1" data-build="auto" data-fx="rise" data-i="2">Nature of Appointment in Civil Service</h2>
+      <p class="lead" data-build="auto" data-fx="rise" data-i="3">The different types of employment appointments in government service</p>
+    </div>
+  </div></div>
+<div class="foot"><span>LCS_3RD QTR_LESSON 2</span><span class="num"></span></div>
+<aside class="notes"></aside>
+</section>
+<section class="slide light eq" data-fx="none" data-transition="fade">
+<div class="frame">
+  <div class="hd"><h2 class="h2" data-build="auto" data-fx="rise" data-i="0">Four Types of Appointment</h2><span class="eyebrow" data-build="auto" data-fx="fade" data-i="0.5"><i></i>Government service</span></div>
+  <div class="grid g2 appt">
+    <div class="card k1" data-build="auto" data-fx="pop" data-i="1"><div class="core"><div class="top"><span class="badge"><svg class="ic " aria-hidden="true"><use href="#i-SealCheck"/></svg></span><span class="t">Permanent</span></div><p>For a person who <b>fully meets all qualification standards</b> required by law</p><div class="glyph g-perm"><i></i></div></div></div>
+    <div class="card k4" data-build="auto" data-fx="pop" data-i="1.5"><div class="core"><div class="top"><span class="badge"><svg class="ic " aria-hidden="true"><use href="#i-Hourglass"/></svg></span><span class="t">Temporary</span></div><p>When <b>no qualified applicant with eligibility</b> is available; up to <b>12 months</b></p><div class="glyph g-temp"><i></i></div></div></div>
+    <div class="card k2" data-build="auto" data-fx="pop" data-i="2"><div class="core"><div class="top"><span class="badge"><svg class="ic " aria-hidden="true"><use href="#i-LinkSimple"/></svg></span><span class="t">Coterminous</span></div><p><b>Primarily confidential</b> in nature, or tied to the <b>lifespan of the agency</b></p><div class="glyph g-cot"><i></i><i></i></div></div></div>
+    <div class="card k3" data-build="auto" data-fx="pop" data-i="2.5"><div class="core"><div class="top"><span class="badge"><svg class="ic " aria-hidden="true"><use href="#i-ArrowsLeftRight"/></svg></span><span class="t">Substitute</span></div><p>While the regular employee is <b>temporarily unable</b> to perform duties</p><div class="glyph g-sub"><i></i><i></i><i></i></div></div></div>
+  </div></div>
+<div class="foot"><span>LCS_3RD QTR_LESSON 2</span><span class="num"></span></div>
+<aside class="notes"></aside>
+</section>
+<section class="slide light eq" data-fx="none" data-transition="rise">
+<div class="frame">
+  <div class="hd"><h2 class="h2" data-build="auto" data-fx="rise" data-i="0">Permanent and Temporary</h2><span class="eyebrow" data-build="auto" data-fx="fade" data-i="0.5"><i></i>Appointment examples</span></div>
+  <div class="grid g2">
+    <div class="card ax k1" data-build="auto" data-fx="pop" data-i="1"><div class="core"><div class="top"><span class="badge"><svg class="ic " aria-hidden="true"><use href="#i-SealCheck"/></svg></span><span class="t">Permanent</span></div><p class="d">For a person who <b>fully meets all qualification standards</b>: eligibility, education, training, and experience.</p><span class="cap">Example</span><p class="e"><b>Maria Bella</b> became a <b>Permanent Senior Education Program Specialist</b> after meeting all the CSC qualification standards.</p></div></div>
+    <div class="card ax k4" data-build="auto" data-fx="pop" data-i="2"><div class="core"><div class="top"><span class="badge"><svg class="ic " aria-hidden="true"><use href="#i-Hourglass"/></svg></span><span class="t">Temporary</span></div><p class="d">When <b>no qualified applicant with eligibility</b> is available; <b>up to 12 months</b>, renewable only under certain conditions. Not for licensed positions, unless justified.</p><span class="cap">Example</span><p class="e">A town office needs an <b>Administrative Aide I</b> but no applicant has Civil Service eligibility, so a qualified college graduate gets a <b>Temporary Appointment</b>.</p></div></div>
+  </div></div>
+<div class="foot"><span>LCS_3RD QTR_LESSON 2</span><span class="num"></span></div>
+<aside class="notes"></aside>
+</section>
+<section class="slide light eq" data-fx="none" data-transition="rise">
+<div class="frame">
+  <div class="hd"><h2 class="h2" data-build="auto" data-fx="rise" data-i="0">Coterminous and Substitute</h2><span class="eyebrow" data-build="auto" data-fx="fade" data-i="0.5"><i></i>Appointment examples</span></div>
+  <div class="grid g2">
+    <div class="card ax k2" data-build="auto" data-fx="pop" data-i="1"><div class="core"><div class="top"><span class="badge"><svg class="ic " aria-hidden="true"><use href="#i-LinkSimple"/></svg></span><span class="t">Coterminous</span></div><p class="d"><b>Primarily confidential</b> in nature, or tied to the <b>lifespan of the agency</b>.</p><span class="cap">Example</span><p class="e">The mayor’s <b>Private Secretary</b> serves at the mayor’s pleasure; when the mayor’s term ends or the mayor is replaced, the appointment <b>ends too</b>.</p></div></div>
+    <div class="card ax k3" data-build="auto" data-fx="pop" data-i="2"><div class="core"><div class="top"><span class="badge"><svg class="ic " aria-hidden="true"><use href="#i-ArrowsLeftRight"/></svg></span><span class="t">Substitute</span></div><p class="d">While the regular employee is <b>temporarily unable to work</b> (leave, suspension, scholarship, secondment); ends when the incumbent returns.</p><span class="cap">Example</span><p class="e"><b>Ms. Tadena</b>, an LET passer, takes <b>Mrs. Sampana</b>’s Grade 4 class during her 105-day maternity leave (Sept. 1–Dec. 15); no tenure.</p></div></div>
+  </div></div>
+<div class="foot"><span>LCS_3RD QTR_LESSON 2</span><span class="num"></span></div>
+<aside class="notes"></aside>
+</section>
+<section class="slide dark eq" data-fx="mist" data-transition="fade" data-section="Flexible work arrangements">
+<div class="frame">
+  <div class="div">
+    <span class="no" data-build="auto" data-fx="fade" data-i="0">05</span>
+    <div class="stack">
+      <span class="eyebrow" data-build="auto" data-fx="rise" data-i="1"><i></i>Flexible work</span>
+      <h2 class="h1" data-build="auto" data-fx="rise" data-i="2">Flexible Work Arrangements</h2>
+      <p class="lead" data-build="auto" data-fx="rise" data-i="3">In government and in private companies</p>
+    </div>
+  </div></div>
+<div class="foot"><span>LCS_3RD QTR_LESSON 2</span><span class="num"></span></div>
+<aside class="notes"></aside>
+</section>
+<section class="slide light eq" data-fx="none" data-transition="fade">
+<div class="frame">
+  <div class="hd"><h2 class="h2" data-build="auto" data-fx="rise" data-i="0">Flexible Work in Government</h2><span class="eyebrow" data-build="auto" data-fx="fade" data-i="0.5"><i></i>CSC Resolution No. 2200209</span></div>
+  <div class="split" style="grid-template-columns:minmax(0,1.25fr) minmax(0,0.75fr)">
+    <div class="card k5" data-build="auto" data-fx="rise" data-i="1"><div class="core"><p class="statement">The <b>Civil Service Commission</b>, through Resolution No. 2200209, institutionalizes <em>flexible work arrangements (FWAs)</em> in government to ensure the <b>continuous delivery of public service</b> while safeguarding the <b>health, safety, and welfare</b> of employees.</p></div></div>
+    <div class="card k5" data-build="auto" data-fx="right" data-i="2"><div class="core"><span class="cap">Who is covered</span><p class="lead-def">All government officials and employees, <b>regardless of employment status</b>, across:</p><div class="cov"><span class="chip k5" data-build="auto" data-fx="pop" data-i="3">Agencies</span><span class="chip k1" data-build="auto" data-fx="pop" data-i="3.4">LGUs</span><span class="chip k2" data-build="auto" data-fx="pop" data-i="3.8">GOCCs with original charters</span><span class="chip k4" data-build="auto" data-fx="pop" data-i="4.2">SUCs</span></div></div></div>
+  </div></div>
+<div class="foot"><span>LCS_3RD QTR_LESSON 2</span><span class="num"></span></div>
+<aside class="notes"></aside>
+</section>
+<section class="slide light eq" data-fx="none" data-transition="fade">
+<div class="frame">
+  <div class="hd"><h2 class="h2" data-build="auto" data-fx="rise" data-i="0">FWAs the Resolution Allows</h2><span class="eyebrow" data-build="auto" data-fx="fade" data-i="0.5"><i></i>Government</span></div>
+  <div class="grid g3 fwa6">
+    <div class="card k5" data-build="auto" data-fx="pop" data-i="1"><div class="core"><div class="top"><span class="badge"><svg class="ic " aria-hidden="true"><use href="#i-HouseLine"/></svg></span><span class="t">Flexiplace</span></div><p>Work <b>away from the office</b> (home, satellite office), with approval</p></div></div><div class="card k1" data-build="auto" data-fx="pop" data-i="1.4"><div class="core"><div class="top"><span class="badge"><svg class="ic " aria-hidden="true"><use href="#i-CalendarDots"/></svg></span><span class="t">Compressed Workweek</span></div><p><b>40 hours</b> in <b>four days or less</b>, instead of five</p></div></div><div class="card k2" data-build="auto" data-fx="pop" data-i="1.8"><div class="core"><div class="top"><span class="badge"><svg class="ic " aria-hidden="true"><use href="#i-UsersThree"/></svg></span><span class="t">Skeleton Workforce</span></div><p>Only the <b>minimum staff</b> report, to keep operations going</p></div></div><div class="card k3" data-build="auto" data-fx="pop" data-i="2.2"><div class="core"><div class="top"><span class="badge"><svg class="ic " aria-hidden="true"><use href="#i-ArrowsClockwise"/></svg></span><span class="t">Work Shifting</span></div><p>Work <b>in shifts</b> for 24/7 services or staggered presence</p></div></div><div class="card k4" data-build="auto" data-fx="pop" data-i="2.6"><div class="core"><div class="top"><span class="badge"><svg class="ic " aria-hidden="true"><use href="#i-Clock"/></svg></span><span class="t">Flexitime</span></div><p>Arrive and leave <b>between 7 AM and 7 PM</b>; 40 hours a week</p></div></div><div class="card k6" data-build="auto" data-fx="pop" data-i="3"><div class="core"><div class="top"><span class="badge"><svg class="ic " aria-hidden="true"><use href="#i-Stack"/></svg></span><span class="t">Combination</span></div><p><b>Mix two or more FWAs</b> (e.g., skeleton workforce + work from home)</p></div></div>
+  </div></div>
+<div class="foot"><span>LCS_3RD QTR_LESSON 2</span><span class="num"></span></div>
+<aside class="notes"></aside>
+</section>
+<section class="slide light eq" data-fx="none" data-transition="fade">
+<div class="frame">
+  <div class="hd"><h2 class="h2" data-build="auto" data-fx="rise" data-i="0">Flexible Work in Private Companies</h2></div>
+  <p class="sub-lead" data-build="auto" data-fx="fade" data-i="0.5">Besides telecommuting (R.A. No. 11165), private companies also use:</p>
+  <div class="grid g2 fwa">
+    <div class="card k1" data-build="auto" data-fx="pop" data-i="1"><div class="core"><div class="top"><span class="badge"><svg class="ic " aria-hidden="true"><use href="#i-CalendarDots"/></svg></span><span class="t">Compressed Workweek</span></div><p>Longer hours on fewer days, <b>same total weekly hours</b> (e.g., four 10-hour days instead of five 8-hour days).</p></div></div>
+    <div class="card k4" data-build="auto" data-fx="pop" data-i="1.5"><div class="core"><div class="top"><span class="badge"><svg class="ic " aria-hidden="true"><use href="#i-Clock"/></svg></span><span class="t">Flexitime</span></div><p>Employees set their <b>start and end times</b> within a core period, as long as they complete the required hours.</p></div></div>
+    <div class="card k2" data-build="auto" data-fx="pop" data-i="2"><div class="core"><div class="top"><span class="badge"><svg class="ic " aria-hidden="true"><use href="#i-UsersFour"/></svg></span><span class="t">Job Sharing</span></div><p>Two or more employees <b>share one full-time position</b>, splitting the hours and responsibilities.</p></div></div>
+    <div class="card k3" data-build="auto" data-fx="pop" data-i="2.5"><div class="core"><div class="top"><span class="badge"><svg class="ic " aria-hidden="true"><use href="#i-ArrowsClockwise"/></svg></span><span class="t">Reduced Workdays or Rotation</span></div><p>In downturns or low demand, fewer workdays or <b>rotating shifts</b> to <b>avoid retrenchments</b>.</p></div></div>
+  </div></div>
+<div class="foot"><span>LCS_3RD QTR_LESSON 2</span><span class="num"></span></div>
+<aside class="notes"></aside>
+</section>
+<section class="slide dark eq" data-fx="mist" data-transition="fade" data-section="Compensation and allowances">
+<div class="frame">
+  <div class="div">
+    <span class="no" data-build="auto" data-fx="fade" data-i="0">06</span>
+    <div class="stack">
+      <span class="eyebrow" data-build="auto" data-fx="rise" data-i="1"><i></i>Pay and benefits</span>
+      <h2 class="h1" data-build="auto" data-fx="rise" data-i="2">Compensation and Allowances</h2>
+      <p class="lead" data-build="auto" data-fx="rise" data-i="3">In the government and in the private sector</p>
+    </div>
+  </div></div>
+<div class="foot"><span>LCS_3RD QTR_LESSON 2</span><span class="num"></span></div>
+<aside class="notes"></aside>
+</section>
+<section class="slide light eq" data-fx="none" data-transition="fade">
+<div class="frame">
+  <div class="hd"><h2 class="h2" data-build="auto" data-fx="rise" data-i="0">Total Pay in the Government</h2><span class="eyebrow" data-build="auto" data-fx="fade" data-i="0.5"><i></i>Under the TCF</span></div>
+  <p class="sub-lead" data-build="auto" data-fx="fade" data-i="0.5">The total payment to an employee for services rendered is composed of:</p>
+  <div class="layers">
+    <div class="card layer k1" style="--w:100%" data-build="auto" data-fx="rise" data-i="1"><div class="core"><span class="n">1</span><span class="t">Basic Salaries (with Step Increments)</span><p>The <b>fixed monthly pay</b>; may increase through step increments based on performance or length of service.</p></div></div>
+    <div class="card layer k5" style="--w:96%" data-build="auto" data-fx="rise" data-i="1.6"><div class="core"><span class="n">2</span><span class="t">Standard Allowances and Benefits</span><p>Regular benefits for <b>all qualified employees</b> (e.g., PERA, ACA, health benefits).</p></div></div>
+    <div class="card layer k2" style="--w:92%" data-build="auto" data-fx="rise" data-i="2.2"><div class="core"><span class="n">3</span><span class="t">Specific Purpose Allowances and Benefits</span><p>Additional pay or benefits for <b>specific needs or situations</b>.</p></div></div>
+    <div class="card layer k4" style="--w:88%" data-build="auto" data-fx="rise" data-i="2.8"><div class="core"><span class="n">4</span><span class="t">Incentives</span><p>Rewards or bonuses based on <b>performance, productivity, or recognition</b> programs.</p></div></div>
+  </div></div>
+<div class="foot"><span>LCS_3RD QTR_LESSON 2</span><span class="num"></span></div>
+<aside class="notes"></aside>
+</section>
+<section class="slide light eq" data-fx="none" data-transition="fade">
+<div class="frame">
+  <div class="hd"><h2 class="h2" data-build="auto" data-fx="rise" data-i="0">Standard Allowances and Benefits</h2><span class="eyebrow" data-build="auto" data-fx="fade" data-i="0.5"><i></i>Government</span></div>
+  <div class="grid g2 money">
+    <div class="card k1" data-build="auto" data-fx="pop" data-i="1"><div class="core"><div class="top"><span class="badge"><svg class="ic " aria-hidden="true"><use href="#i-Wallet"/></svg></span><span class="t">PERA</span></div><div class="amt"><b>₱<span class="count" data-to="2000">2,000</span></b><span>a month</span></div><p>Personnel Economic Relief Allowance: help with living costs brought about by inflation.</p></div></div>
+    <div class="card k5" data-build="auto" data-fx="pop" data-i="1.6"><div class="core"><div class="top"><span class="badge"><svg class="ic " aria-hidden="true"><use href="#i-TShirt"/></svg></span><span class="t">Uniform/Clothing Allowance</span></div><div class="amt"><b>₱<span class="count" data-to="7000">7,000</span></b><span>at most, a year</span></div><p>Per qualified employee (Sec. 57, FY 2025 GAA; DBM guidelines).</p></div></div>
+    <div class="card k3" data-build="auto" data-fx="pop" data-i="2.2"><div class="core"><div class="top"><span class="badge"><svg class="ic " aria-hidden="true"><use href="#i-Gift"/></svg></span><span class="t">Year-End Bonus + Cash Gift</span></div><div class="amt"><b>1 month</b><span>basic pay + ₱5,000 cash gift</span></div><p>Basic pay as of October 31.</p></div></div>
+    <div class="card k2" data-build="auto" data-fx="pop" data-i="2.8"><div class="core"><div class="top"><span class="badge"><svg class="ic " aria-hidden="true"><use href="#i-FirstAidKit"/></svg></span><span class="t">Medical Allowance</span></div><div class="amt"><b>₱<span class="count" data-to="7000">7,000</span></b><span>at most, a year</span></div><p>From FY2025, a subsidy for HMO-type benefits (EO No. 64, s. 2024).</p></div></div>
+  </div></div>
+<div class="foot"><span>LCS_3RD QTR_LESSON 2</span><span class="num"></span></div>
+<aside class="notes"></aside>
+</section>
+<section class="slide light eq" data-fx="none" data-transition="fade">
+<div class="frame">
+  <div class="hd"><h2 class="h2" data-build="auto" data-fx="rise" data-i="0">Specific Purpose Allowances and Incentives</h2></div>
+  <div class="split" style="grid-template-columns:minmax(0,1.3fr) minmax(0,0.7fr)">
+    <div class="card k2" data-build="auto" data-fx="rise" data-i="1"><div class="core"><span class="cap">Specific purpose allowances and benefits</span><p class="lead-def">Additional pay or benefits for <b>specific needs or situations</b>, such as:</p>
+    <ul class="ul tight cols2"><li>Loyalty Incentive</li><li>Anniversary Bonus</li><li>Mid-Year Bonus</li><li>Productivity Enhancement Incentive</li><li>Collective Negotiation Agreement (CNA) Incentive</li><li>Performance-Based Bonus</li><li>Program on Awards and Incentives for Service Excellence (PRAISE)</li></ul></div></div>
+    <div class="card k4 tint" data-build="auto" data-fx="right" data-i="2"><div class="core"><span class="badge"><svg class="ic " aria-hidden="true"><use href="#i-Trophy"/></svg></span><span class="cap">Incentives</span><p class="statement" style="font-size:54px">Rewards or bonuses based on <em>performance</em>, <em>productivity</em>, or <em>recognition</em> programs.</p></div></div>
+  </div></div>
+<div class="foot"><span>LCS_3RD QTR_LESSON 2</span><span class="num"></span></div>
+<aside class="notes"></aside>
+</section>
+<section class="slide light eq" data-fx="none" data-transition="fade">
+<div class="frame">
+  <div class="hd"><h2 class="h2" data-build="auto" data-fx="rise" data-i="0">Pay and Benefits in Private Companies</h2></div>
+  <div class="grid g2">
+    <div class="card ex k1" data-build="auto" data-fx="rise" data-i="1"><div class="core"><span class="cap">Overview</span><dl class="kv big"><dt>Compensation</dt><dd>Wages, salaries, bonuses</dd><dt>Benefits</dt><dd>Health insurance, leave, retirement, perks</dd><dt>Purpose</dt><dd>Improve employee welfare and motivation</dd></dl></div></div>
+    <div class="card ex k5" data-build="auto" data-fx="right" data-i="2"><div class="core"><span class="cap">Governing laws</span><dl class="kv big"><dt>Labor Code</dt><dd>Wages, work hours, leave, benefits</dd><dt>RA 8282</dt><dd>SSS: social security benefits</dd><dt>RA 9679</dt><dd>Pag-IBIG: housing, savings, loans</dd><dt>RA 10606</dt><dd>PhilHealth: health insurance</dd><dt>Tax laws</dt><dd>Tax-exempt income and benefits</dd></dl></div></div>
+  </div></div>
+<div class="foot"><span>LCS_3RD QTR_LESSON 2</span><span class="num"></span></div>
+<aside class="notes"></aside>
+</section>
+<section class="slide light eq" data-fx="none" data-transition="fade">
+<div class="frame">
+  <div class="hd"><h2 class="h2" data-build="auto" data-fx="rise" data-i="0">Who Is Covered and What They Get</h2><span class="eyebrow" data-build="auto" data-fx="fade" data-i="0.5"><i></i>Private sector</span></div>
+  <div class="split" style="grid-template-columns:minmax(0,0.82fr) minmax(0,1.18fr);gap:40px">
+    <div class="card ex k2" data-build="auto" data-fx="rise" data-i="1"><div class="core"><span class="cap">Employee eligibility</span><dl class="kv stk"><dt>Regular</dt><dd>Full legal and company benefits</dd><dt>Non-regular</dt><dd>Minimum wage, 13th month pay</dd><dt>Freelancers and contractors</dt><dd>Not covered by employer contributions (SSS, PhilHealth, Pag-IBIG)</dd></dl></div></div>
+    <div class="card ex k4" data-build="auto" data-fx="right" data-i="2"><div class="core"><span class="cap">Compensation and allowances</span><dl class="kv tight"><dt>Minimum wage</dt><dd>Varies by region/sector (e.g., ₱610/day, Metro Manila non-agri)</dd><dt>13th month pay</dt><dd>One month’s salary (prorated if under 1 year)</dd><dt>Holiday pay</dt><dd>100% on holidays; 200% if working</dd><dt>Overtime pay</dt><dd>125% on regular days; 130% on holidays</dd><dt>Night differential</dt><dd>Additional 10%</dd></dl></div></div>
+  </div></div>
+<div class="foot"><span>LCS_3RD QTR_LESSON 2</span><span class="num"></span></div>
+<aside class="notes"></aside>
+</section>
+<section class="slide light eq" data-fx="none" data-transition="fade">
+<div class="frame">
+  <div class="hd"><h2 class="h2" data-build="auto" data-fx="rise" data-i="0">Additional Mandatory Benefits</h2><span class="eyebrow" data-build="auto" data-fx="fade" data-i="0.5"><i></i>Private sector</span></div>
+  <div class="grid g2 money">
+    <div class="card k1" data-build="auto" data-fx="pop" data-i="1"><div class="core"><div class="top"><span class="badge"><svg class="ic " aria-hidden="true"><use href="#i-SunHorizon"/></svg></span><span class="t">Service Incentive Leave</span></div><div class="amt"><b><span class="count" data-to="5">5</span> days</b><span>paid, a year</span></div><p>Minimum, after 1 year of service.</p></div></div>
+    <div class="card k6" data-build="auto" data-fx="pop" data-i="1.6"><div class="core"><div class="top"><span class="badge"><svg class="ic " aria-hidden="true"><use href="#i-Baby"/></svg></span><span class="t">Maternity Leave</span></div><div class="amt"><b><span class="count" data-to="105">105</span> days</b><span>paid</span></div><p>+15 days for solo parents; optional 30 days unpaid.</p></div></div>
+    <div class="card k3" data-build="auto" data-fx="pop" data-i="2.2"><div class="core"><div class="top"><span class="badge"><svg class="ic " aria-hidden="true"><use href="#i-SignOut"/></svg></span><span class="t">Separation Pay</span></div><div class="amt"><b>½ to 1 month</b><span>per year of service</span></div><p>Based on the reason for termination.</p></div></div>
+    <div class="card k5" data-build="auto" data-fx="pop" data-i="2.8"><div class="core"><div class="top"><span class="badge"><svg class="ic " aria-hidden="true"><use href="#i-Armchair"/></svg></span><span class="t">Retirement Pay</span></div><div class="amt"><b>½ month</b><span>per year of service</span></div><p>Ages 60–65, with at least 5 years of service.</p></div></div>
+  </div></div>
+<div class="foot"><span>LCS_3RD QTR_LESSON 2</span><span class="num"></span></div>
+<aside class="notes"></aside>
+</section>
+<section class="slide dark eq" data-fx="mist" data-transition="fade" data-section="Work-life approaches">
+<div class="frame">
+  <div class="div">
+    <span class="no" data-build="auto" data-fx="fade" data-i="0">07</span>
+    <div class="stack">
+      <span class="eyebrow" data-build="auto" data-fx="rise" data-i="1"><i></i>Work and life</span>
+      <h2 class="h1" data-build="auto" data-fx="rise" data-i="2">Five Work-Life Approaches</h2>
+      <p class="lead" data-build="auto" data-fx="rise" data-i="3">Balance · Integration · Harmony · Fit · Negotiation</p>
+    </div>
+  </div></div>
+<div class="foot"><span>LCS_3RD QTR_LESSON 2</span><span class="num"></span></div>
+<aside class="notes"></aside>
+</section>
+<section class="slide light eq" data-fx="none" data-transition="fade">
+<div class="frame">
+  <div class="hd"><h2 class="h2" data-build="auto" data-fx="rise" data-i="0">Five Ways to Manage Work and Life</h2></div>
+  <div class="grid five" style="grid-template-columns:repeat(5,minmax(0,1fr))">
+    <div class="card k5" data-build="auto" data-fx="pop" data-i="1"><div class="core"><div class="venn" style="--d:72px"><i></i><i></i></div><span class="t">Work-Life Balance</span><p>Keep work and personal time <b>separate</b>.</p></div></div><div class="card k1" data-build="auto" data-fx="pop" data-i="1.5"><div class="core"><div class="venn" style="--d:42px"><i></i><i></i></div><span class="t">Work-Life Integration</span><p>Work and personal life <b>coexist</b> harmoniously.</p></div></div><div class="card k2" data-build="auto" data-fx="pop" data-i="2"><div class="core"><div class="venn" style="--d:24px"><i></i><i></i></div><span class="t">Work-Life Harmony</span><p>Blend work into life for <b>happiness</b> at home and at work.</p></div></div><div class="card k4" data-build="auto" data-fx="pop" data-i="2.5"><div class="core"><div class="venn" style="--d:32px"><i></i><i></i></div><span class="t">Work-Life Fit</span><p>Align work with your <b>personal priorities</b> and lifestyle.</p></div></div><div class="card k3" data-build="auto" data-fx="pop" data-i="3"><div class="core"><div class="venn"><svg class="ic " aria-hidden="true"><use href="#i-ChatsCircle"/></svg></div><span class="t">Work-Life Negotiation</span><p><b>Talk with your employer</b> to set schedules and commitments.</p></div></div>
+  </div></div>
+<div class="foot"><span>LCS_3RD QTR_LESSON 2</span><span class="num"></span></div>
+<aside class="notes"></aside>
+</section>
+<section class="slide light eq" data-fx="none" data-transition="rise">
+<div class="frame">
+  <div class="hd"><h2 class="h2" data-build="auto" data-fx="rise" data-i="0">Work-Life Balance and Integration</h2><div class="keylegend" data-build="auto" data-fx="fade" data-i="0.5"><span class="chip k5"><svg class="ic " aria-hidden="true"><use href="#i-Briefcase"/></svg>Work</span><span class="chip k3"><svg class="ic " aria-hidden="true"><use href="#i-HouseLine"/></svg>Life</span></div></div>
+  <div class="grid g2">
+    <div class="card ax k5" data-build="auto" data-fx="pop" data-i="1"><div class="core"><span class="t">Work-Life Balance</span><p class="d">A <b>structured separation</b> between work and personal time, so work does not dominate life.</p><span class="cap">Common principles</span><ul class="ul tight"><li><b>Fixed hours:</b> no emails or calls after a set time</li><li><b>Uninterrupted</b> personal time for family, hobbies, and rest</li><li><b>Structured schedules</b> with little spillover</li></ul></div></div>
+    <div class="card ax k1" data-build="auto" data-fx="pop" data-i="2"><div class="core"><span class="t">Work-Life Integration</span><p class="d">Work and personal life are <b>interconnected</b> and <b>coexist</b>; days are structured to meet both.</p><span class="cap">Example</span><ul class="tline"><li class="k5"><span class="tm">Early</span><span class="dot"><svg class="ic " aria-hidden="true"><use href="#i-Briefcase"/></svg></span><span class="what"><b>Elsa</b> starts with <b>emails</b></span></li><li class="k3"><span class="tm">7:30–8:30 AM</span><span class="dot"><svg class="ic " aria-hidden="true"><use href="#i-HouseLine"/></svg></span><span class="what"><b>School prep</b></span></li><li class="k5"><span class="tm">9 AM–3 PM</span><span class="dot"><svg class="ic " aria-hidden="true"><use href="#i-Briefcase"/></svg></span><span class="what"><b>Meetings</b>, core hours</span></li><li class="k3"><span class="tm">3 PM</span><span class="dot"><svg class="ic " aria-hidden="true"><use href="#i-HouseLine"/></svg></span><span class="what"><b>Picks up her kids</b>; works as needed</span></li><li class="k5"><span class="tm">After bedtime</span><span class="dot"><svg class="ic " aria-hidden="true"><use href="#i-Briefcase"/></svg></span><span class="what"><b>Wraps up</b> tasks</span></li></ul></div></div>
+  </div></div>
+<div class="foot"><span>LCS_3RD QTR_LESSON 2</span><span class="num"></span></div>
+<aside class="notes"></aside>
+</section>
+<section class="slide light eq" data-fx="none" data-transition="rise">
+<div class="frame">
+  <div class="hd"><h2 class="h2" data-build="auto" data-fx="rise" data-i="0">Work-Life Harmony and Fit</h2><div class="keylegend" data-build="auto" data-fx="fade" data-i="0.5"><span class="chip k5"><svg class="ic " aria-hidden="true"><use href="#i-Briefcase"/></svg>Work</span><span class="chip k3"><svg class="ic " aria-hidden="true"><use href="#i-HouseLine"/></svg>Life</span></div></div>
+  <div class="grid g2">
+    <div class="card ax k2" data-build="auto" data-fx="pop" data-i="1"><div class="core"><span class="t">Work-Life Harmony</span><p class="d">Blending work into life to be <b>happy at home and at work</b>: not strict separation, but prioritizing <b>well-being</b>.</p><span class="cap">Example</span><p class="e"><b>Mina</b> walks with her kids each morning, stays focused at work, takes breaks for family or self-care, and uses <b>flexible hours and remote work</b> to adjust.</p></div></div>
+    <div class="card ax k4" data-build="auto" data-fx="pop" data-i="2"><div class="core"><span class="t">Work-Life Fit</span><p class="d"><b>Aligning</b> work with your <b>personal priorities and lifestyle</b>: an adaptable blend that works best for you.</p><span class="cap">Example</span><ul class="tline"><li class="k5"><span class="tm">7 AM</span><span class="dot"><svg class="ic " aria-hidden="true"><use href="#i-Briefcase"/></svg></span><span class="what"><b>Roem</b>, a single dad, starts work as a <b>store supervisor</b></span></li><li class="k5"><span class="tm">3 PM</span><span class="dot"><svg class="ic " aria-hidden="true"><use href="#i-Briefcase"/></svg></span><span class="what">Finishes his shift</span></li><li class="k3"><span class="tm">After school</span><span class="dot"><svg class="ic " aria-hidden="true"><use href="#i-HouseLine"/></svg></span><span class="what"><b>There for his kids</b></span></li><li class="k5"><span class="tm">Evening</span><span class="dot"><svg class="ic " aria-hidden="true"><use href="#i-Briefcase"/></svg></span><span class="what">Works later, <b>if needed</b></span></li></ul></div></div>
+  </div></div>
+<div class="foot"><span>LCS_3RD QTR_LESSON 2</span><span class="num"></span></div>
+<aside class="notes"></aside>
+</section>
+<section class="slide light eq" data-fx="none" data-transition="rise">
+<div class="frame">
+  <div class="hd"><h2 class="h2" data-build="auto" data-fx="rise" data-i="0">Work-Life Negotiation</h2><span class="eyebrow" data-build="auto" data-fx="fade" data-i="0.5"><i></i>Approach 5</span></div>
+  <div class="split" style="grid-template-columns:minmax(0,1fr) minmax(0,1fr)">
+    <div class="card def tint k3" data-build="auto" data-fx="rise" data-i="1"><div class="core"><span class="cap">What it is</span><p>A <b>strategic approach</b> that lets you make informed decisions about your work schedules and commitments.</p><div class="chips big"><span class="chip k2" data-build="auto" data-fx="pop" data-i="1.5">Understand personal priorities</span><span class="chip k4" data-build="auto" data-fx="pop" data-i="1.9">Set realistic expectations</span><span class="chip k3" data-build="auto" data-fx="pop" data-i="2.3">Communicate with employers</span></div></div></div>
+    <div class="steps">
+      <div class="card k3" data-build="auto" data-fx="right" data-i="2"><div class="core"><span class="n">1</span><p><b>Carlo</b>, a software developer, must care for his <b>elderly father</b> and meet project deadlines.</p></div></div>
+      <div class="card k3" data-build="auto" data-fx="right" data-i="2.5"><div class="core"><span class="n">2</span><p>He <b>discusses</b> his situation with his supervisor and <b>negotiates</b> a flexible schedule.</p></div></div>
+      <div class="card k3" data-build="auto" data-fx="right" data-i="3"><div class="core"><span class="n">3</span><p>He <b>starts earlier and finishes in time</b> for caregiving, meeting both commitments.</p></div></div>
+    </div>
+  </div></div>
+<div class="foot"><span>LCS_3RD QTR_LESSON 2</span><span class="num"></span></div>
+<aside class="notes"></aside>
+</section>
+</div></div>
+<div class="bar"><div class="bar-fill" id="barfill"></div></div>
+<nav class="island" id="island" aria-label="Deck controls">
+  <button id="prev" aria-label="Previous (left arrow)"><svg class="ic " aria-hidden="true"><use href="#i-CaretLeft"/></svg></button>
+  <span class="counter" id="counter">1 / 36</span>
+  <button id="next" aria-label="Next (right arrow or space)"><svg class="ic " aria-hidden="true"><use href="#i-CaretRight"/></svg></button>
+  <span class="sep"></span>
+  <button id="slidesBtn" aria-label="All slides (G)"><svg class="ic " aria-hidden="true"><use href="#i-SquaresFour"/></svg></button>
+  <button id="notesBtn" aria-label="Speaker notes (N)"><svg class="ic " aria-hidden="true"><use href="#i-Note"/></svg></button>
+  <button id="fsBtn" aria-label="Fullscreen (F)"><svg class="ic " aria-hidden="true"><use href="#i-ArrowsOut"/></svg></button>
+</nav>
+<aside class="panel left" id="slidesPanel" aria-label="All slides"><div class="panel-head"><span>All slides</span><button id="slidesClose" aria-label="Close"><svg class="ic " aria-hidden="true"><use href="#i-X"/></svg></button></div><div class="panel-body"><ul class="sorter" id="sorter"></ul></div></aside>
+<aside class="panel" id="notesPanel" aria-label="Speaker notes"><div class="panel-head"><span>Speaker notes</span><button id="notesClose" aria-label="Close"><svg class="ic " aria-hidden="true"><use href="#i-X"/></svg></button></div><div class="panel-body" id="notesBody"></div></aside>
+<div class="kbhint" id="kbhint">← → or click to advance · G all slides · F fullscreen</div>
+<script>
+(function () {
+  "use strict";
+  var root = document.documentElement;
+  var stage = document.getElementById("stage");
+  var wrap = document.getElementById("stageWrap");
+  var slides = Array.prototype.slice.call(stage.querySelectorAll(".slide"));
+  var N = slides.length, cur = -1;
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var $ = function (id) { return document.getElementById(id); };
+
+  // ---------- setup ----------
+  slides.forEach(function (s, i) {
+    var num = s.querySelector(".num");
+    if (num) num.textContent = (i + 1) + " / " + N;
+    s.setAttribute("role", "group");
+    s.setAttribute("aria-roledescription", "slide");
+    s.setAttribute("aria-label", (i + 1) + " of " + N);
+    var els = Array.prototype.slice.call(s.querySelectorAll("[data-build]"));
+    els.forEach(function (e) { e.style.setProperty("--i", e.getAttribute("data-i") || 0); });
+    var groups = [];
+    els.forEach(function (e) {
+      var g = e.getAttribute("data-build");
+      if (g !== "auto" && groups.indexOf(+g) < 0) groups.push(+g);
+    });
+    groups.sort(function (a, b) { return a - b; });
+    s._groups = groups; s._els = els; s._step = 0; s.inert = true;
+  });
+  root.classList.add("js");
+
+  function fit() {
+    var s = Math.min(wrap.clientWidth / 1920, wrap.clientHeight / 1080);
+    stage.style.setProperty("--s", s.toFixed(4));
+    stage._scale = s;
+  }
+  window.addEventListener("resize", fit);
+  fit();
+
+  // ---------- builds ----------
+  function applyStep(s, withAuto) {
+    var limit = s._step === 0 ? -Infinity : s._groups[s._step - 1];
+    s._els.forEach(function (e) {
+      var g = e.getAttribute("data-build");
+      e.classList.toggle("shown", g === "auto" ? withAuto : (+g <= limit));
+    });
+    Array.prototype.forEach.call(s.querySelectorAll("[data-burst].shown:not(.burst-done)"), function (e) {
+      e.classList.add("burst-done");
+      setTimeout(function () { burstAt(e); }, 260);
+    });
+  }
+  function resetInteractive(s) {
+    Array.prototype.forEach.call(s.querySelectorAll(".flip.on, .ck.on, .rv.on"), function (f) { f.classList.remove("on"); f.setAttribute("aria-pressed", "false"); });
+    Array.prototype.forEach.call(s.querySelectorAll(".rv-all span"), function (x) { x.textContent = "Reveal all"; });
+    Array.prototype.forEach.call(s.querySelectorAll(".burst-done"), function (e) { e.classList.remove("burst-done"); });
+  }
+
+  // ---------- navigation ----------
+  var cleanup = null;
+  function go(n, dir, full) {
+    n = Math.max(0, Math.min(N - 1, n));
+    if (n === cur) return;
+    if (cleanup) cleanup();
+    var old = cur >= 0 ? slides[cur] : null, nw = slides[n];
+    dir = dir || (n > cur ? 1 : -1);
+    nw.classList.add("instant");
+    nw.classList.remove("entered");
+    resetInteractive(nw);
+    nw._step = full ? nw._groups.length : 0;
+    applyStep(nw, !!full);
+    void nw.offsetWidth;
+    nw.classList.remove("instant");
+    var type = old ? (nw.getAttribute("data-transition") || "fade") : "fade";
+    var enterC = "enter-" + type + (dir > 0 ? "-f" : "-b"), leaveC = "leave-" + type + (dir > 0 ? "-f" : "-b");
+    nw.classList.add("active", enterC); nw.style.zIndex = 2; nw.inert = false;
+    if (old) { old.classList.add(leaveC); old.style.zIndex = 1; old.inert = true; }
+    moveFx(nw);
+    var t1 = setTimeout(function () { nw.classList.add("entered"); if (!full) applyStep(nw, true); }, old ? 280 : 140);
+    var t2 = setTimeout(done, 1000);
+    function done() {
+      clearTimeout(t1); clearTimeout(t2);
+      nw.classList.remove(enterC);
+      if (!nw.classList.contains("entered")) { nw.classList.add("entered"); if (!full) applyStep(nw, true); }
+      if (old) { old.classList.remove("active", leaveC, "entered"); old.style.zIndex = ""; }
+      cleanup = null;
+    }
+    cleanup = done;
+    cur = n;
+    $("counter").textContent = (n + 1) + " / " + N;
+    $("barfill").style.transform = "scaleX(" + ((n + 1) / N) + ")";
+    try { history.replaceState(null, "", "#slide-" + (n + 1)); } catch (e) { /* ignore */ }
+    var notes = nw.querySelector(".notes");
+    $("notesBody").innerHTML = "<h4>" + (n + 1) + ". " + esc(titleOf(nw)) + "</h4>" + esc(notes ? notes.textContent : "");
+    markSorter();
+  }
+  function next() {
+    var s = slides[cur];
+    if (s._step < s._groups.length) { s._step++; applyStep(s, true); }
+    else if (cur < N - 1) go(cur + 1, 1);
+  }
+  function prev() {
+    var s = slides[cur];
+    if (s._step > 0) { s._step--; applyStep(s, true); }
+    else if (cur > 0) go(cur - 1, -1, true);
+  }
+  function esc(t) { return String(t).replace(/[&<>]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]; }); }
+  function titleOf(s) { var h = s.querySelector("[data-title]") || s.querySelector(".h2, .h1, .mega"); return h ? (h.getAttribute("data-title") || h.textContent).trim().replace(/\s+/g, " ") : "Slide"; }
+
+  // ---------- slide list ----------
+  var sorter = $("sorter");
+  (function () {
+    var html = "";
+    slides.forEach(function (s, i) {
+      var sec = s.getAttribute("data-section");
+      if (sec) html += '<li><span class="sec">' + esc(sec) + "</span></li>";
+      html += '<li><button data-to="' + i + '"><span class="no">' + (i + 1) + "</span><span>" + esc(titleOf(s)) + "</span></button></li>";
+    });
+    sorter.innerHTML = html;
+  })();
+  function markSorter() {
+    Array.prototype.forEach.call(sorter.querySelectorAll("button"), function (b) { b.classList.toggle("cur", +b.getAttribute("data-to") === cur); });
+  }
+  sorter.addEventListener("click", function (e) {
+    var b = e.target.closest("button[data-to]");
+    if (!b) return;
+    go(+b.getAttribute("data-to"));
+    if (window.innerWidth < 900) togglePanel("slidesPanel", false);
+  });
+
+  // ---------- panels and controls ----------
+  function togglePanel(id, force) {
+    var p = $(id), open = force === undefined ? !p.classList.contains("open") : force;
+    p.classList.toggle("open", open); p.inert = !open;
+  }
+  $("notesPanel").inert = true; $("slidesPanel").inert = true;
+  $("notesBtn").addEventListener("click", function () { togglePanel("notesPanel"); });
+  $("slidesBtn").addEventListener("click", function () { togglePanel("slidesPanel"); });
+  $("notesClose").addEventListener("click", function () { togglePanel("notesPanel", false); });
+  $("slidesClose").addEventListener("click", function () { togglePanel("slidesPanel", false); });
+  function fullscreen() {
+    if (document.fullscreenElement) { if (document.exitFullscreen) document.exitFullscreen().catch(function () {}); }
+    else if (root.requestFullscreen) root.requestFullscreen().catch(function () {});
+  }
+  $("fsBtn").addEventListener("click", fullscreen);
+  document.addEventListener("fullscreenchange", function () { setTimeout(fit, 60); });
+  $("prev").addEventListener("click", prev);
+  $("next").addEventListener("click", next);
+
+  document.addEventListener("keydown", function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var t = e.target, tag = (t && t.tagName) || "";
+    if (t && (t.isContentEditable || tag === "INPUT" || tag === "TEXTAREA")) { if (e.key === "Escape") t.blur(); return; }
+    var onButton = tag === "BUTTON" || tag === "A";
+    switch (e.key) {
+      case "ArrowRight": case "PageDown": case "ArrowDown": next(); e.preventDefault(); break;
+      case " ": case "Enter": if (onButton) return; next(); e.preventDefault(); break;
+      case "ArrowLeft": case "PageUp": case "ArrowUp": case "Backspace": prev(); e.preventDefault(); break;
+      case "Home": go(0, -1); break;
+      case "End": go(N - 1, 1, true); break;
+      case "n": case "N": togglePanel("notesPanel"); break;
+      case "g": case "G": togglePanel("slidesPanel"); break;
+      case "f": case "F": fullscreen(); break;
+      case "Escape": togglePanel("notesPanel", false); togglePanel("slidesPanel", false); break;
+      default: return;
+    }
+    wake();
+  });
+
+  var INTERACTIVE = "button, a, label, .flip, .timer, .quiz, .rv, .ck, input, [contenteditable]";
+  var lastSwipe = 0, sx = 0, sy = 0;
+  wrap.addEventListener("click", function (e) {
+    if (e.target.closest(INTERACTIVE) || Date.now() - lastSwipe < 400) return;
+    next();
+  });
+  wrap.addEventListener("touchstart", function (e) { var t = e.changedTouches[0]; sx = t.clientX; sy = t.clientY; }, { passive: true });
+  wrap.addEventListener("touchend", function (e) {
+    if (e.target.closest("[contenteditable]")) return;
+    var t = e.changedTouches[0], dx = t.clientX - sx, dy = t.clientY - sy;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.4) { lastSwipe = Date.now(); if (dx < 0) next(); else prev(); }
+  }, { passive: true });
+
+  // ---------- tap toggles: flip cards, pick cards, reveal chips ----------
+  stage.addEventListener("click", function (e) {
+    var all = e.target.closest(".rv-all");
+    if (all) {
+      var chips = all.closest(".slide").querySelectorAll(".rv"), anyHidden = Array.prototype.some.call(chips, function (c) { return !c.classList.contains("on"); });
+      Array.prototype.forEach.call(chips, function (c) { c.classList.toggle("on", anyHidden); c.setAttribute("aria-pressed", anyHidden ? "true" : "false"); });
+      all.querySelector("span").textContent = anyHidden ? "Hide all" : "Reveal all";
+      return;
+    }
+    var f = e.target.closest(".flip, .ck, .rv");
+    if (!f) return;
+    var on = !f.classList.contains("on");
+    f.classList.toggle("on", on); f.setAttribute("aria-pressed", on ? "true" : "false");
+  });
+
+  // ---------- activity timers ----------
+  Array.prototype.forEach.call(stage.querySelectorAll(".timer"), function (timer) {
+    var TOTAL = +timer.getAttribute("data-seconds") || 180, left = TOTAL, endAt = 0, iv = 0;
+    var prog = timer.querySelector(".prog"), digits = timer.querySelector(".digits"), btn = timer.querySelector(".t-start"), lbl = btn.querySelector(".lbl");
+    var C = 2 * Math.PI * 52;
+    function render() {
+      var s = Math.max(0, Math.ceil(left));
+      digits.textContent = Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0");
+      prog.style.strokeDashoffset = (C * (1 - left / TOTAL)).toFixed(2);
+    }
+    function stop() { clearInterval(iv); iv = 0; timer.classList.remove("running"); }
+    btn.addEventListener("click", function () {
+      if (iv) { stop(); lbl.textContent = "Resume"; return; }
+      if (left <= 0) left = TOTAL;
+      timer.classList.remove("done");
+      endAt = Date.now() + left * 1000;
+      timer.classList.add("running"); lbl.textContent = "Pause";
+      iv = setInterval(function () {
+        left = (endAt - Date.now()) / 1000;
+        if (left <= 0) { left = 0; stop(); timer.classList.add("done"); lbl.textContent = "Start"; }
+        render();
+      }, 200);
+      wake();
+    });
+    timer.querySelector(".t-reset").addEventListener("click", function () { stop(); left = TOTAL; timer.classList.remove("done"); lbl.textContent = "Start"; render(); });
+    render();
+  });
+
+  // ---------- quiz: one question at a time, tap an option to check it ----------
+  Array.prototype.forEach.call(stage.querySelectorAll(".quiz"), function (quiz) {
+    var qs = Array.prototype.slice.call(quiz.querySelectorAll(".qz")), dots = quiz.querySelectorAll(".qdots i"), at = 0;
+    function show(i) {
+      at = Math.max(0, Math.min(qs.length - 1, i));
+      qs.forEach(function (q, k) { q.classList.toggle("on", k === at); });
+      Array.prototype.forEach.call(dots, function (d, k) { d.classList.toggle("on", k === at); d.classList.toggle("seen", qs[k].classList.contains("answered")); });
+      quiz.querySelector(".qprev").disabled = at === 0;
+      quiz.querySelector(".qnext").disabled = at === qs.length - 1;
+    }
+    qs.forEach(function (q) {
+      q.addEventListener("click", function (e) {
+        var o = e.target.closest(".opt");
+        if (!o || q.classList.contains("answered")) return;
+        q.classList.add("answered");
+        var ok = q.querySelector(".opt[data-ok]");
+        if (ok) { if (!o.hasAttribute("data-ok")) o.classList.add("wrong"); ok.classList.add("right"); }
+        else o.classList.add("pick");
+        show(at);
+      });
+    });
+    quiz.querySelector(".qprev").addEventListener("click", function () { show(at - 1); });
+    quiz.querySelector(".qnext").addEventListener("click", function () { show(at + 1); });
+    quiz.querySelector(".qreset").addEventListener("click", function () {
+      qs.forEach(function (q) { q.classList.remove("answered"); Array.prototype.forEach.call(q.querySelectorAll(".opt"), function (o) { o.classList.remove("right", "wrong", "pick"); }); });
+      show(0);
+    });
+    show(0);
+  });
+
+  // ---------- peso amounts count up when their build step shows ----------
+  Array.prototype.forEach.call(stage.querySelectorAll(".count[data-to]"), function (el) {
+    var to = +el.getAttribute("data-to"), host = el.closest("[data-build]") || el, raf2 = 0, was = false;
+    function fmt(v) { return Math.round(v).toLocaleString("en-US"); }
+    function run() {
+      cancelAnimationFrame(raf2);
+      if (reduce) { el.textContent = fmt(to); return; }
+      var t0 = performance.now(), dur = 1500;
+      (function step(now) {
+        var p = Math.min(1, (now - t0) / dur), k = 1 - Math.pow(1 - p, 4);
+        el.textContent = fmt(to * k);
+        if (p < 1) raf2 = requestAnimationFrame(step);
+      })(t0);
+    }
+    el.textContent = fmt(to);
+    new MutationObserver(function () {
+      var on = host.classList.contains("shown");
+      if (on && !was && !host.closest(".slide").classList.contains("instant")) run();
+      if (!on) { cancelAnimationFrame(raf2); el.textContent = fmt(to); }
+      was = on;
+    }).observe(host, { attributes: true, attributeFilter: ["class"] });
+  });
+
+  // ---------- particle field on dark slides ----------
+  var fx = document.createElement("canvas");
+  fx.className = "fx"; fx.width = 1920; fx.height = 1080; fx.setAttribute("aria-hidden", "true");
+  var ctx = fx.getContext("2d"), mode = "none", parts = [], bursts = [], raf = 0;
+  var HUES = { dust: [34, 42, 8], mist: [150, 255, 170, 42] };
+  var BURST = (stage.getAttribute("data-burst") || "30,25").split(",").map(Number);
+  function spawn(m, initial) {
+    var hs = HUES[m] || [40], big = m === "mist";
+    return { x: Math.random() * 1920, y: initial ? Math.random() * 1080 : 1090, vy: -(0.1 + Math.random() * (big ? 0.3 : 0.45)), vx: (Math.random() - 0.5) * 0.28,
+      r: big ? 2 + Math.random() * 5 : 1 + Math.random() * 2.4, ph: Math.random() * 6.28, hue: hs[Math.floor(Math.random() * hs.length)] + Math.random() * 8, a: big ? 0.12 + Math.random() * 0.22 : 0.22 + Math.random() * 0.4 };
+  }
+  function setMode(m) {
+    mode = reduce ? "none" : m;
+    parts = [];
+    var count = mode === "dust" ? 70 : mode === "mist" ? 46 : 0;
+    for (var i = 0; i < count; i++) parts.push(spawn(mode, true));
+    if (!raf && (parts.length || bursts.length)) raf = requestAnimationFrame(tick);
+    if (!parts.length && !bursts.length) ctx.clearRect(0, 0, 1920, 1080);
+  }
+  function tick() {
+    ctx.clearRect(0, 0, 1920, 1080);
+    ctx.globalCompositeOperation = "lighter";
+    parts.forEach(function (p, i) {
+      p.ph += 0.025; p.x += p.vx + Math.sin(p.ph) * 0.3; p.y += p.vy;
+      if (p.y < -30) parts[i] = spawn(mode, false);
+      var flick = 0.7 + 0.3 * Math.sin(p.ph);
+      var g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 4);
+      var col = "hsla(" + p.hue + "," + (mode === "mist" ? "70%,72%," : "85%,74%,");
+      g.addColorStop(0, col + (p.a * flick) + ")"); g.addColorStop(1, col + "0)");
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(p.x, p.y, p.r * 4, 0, 6.2832); ctx.fill();
+    });
+    bursts = bursts.filter(function (b) { return b.life < 110; });
+    bursts.forEach(function (b) {
+      b.life++; b.vx *= 0.965; b.vy *= 0.965; b.vy += 0.03; b.x += b.vx; b.y += b.vy;
+      var a = Math.max(0, 1 - b.life / 110);
+      var g = ctx.createRadialGradient(b.x, b.y, 0, b.x, b.y, b.r * 3);
+      g.addColorStop(0, "hsla(" + b.hue + ",90%,66%," + a + ")"); g.addColorStop(1, "hsla(" + b.hue + ",90%,66%,0)");
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(b.x, b.y, b.r * 3, 0, 6.2832); ctx.fill();
+    });
+    ctx.globalCompositeOperation = "source-over";
+    raf = (parts.length || bursts.length) && !document.hidden ? requestAnimationFrame(tick) : 0;
+  }
+  function burstAt(el) {
+    if (reduce) return;
+    var sr = stage.getBoundingClientRect(), r = el.getBoundingClientRect(), k = stage._scale || 1;
+    var x = (r.left + r.width / 2 - sr.left) / k, y = (r.top + r.height / 2 - sr.top) / k;
+    for (var i = 0; i < 160; i++) {
+      var a = Math.random() * 6.2832, v = 3 + Math.random() * 14;
+      bursts.push({ x: x, y: y, vx: Math.cos(a) * v, vy: Math.sin(a) * v, r: 2 + Math.random() * 4, hue: BURST[0] + Math.random() * BURST[1], life: 0 });
+    }
+    if (!raf) raf = requestAnimationFrame(tick);
+  }
+  function moveFx(s) {
+    s.insertBefore(fx, s.firstChild);
+    setMode(s.getAttribute("data-fx") || "none");
+  }
+  document.addEventListener("visibilitychange", function () { if (!document.hidden && !raf && (parts.length || bursts.length)) raf = requestAnimationFrame(tick); });
+
+  // ---------- idle controls, hint, wake lock ----------
+  var island = $("island"), idleT = 0;
+  function poke() {
+    island.classList.remove("idle"); clearTimeout(idleT);
+    idleT = setTimeout(function () { if (!island.matches(":hover") && !document.querySelector(".panel.open")) island.classList.add("idle"); }, 3200);
+  }
+  ["mousemove", "touchstart", "keydown"].forEach(function (ev) { document.addEventListener(ev, poke, { passive: true }); });
+  poke();
+  setTimeout(function () { var h = $("kbhint"); if (h) h.classList.add("gone"); }, 6000);
+  var lock = null;
+  function wake() {
+    if (lock || !navigator.wakeLock || document.visibilityState !== "visible") return;
+    navigator.wakeLock.request("screen").then(function (l) { lock = l; l.addEventListener("release", function () { lock = null; }); }).catch(function () {});
+  }
+  document.addEventListener("click", wake);
+
+  var m = /slide-(\d+)/.exec(location.hash || "");
+  go(m ? Math.max(0, Math.min(N - 1, +m[1] - 1)) : 0, 1);
+})();
+
+</script>
+</body>
+</html>
