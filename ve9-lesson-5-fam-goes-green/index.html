@@ -1,0 +1,1501 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Animated Values Education 9 (Term 2, Lesson 5) presentation: how families care for and preserve God’s creation.">
+<title>Fam Goes Green</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400..700&family=Rubik:ital,wght@0,400..700;1,400..700&display=swap">
+<style>
+/* Layout: a fixed 1920×1080 stage scaled to fit a deep-forest letterbox, a floating glass control island, and a speaker-notes drawer that slides in from the right. Single deliberate look (projector dark), so no light-theme variant. */
+:root{
+  color-scheme: dark;
+  --forest:#1B3A2A; --forest-deep:#10241A; --paper:#F6F3EA; --moss:#E9EFE4; --leaf:#256B43; --sprout:#3F8A55;
+  --clay:#B4531C; --amber:#F0B95A; --ink:#1B3A2A; --ink-soft:#3B4A41; --mute:#5B6B61; --card:#FDFCF8;
+  --mist:#CFE3D5; --mist-dim:#A9C4B3; --bark:#7A5232; --apple:#D9452B; --heat:#E8743B; --sun:#F7C96E;
+  --chrome-bg:#0B1610; --chrome-panel:#0F1F17; --chrome-fg:#E9EFE4; --chrome-dim:#9FB5A7; --chrome-glass:rgba(16,36,26,.74); --chrome-line:rgba(233,239,228,.14);
+  --f-display:'Fredoka','Trebuchet MS',system-ui,sans-serif;
+  --f-body:'Rubik',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --ease-spring:cubic-bezier(.34,1.56,.64,1);
+  --ease-soft:cubic-bezier(.32,.72,0,1);
+  --ease-sine:cubic-bezier(.37,0,.63,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{height:100%}
+body{height:100%; margin:0; overflow:hidden; background:var(--chrome-bg); color:var(--chrome-fg); font-family:var(--f-body); -webkit-font-smoothing:antialiased; padding-left:max(16px, env(safe-area-inset-left,0px)); padding-right:max(16px, env(safe-area-inset-right,0px)); padding-block:0}
+.sr{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap}
+
+/* ---------- app chrome ---------- */
+.app{height:100%; display:flex; position:relative}
+.deck{position:relative; flex:1; min-width:0; height:100%; overflow:hidden}
+.stage{position:absolute; left:50%; top:50%; width:1920px; height:1080px; transform:translate(-50%,-50%) scale(var(--s,.4)); transform-origin:center; overflow:hidden; border-radius:calc(14px / var(--s,.4)); box-shadow:0 40px 120px -40px rgba(0,0,0,.7); background:var(--forest); cursor:pointer}
+.island{position:absolute; left:50%; bottom:calc(14px + env(safe-area-inset-bottom,0px)); transform:translateX(-50%); display:flex; align-items:center; gap:2px; padding:6px; border-radius:999px; background:var(--chrome-glass); -webkit-backdrop-filter:blur(18px) saturate(1.2); backdrop-filter:blur(18px) saturate(1.2); box-shadow:0 0 0 1px var(--chrome-line), 0 18px 40px -18px rgba(0,0,0,.7); transition:opacity .5s var(--ease-soft), transform .6s var(--ease-soft); z-index:3}
+.app.idle .island{opacity:0; transform:translate(-50%,14px); pointer-events:none}
+.island button{appearance:none; border:0; margin:0; background:transparent; color:var(--chrome-fg); width:44px; height:44px; border-radius:999px; display:grid; place-items:center; cursor:pointer; transition:background-color .3s var(--ease-soft), transform .25s var(--ease-soft), color .3s var(--ease-soft)}
+.island button svg{width:22px; height:22px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round}
+.island button:hover{background:rgba(233,239,228,.1)}
+.island button:active{transform:scale(.92)}
+.island button:focus-visible{outline:2px solid var(--amber); outline-offset:2px}
+.island button:disabled{opacity:.35; cursor:default}
+.island button[aria-pressed="true"]{background:rgba(240,185,90,.18); color:var(--amber)}
+.island .count{font:600 15px/1 var(--f-body); font-variant-numeric:tabular-nums; letter-spacing:.04em; min-width:78px; text-align:center; padding:0 6px; color:var(--chrome-fg)}
+.island .sep{width:1px; height:22px; background:var(--chrome-line); margin:0 4px}
+.hint{position:absolute; left:50%; bottom:calc(74px + env(safe-area-inset-bottom,0px)); transform:translateX(-50%); margin:0; padding:8px 16px; border-radius:999px; background:var(--chrome-glass); box-shadow:0 0 0 1px var(--chrome-line); font:400 13px/1.3 var(--f-body); color:var(--chrome-dim); white-space:nowrap; pointer-events:none; transition:opacity .8s var(--ease-soft), transform .8s var(--ease-soft); z-index:3}
+.hint.gone{opacity:0; transform:translate(-50%,8px)}
+.hint kbd{font:600 12px/1 var(--f-body); color:var(--chrome-fg); padding:2px 6px; border-radius:6px; background:rgba(233,239,228,.1)}
+.notes-panel{flex:none; width:0; overflow:hidden; background:var(--chrome-panel); box-shadow:inset 1px 0 0 var(--chrome-line); transition:width .6s var(--ease-soft)}
+.app.notes-open .notes-panel{width:min(440px, 38vw)}
+.notes-inner{width:min(440px, 38vw); height:100%; overflow-y:auto; padding:28px 26px calc(28px + env(safe-area-inset-bottom,0px)); display:flex; flex-direction:column; gap:14px}
+.notes-k{margin:0; font:600 11px/1.2 var(--f-body); letter-spacing:.18em; text-transform:uppercase; color:var(--amber)}
+.notes-title{margin:0; font:600 22px/1.25 var(--f-display); color:var(--chrome-fg); text-wrap:balance}
+.notes-body{margin:0; font:400 16px/1.6 var(--f-body); color:#D7E3DA; white-space:pre-line}
+.notes-next{margin:auto 0 0; padding-top:14px; box-shadow:inset 0 1px 0 var(--chrome-line); font:400 13px/1.4 var(--f-body); color:var(--chrome-dim)}
+@media (max-width:900px){
+  .app{flex-direction:column}
+  .notes-panel{width:auto; height:0; box-shadow:inset 0 1px 0 var(--chrome-line); transition:height .6s var(--ease-soft)}
+  .app.notes-open .notes-panel{width:auto; height:44%}
+  .notes-inner{width:auto}
+}
+
+/* ---------- section wipe + progress ---------- */
+.wipe{position:absolute; inset:0; z-index:6; pointer-events:none; background:var(--leaf); transform:translateX(-101%); display:flex; flex-direction:column; justify-content:center; gap:22px; padding:0 160px}
+.wipe.run{animation:wipe 1.3s var(--ease-soft) both}
+@keyframes wipe{0%{transform:translateX(-101%)} 40%,58%{transform:translateX(0)} 100%{transform:translateX(101%)}}
+.wipe-k{margin:0; font:600 30px/1.2 var(--f-body); letter-spacing:.2em; text-transform:uppercase; color:var(--amber)}
+.wipe-t{margin:0; font:600 118px/1.04 var(--f-display); color:var(--paper); text-wrap:balance; max-width:1500px}
+.progress{position:absolute; left:0; right:0; bottom:0; height:8px; z-index:5; background:rgba(16,36,26,.18); pointer-events:none}
+.progress i{display:block; height:100%; background:var(--amber); transform-origin:left; transform:scaleX(0); transition:transform .8s var(--ease-out)}
+
+/* ---------- slide base ---------- */
+.slide{position:absolute; inset:0; padding:80px 80px 136px; display:flex; flex-direction:column; gap:32px; overflow:hidden; opacity:0; visibility:hidden; transform:scale(1.02); transition:opacity .7s var(--ease-out), transform 1s var(--ease-out), visibility 0s .7s; z-index:1}
+.slide.is-active{opacity:1; visibility:visible; transform:none; transition:opacity .7s var(--ease-out), transform 1s var(--ease-out), visibility 0s; z-index:2}
+.slide.is-leaving{transform:scale(.985)}
+.slide > *{position:relative; z-index:1}
+.slide > .bg, .slide > .scrim, .slide > .fx-slot, .slide > .stars{position:absolute; inset:0; z-index:0}
+.fx-slot canvas{position:absolute; inset:0; width:1920px; height:1080px; pointer-events:none}
+aside.notes{display:none}
+.slide .foot{position:absolute; left:80px; right:80px; bottom:46px; display:flex; justify-content:space-between; gap:40px; margin:0; font:400 28px/1.2 var(--f-body); color:var(--mute); z-index:1}
+.foot span:last-child{text-align:right}
+.t-paper{background:radial-gradient(1100px 680px at 88% -6%, rgba(37,107,67,.08), rgba(37,107,67,0) 62%), var(--paper); color:var(--ink)}
+.t-moss{background:radial-gradient(1000px 640px at 6% 108%, rgba(240,185,90,.14), rgba(240,185,90,0) 60%), var(--moss); color:var(--ink)}
+.t-forest{background:radial-gradient(1200px 800px at 80% 10%, rgba(63,138,85,.32), rgba(63,138,85,0) 60%), var(--forest); color:var(--paper)}
+.t-leaf{background:radial-gradient(1100px 760px at 12% 0%, rgba(240,185,90,.16), rgba(240,185,90,0) 58%), var(--leaf); color:var(--paper)}
+.t-forest .foot, .t-leaf .foot{color:var(--mist-dim)}
+
+/* ---------- type ---------- */
+.eyebrow{align-self:flex-start; display:inline-flex; align-items:center; gap:14px; margin:0; padding:8px 22px 8px 16px; border-radius:999px; font:600 28px/1.2 var(--f-body); letter-spacing:.16em; text-transform:uppercase; color:var(--leaf); background:rgba(37,107,67,.1)}
+.eyebrow::before{content:""; width:12px; height:12px; border-radius:50%; background:currentColor; box-shadow:0 0 0 6px rgba(37,107,67,.14)}
+.t-forest .eyebrow, .t-leaf .eyebrow{color:var(--amber); background:rgba(240,185,90,.14)}
+.t-forest .eyebrow::before, .t-leaf .eyebrow::before{box-shadow:0 0 0 6px rgba(240,185,90,.16)}
+.title{margin:0; font:600 76px/1.08 var(--f-display); text-wrap:balance}
+.lead{margin:0; font:400 44px/1.32 var(--f-body); color:var(--ink-soft); text-wrap:pretty}
+.t-forest .lead{color:var(--mist)}
+.t-leaf .lead{color:#E6F1E8}
+.lead.soft{color:#DCEBDF}
+.em{color:var(--clay); font-weight:600}
+.t-forest .em, .t-leaf .em, .dark .em{color:var(--amber)}
+.k{margin:0; font:600 30px/1.2 var(--f-body); letter-spacing:.14em; text-transform:uppercase; color:var(--leaf)}
+.dark .k, .t-forest .k, .t-leaf .k{color:var(--amber)}
+.t-leaf .reflect-card .k{color:var(--leaf)}
+.t-leaf .reflect-card .em{color:var(--clay)}
+.ct{margin:0; font:400 44px/1.3 var(--f-body)}
+.ct.s40{font-size:40px} .ct.s36{font-size:36px} .ct.s34{font-size:34px}
+.qt{margin:0; font:400 44px/1.3 var(--f-display); text-wrap:pretty}
+.cite{margin:0; font:400 36px/1.3 var(--f-body); color:var(--mist)}
+.head{display:flex; flex-direction:column; gap:16px}
+.head-row{display:flex; align-items:flex-end; justify-content:space-between; gap:40px}
+.row{display:flex; gap:48px; flex:1; min-height:0}
+.col{display:flex; flex-direction:column; gap:24px; min-width:0}
+.grow{flex:1}
+.between{justify-content:space-between}
+.center-y{justify-content:center}
+.items-center{align-items:center}
+
+/* ---------- surfaces (double bezel: outer tray ring + inner core) ---------- */
+.card{position:relative; margin:0; background:var(--card); color:var(--ink); border-radius:28px; padding:28px 32px; box-shadow:0 0 0 8px rgba(27,58,42,.05), 0 0 0 9px rgba(27,58,42,.08), 0 30px 60px -36px rgba(27,58,42,.38), inset 0 1px 0 rgba(255,255,255,.85)}
+.card.dark{background:var(--forest); color:var(--paper); box-shadow:0 0 0 8px rgba(27,58,42,.10), 0 0 0 9px rgba(27,58,42,.16), 0 40px 70px -36px rgba(16,36,26,.6), inset 0 1px 0 rgba(255,255,255,.08)}
+.card.green{background:var(--leaf); color:var(--paper)}
+.card.glass{background:rgba(246,243,234,.07); color:var(--paper); box-shadow:0 0 0 8px rgba(246,243,234,.035), 0 0 0 9px rgba(246,243,234,.10), inset 0 1px 0 rgba(255,255,255,.08)}
+.photo{position:relative; overflow:hidden; margin:0; border-radius:28px; background:#C9D3C9; box-shadow:0 0 0 8px rgba(27,58,42,.06), 0 0 0 9px rgba(27,58,42,.09), 0 40px 80px -40px rgba(16,36,26,.55)}
+.photo > img{display:block; width:100%; height:100%; object-fit:cover}
+.polaroid{flex:none; display:flex; flex-direction:column; margin:0; padding:20px 20px 0; border-radius:10px; background:var(--card); transform:rotate(-2deg); box-shadow:0 34px 60px -28px rgba(16,36,26,.55), 0 0 0 1px rgba(27,58,42,.06)}
+.polaroid .ph{flex:1; min-height:0; overflow:hidden; border-radius:4px; background:#C9D3C9}
+.polaroid .ph img{display:block; width:100%; height:100%; object-fit:cover}
+.polaroid figcaption{padding:22px 6px 24px; text-align:center; font:500 30px/1 var(--f-display); color:var(--mute)}
+.bscrim{position:absolute; left:0; right:0; bottom:0; height:55%; background:linear-gradient(180deg, rgba(16,36,26,0), rgba(16,36,26,.84)); pointer-events:none}
+
+/* ---------- lists ---------- */
+.steps{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:22px}
+.step{display:grid; grid-template-columns:60px 1fr; gap:24px; align-items:center}
+.step p{margin:0; font:400 44px/1.3 var(--f-body); color:var(--ink-soft)}
+.step.s40 p{font-size:40px}
+.badge{width:60px; height:60px; border-radius:50%; display:grid; place-items:center; background:var(--leaf); color:var(--paper); font:600 30px/1 var(--f-display); box-shadow:0 0 0 6px rgba(37,107,67,.13)}
+.qs{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; justify-content:space-between; flex:1}
+.qs li{display:grid; grid-template-columns:80px 1fr; gap:28px; align-items:center; padding:14px 0; box-shadow:inset 0 2px 0 rgba(27,58,42,.12)}
+.qs li:last-child{box-shadow:inset 0 2px 0 rgba(27,58,42,.12), inset 0 -2px 0 rgba(27,58,42,.12)}
+.qs .n{font:600 52px/1 var(--f-display); color:var(--clay)}
+.qs p{margin:0; font:400 44px/1.3 var(--f-body); color:var(--ink)}
+.pills{display:flex; flex-wrap:wrap; gap:14px}
+.pill{margin:0; padding:12px 26px; border-radius:999px; background:var(--card); font:400 34px/1.25 var(--f-body); color:var(--ink); box-shadow:0 0 0 1px rgba(27,58,42,.10), 0 12px 24px -16px rgba(27,58,42,.45)}
+.pill.big{font-size:36px; font-weight:600; flex:1; text-align:center; padding:22px 16px}
+
+/* ---------- build engine: [data-a] plays when its slide becomes active ---------- */
+.slide.is-active [data-a]{animation-name:var(--a-name); animation-duration:var(--a-dur,.95s); animation-timing-function:var(--a-ease,var(--ease-out)); animation-delay:calc(var(--a-base,.3s) + var(--i,0) * .16s); animation-fill-mode:both}
+[data-a="rise"]{--a-name:a-rise}
+[data-a="fade"]{--a-name:a-fade}
+[data-a="pop"]{--a-name:a-pop; --a-ease:var(--ease-spring); --a-dur:.8s}
+[data-a="left"]{--a-name:a-left}
+[data-a="right"]{--a-name:a-right}
+[data-a="flip"]{--a-name:a-flip; --a-dur:1.1s; transform-origin:left center}
+[data-a="mask"]{--a-name:a-mask; --a-dur:1.1s}
+[data-a="draw"]{--a-name:a-draw; --a-dur:1.8s; --a-ease:var(--ease-soft)}
+[data-a="grow"]{--a-name:a-grow; --a-ease:var(--ease-spring); --a-dur:.9s}
+[data-a="drop"]{--a-name:a-drop; --a-dur:1.25s}
+[data-a="stamp"]{--a-name:a-stamp; --a-ease:var(--ease-spring); --a-dur:.7s}
+@keyframes a-rise{from{opacity:0; transform:translateY(56px)}}
+@keyframes a-fade{from{opacity:0}}
+@keyframes a-pop{from{opacity:0; transform:scale(.8)}}
+@keyframes a-left{from{opacity:0; transform:translateX(-90px)}}
+@keyframes a-right{from{opacity:0; transform:translateX(90px)}}
+@keyframes a-flip{from{opacity:0; transform:perspective(1400px) rotateY(-70deg) translateX(-30px)}}
+@keyframes a-mask{from{transform:translateY(112%)}}
+@keyframes a-draw{from{stroke-dashoffset:1}}
+@keyframes a-grow{from{opacity:0; transform:scale(0)}}
+@keyframes a-drop{from{opacity:0; transform:translateY(-70px) rotate(-10deg)} to{opacity:1; transform:rotate(-2deg)}}
+@keyframes a-stamp{from{opacity:0; transform:scale(2.2) rotate(-20deg)} to{opacity:1; transform:rotate(-8deg)}}
+.draw{stroke-dasharray:1; stroke-dashoffset:0}
+[data-split] .sw{display:inline-block}
+.slide.is-active [data-split] .sw{animation:a-word .8s var(--ease-out) both; animation-delay:calc(var(--a-base,.35s) + var(--w) * 30ms)}
+@keyframes a-word{from{opacity:0; transform:translateY(.42em)}}
+/* click-to-reveal items */
+.slide [data-step]{transition:opacity .6s var(--ease-out), transform .7s var(--ease-out)}
+.slide [data-step]:not(.is-shown){opacity:0; transform:translateY(32px)}
+/* ambient loops (only while the slide is on screen) */
+.slide.is-active .kb{animation:kb 18s var(--ease-sine) infinite alternate}
+@keyframes kb{from{transform:scale(1.02)} to{transform:scale(1.13) translate(-2%,-1.5%)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes floaty{from{transform:translateY(-12px)} to{transform:translateY(14px)}}
+@keyframes breathe{from{opacity:.55; transform:scale(.97)} to{opacity:1; transform:scale(1.03)}}
+@keyframes flow{from{stroke-dashoffset:60} to{stroke-dashoffset:0}}
+
+/* progress ring for click-to-reveal slides */
+.ring{position:relative; width:132px; height:132px; flex:none}
+.ring svg{width:100%; height:100%; fill:none}
+.ring .tr{stroke:rgba(27,58,42,.12); stroke-width:10}
+.ring .bar{stroke:var(--clay); stroke-width:10; stroke-linecap:round; stroke-dasharray:1; stroke-dashoffset:1; transition:stroke-dashoffset .8s var(--ease-out)}
+.ring b{position:absolute; inset:0; display:grid; place-items:center; font:600 32px/1 var(--f-display); font-variant-numeric:tabular-nums; color:var(--ink)}
+
+/* ---------- 1 cover ---------- */
+.cover .bg img{display:block; width:100%; height:100%; object-fit:cover}
+.cover .scrim{background:linear-gradient(180deg, rgba(27,58,42,.10) 0%, rgba(27,58,42,.5) 46%, rgba(16,36,26,.96) 100%)}
+.cover-body{margin-top:auto; display:flex; flex-direction:column; gap:20px; max-width:1720px}
+.mega{margin:0; font:600 150px/1 var(--f-display); letter-spacing:-.01em; color:var(--paper)}
+.mega .ln{display:inline-block; overflow:hidden; vertical-align:top; padding:0 .03em .07em}
+.mega .w{display:inline-block}
+.mega .hl{color:var(--amber)}
+.vine{display:block; width:900px; height:70px; overflow:visible}
+.vine .stem{fill:none; stroke:var(--amber); stroke-width:5; stroke-linecap:round}
+.vine .lf{fill:var(--amber); transform-box:fill-box; transform-origin:0 50%}
+.cover .sub{margin:0; font:500 62px/1.15 var(--f-display); color:var(--paper)}
+.cover .tag{margin:0; font:400 40px/1.3 var(--f-body); color:var(--mist)}
+
+/* ---------- 2 objectives ---------- */
+.comp{display:grid; grid-template-columns:64px 1fr; gap:24px; align-items:center; padding:24px 30px}
+.comp .badge{width:64px; height:64px; font-size:32px}
+.eq{width:560px; flex:none; display:flex; flex-direction:column; justify-content:center; gap:24px; padding:48px; overflow:hidden}
+.eq > p{position:relative}
+.qmark{position:absolute; right:-6px; bottom:-120px; font:700 440px/1 var(--f-display); color:var(--amber); opacity:.12; pointer-events:none}
+.slide.is-active .qmark{animation:floaty 5s var(--ease-sine) infinite alternate}
+.eq .qt{font-size:52px; line-height:1.24; font-weight:500}
+
+/* ---------- 3 & 30 earth ---------- */
+.stars span{position:absolute; left:var(--x); top:var(--y); width:var(--z); height:var(--z); border-radius:50%; background:var(--paper); opacity:.45}
+.slide.is-active .stars span{animation:twinkle var(--t) var(--ease-sine) infinite alternate; animation-delay:var(--dl)}
+@keyframes twinkle{from{opacity:.1; transform:scale(.6)} to{opacity:.85; transform:scale(1)}}
+.earth{position:relative; flex:none; width:640px; height:640px; margin:0}
+.earth.sm{width:560px; height:560px}
+.earth .halo{position:absolute; inset:-48px; border-radius:50%; background:radial-gradient(circle, rgba(120,180,230,.30) 46%, rgba(120,180,230,0) 70%)}
+.slide.is-active .earth .halo{animation:breathe 6s var(--ease-sine) infinite alternate}
+.earth .globe{position:absolute; inset:0; border-radius:50%; overflow:hidden; background:#0B1B2B; box-shadow:0 0 0 1px rgba(207,227,213,.15), 0 0 90px 10px rgba(110,170,220,.25)}
+.earth img{position:absolute; left:-9%; top:-9%; width:118%; height:118%; object-fit:cover}
+.slide.is-active .earth img{animation:spin 180s linear infinite}
+.orbit{position:absolute; left:-90px; top:calc(50% - 90px); width:calc(100% + 180px); height:180px; transform:rotate(-16deg); pointer-events:none}
+.orbit svg{position:absolute; inset:0; width:100%; height:100%; overflow:visible}
+.orbit ellipse{fill:none; stroke:rgba(240,185,90,.45); stroke-width:2; stroke-dasharray:6 10}
+.moon{position:absolute; left:0; top:0; width:26px; height:26px; border-radius:50%; background:var(--amber); box-shadow:0 0 26px 6px rgba(240,185,90,.45); offset-path:path('M 0 90 A 410 90 0 1 0 820 90 A 410 90 0 1 0 0 90'); offset-rotate:0deg}
+.earth.sm .moon{offset-path:path('M 0 90 A 370 90 0 1 0 740 90 A 370 90 0 1 0 0 90')}
+.slide.is-active .moon{animation:orbit 14s linear infinite}
+@keyframes orbit{from{offset-distance:0%} to{offset-distance:100%}}
+.quote-col{display:flex; flex-direction:column; justify-content:center; gap:30px; flex:1; min-width:0}
+.quote-col .qt{font-size:50px; line-height:1.3}
+
+/* ---------- 4 bingo ---------- */
+.bingo{width:680px; flex:none; display:flex; flex-direction:column; gap:16px}
+.bingo-title{margin:0; text-align:center; font:600 30px/1.2 var(--f-body); letter-spacing:.14em; text-transform:uppercase}
+.bingo-grid{position:relative; display:grid; grid-template-columns:repeat(3,1fr); grid-template-rows:repeat(3,190px); border-radius:24px; background:var(--card); box-shadow:0 0 0 8px rgba(27,58,42,.06), 0 0 0 9px rgba(27,58,42,.12), 0 40px 70px -36px rgba(16,36,26,.45)}
+.cell{display:grid; place-items:center; padding:14px; text-align:center; font:500 32px/1.25 var(--f-body); box-shadow:inset -2px 0 0 rgba(27,58,42,.12), inset 0 -2px 0 rgba(27,58,42,.12)}
+.cell:nth-child(3n){box-shadow:inset 0 -2px 0 rgba(27,58,42,.12)}
+.cell:nth-child(n+7){box-shadow:inset -2px 0 0 rgba(27,58,42,.12)}
+.cell:nth-child(9){box-shadow:none}
+.cell:nth-child(1){border-top-left-radius:24px} .cell:nth-child(3){border-top-right-radius:24px} .cell:nth-child(7){border-bottom-left-radius:24px} .cell:nth-child(9){border-bottom-right-radius:24px}
+.cell.free{background:var(--leaf); color:var(--paper); font-weight:600}
+.slide.is-active .cell{animation:a-pop .6s var(--ease-spring) both; animation-delay:calc(1.3s + var(--c) * 90ms)}
+.strike{position:absolute; inset:0; width:100%; height:100%; pointer-events:none; overflow:visible}
+.strike path{fill:none; stroke:var(--clay); stroke-width:12; stroke-linecap:round; opacity:.9}
+.stamp{position:absolute; right:-26px; top:-34px; margin:0; padding:10px 24px; border-radius:16px; background:rgba(253,252,248,.94); color:var(--clay); font:700 40px/1 var(--f-display); box-shadow:inset 0 0 0 4px var(--clay), 0 14px 30px -16px rgba(180,83,28,.6); transform:rotate(-8deg)}
+
+/* ---------- 6 then & now / 19 story ---------- */
+.polaroid.p640{width:640px; height:864px}
+.polaroid.p600{width:600px; height:864px}
+
+/* ---------- 7 gift ---------- */
+.scripture{width:600px; flex:none; display:flex; flex-direction:column; justify-content:center; gap:24px; padding:48px; overflow:hidden}
+.scripture > *{position:relative}
+.rays{position:absolute !important; left:-50%; top:-100%; width:200%; height:200%; background:repeating-conic-gradient(from 0deg, rgba(240,185,90,.14) 0deg 7deg, rgba(240,185,90,0) 7deg 26deg); -webkit-mask-image:radial-gradient(circle, #000 0%, rgba(0,0,0,0) 55%); mask-image:radial-gradient(circle, #000 0%, rgba(0,0,0,0) 55%); pointer-events:none}
+.slide.is-active .rays{animation:spin 70s linear infinite}
+.scripture .qt{font-size:44px}
+.ref{margin:0; font:400 32px/1.3 var(--f-body); color:var(--mist)}
+
+/* ---------- 8 appleseed ---------- */
+.apple-photo{width:520px; height:864px; flex:none}
+.trail{position:absolute; left:0; right:0; bottom:0; width:100%; height:auto; overflow:visible}
+.trail .path{fill:none; stroke:var(--amber); stroke-width:4; stroke-linecap:round; stroke-dasharray:1; opacity:.9}
+.tree{transform-box:fill-box; transform-origin:50% 100%}
+.tree .tk{fill:var(--bark)} .tree .cn{fill:var(--sprout)} .tree .ap{fill:var(--apple)}
+.stats{display:grid; grid-template-columns:repeat(4,1fr); gap:24px}
+.stat{padding:22px 24px}
+.stat .num{margin:0; font:600 58px/1.05 var(--f-display); color:var(--clay); font-variant-numeric:tabular-nums}
+.stat .lbl{margin:8px 0 0; font:400 30px/1.3 var(--f-body); color:var(--ink-soft)}
+
+/* ---------- 9 reflect ---------- */
+.qcard{flex:1; display:grid; grid-template-columns:64px 1fr; gap:24px; align-items:center; padding:24px 28px}
+.qcard .n{font:600 52px/1 var(--f-display); color:var(--clay)}
+.research{width:600px; flex:none; display:flex; flex-direction:column; justify-content:center; gap:24px; padding:44px}
+
+/* ---------- 10 stewardship ---------- */
+.def{margin:0; max-width:1640px; font:400 64px/1.2 var(--f-display); text-wrap:balance}
+.mark{position:relative; font-weight:600; color:var(--amber)}
+.mark::after{content:""; position:absolute; left:-6px; right:-6px; bottom:.04em; height:.18em; border-radius:6px; background:var(--amber); opacity:.3; transform-origin:left; z-index:-1}
+.slide.is-active .mark::after{animation:a-growx 1s var(--ease-soft) both 1.1s}
+@keyframes a-growx{from{transform:scaleX(0)}}
+.trio{display:grid; grid-template-columns:repeat(3,1fr); gap:28px; flex:1; min-height:0}
+.flip-card{display:flex; flex-direction:column; justify-content:center; padding:36px}
+
+/* ---------- 11 ponder ---------- */
+.drought{width:648px; height:864px; flex:none}
+.shimmer{position:absolute; inset:0; background:linear-gradient(100deg, rgba(255,214,150,0) 30%, rgba(255,214,150,.22) 46%, rgba(255,214,150,0) 62%); transform:translateX(-100%); pointer-events:none}
+.slide.is-active .shimmer{animation:sweep 6s var(--ease-sine) infinite 1.2s}
+@keyframes sweep{to{transform:translateX(100%)}}
+.pulse::after{content:""; position:absolute; inset:-12px; border-radius:36px; box-shadow:0 0 0 3px rgba(240,185,90,.7); opacity:0; pointer-events:none}
+.slide.is-active .pulse::after{animation:ring-pulse 2.8s var(--ease-out) infinite 2.2s}
+@keyframes ring-pulse{0%{opacity:.9; transform:scale(.97)} 100%{opacity:0; transform:scale(1.05)}}
+
+/* ---------- 12 crisis ---------- */
+.triple{width:150px; height:150px; flex:none}
+.triple circle{fill:none; stroke-width:5}
+.slide.is-active .triple g{transform-origin:75px 75px; animation:spin 24s linear infinite}
+.ccard{display:flex; flex-direction:column; padding:0; overflow:hidden}
+.ccard .ph{height:210px; overflow:hidden}
+.ccard .ph img{display:block; width:100%; height:100%; object-fit:cover}
+.ccard .bd{padding:26px 30px; display:flex; flex-direction:column; gap:12px}
+.ccard h3{margin:0; font:600 44px/1.2 var(--f-display); color:var(--clay)}
+
+/* ---------- 13 greenhouse diagram ---------- */
+.gh{position:relative; width:760px; height:420px; flex:none; border-radius:28px; overflow:hidden; margin:0; box-shadow:0 0 0 8px rgba(27,58,42,.06), 0 0 0 9px rgba(27,58,42,.09), 0 40px 80px -40px rgba(16,36,26,.55)}
+.gh svg{display:block; width:100%; height:100%}
+.flow{fill:none; stroke-width:6; stroke-linecap:round; stroke-dasharray:14 16}
+.flow.sun{stroke:var(--sun)} .flow.heat{stroke:var(--heat)} .flow.esc{opacity:.6}
+.slide.is-active .flow{animation:flow 1.4s linear infinite}
+.slide.is-active .flow.heat{animation-duration:1.8s}
+.sun-rays{stroke:var(--sun); stroke-width:4; stroke-linecap:round; transform-box:view-box; transform-origin:86px 70px}
+.slide.is-active .sun-rays{animation:spin 26s linear infinite}
+.mol circle{fill:rgba(205,236,222,.75)}
+.slide.is-active .mol{animation:jiggle 3.2s var(--ease-sine) infinite alternate}
+.slide.is-active .mol:nth-of-type(2n){animation-duration:4.1s; animation-delay:-1.3s}
+.slide.is-active .mol:nth-of-type(3n){animation-duration:3.6s; animation-delay:-2.2s}
+@keyframes jiggle{from{transform:translateX(-16px)} to{transform:translateX(16px)}}
+.gh-l{position:absolute; margin:0; padding:6px 16px; border-radius:999px; background:rgba(14,34,54,.78); color:var(--paper); font:500 28px/1.2 var(--f-body); white-space:nowrap; box-shadow:0 0 0 1px rgba(246,243,234,.14)}
+.gh-l.amber{background:rgba(240,185,90,.92); color:var(--forest)}
+
+/* ---------- 14 air ---------- */
+.haze{position:absolute; inset:-15%; pointer-events:none}
+.haze i{position:absolute; width:75%; height:65%; border-radius:50%; background:radial-gradient(closest-side, rgba(226,226,214,.55), rgba(226,226,214,0))}
+.haze i:nth-child(1){left:0; top:10%} .haze i:nth-child(2){left:30%; top:35%} .haze i:nth-child(3){left:-10%; top:45%}
+.slide.is-active .haze i{animation:drift 13s var(--ease-sine) infinite alternate}
+.slide.is-active .haze i:nth-child(2){animation-duration:17s; animation-delay:-6s}
+.slide.is-active .haze i:nth-child(3){animation-duration:21s; animation-delay:-11s}
+@keyframes drift{from{transform:translateX(-12%)} to{transform:translateX(14%)}}
+.list-card{flex:1; display:flex; flex-direction:column; gap:12px; padding:24px 26px}
+.list-card h3{margin:0; font:600 32px/1.2 var(--f-body); color:var(--leaf)}
+.list-card ul{margin:0; padding:0 0 0 30px; font:400 32px/1.32 var(--f-body); color:var(--ink-soft)}
+
+/* ---------- 15 biodiversity ---------- */
+.forest-strip{position:absolute; left:0; right:0; bottom:0; width:100%; height:auto}
+.pine .trunk{fill:var(--bark)}
+.pine .crown{fill:#4E9A62; transform-box:fill-box; transform-origin:50% 100%}
+.slide.is-active .pine.gone .crown{animation:fell 1.1s var(--ease-out) both; animation-delay:calc(1.8s + var(--k) * .34s)}
+@keyframes fell{0%{transform:none; opacity:1} 55%{opacity:1} 100%{transform:rotate(84deg) translate(8px,6px); opacity:0}}
+
+/* ---------- 16 right ---------- */
+.tl{list-style:none; margin:0; padding:0 0 0 58px; position:relative; display:flex; flex-direction:column; justify-content:space-between; gap:24px; flex:1}
+.tl::before{content:""; position:absolute; left:16px; top:20px; bottom:30px; width:4px; border-radius:4px; background:linear-gradient(var(--leaf), var(--clay)); transform-origin:top}
+.slide.is-active .tl::before{animation:a-growy 2.4s var(--ease-soft) both .6s}
+@keyframes a-growy{from{transform:scaleY(0)}}
+.tl li{position:relative; display:flex; flex-direction:column; gap:6px}
+.tl .dot{position:absolute; left:-56px; top:10px; width:32px; height:32px; border-radius:50%; background:var(--moss); box-shadow:inset 0 0 0 6px var(--clay), 0 0 0 6px rgba(180,83,28,.14)}
+.tl-d{margin:0; font:600 44px/1.15 var(--f-display); color:var(--clay); font-variant-numeric:tabular-nums}
+.tl-t{margin:0; font:400 36px/1.3 var(--f-body); color:var(--ink-soft)}
+.rights{display:grid; grid-template-columns:1fr 1fr; gap:18px; flex:1}
+.right-c{display:grid; grid-template-columns:56px 1fr; gap:18px; align-items:center; padding:18px 22px}
+.right-c svg{width:56px; height:56px; fill:none; stroke:var(--leaf); stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round}
+.right-c svg path{stroke-dasharray:1; stroke-dashoffset:0}
+.slide.is-active .right-c svg path{animation:a-draw 1.6s var(--ease-soft) both; animation-delay:calc(1.2s + var(--i,0) * .16s)}
+.right-c p{margin:0; font:400 36px/1.28 var(--f-body)}
+
+/* ---------- 17 uphold ---------- */
+.duo{display:grid; grid-template-columns:1fr 1fr; gap:32px; flex:1; min-height:0}
+.duo .card{display:flex; flex-direction:column; justify-content:center; gap:16px; padding:32px}
+
+/* ---------- 21 roadmap ---------- */
+.road{position:relative; flex:1; justify-content:space-between}
+.road::before, .road::after{content:""; position:absolute; left:28px; top:30px; bottom:30px; width:4px; border-radius:4px; background:var(--leaf)}
+.road::before{opacity:.18}
+.road::after{transform-origin:top}
+.slide.is-active .road::after{animation:a-growy 2.8s var(--ease-soft) both .4s}
+.road .step{position:relative; z-index:1}
+
+/* ---------- 22 stopwatch ---------- */
+.watch{position:relative; width:140px; height:160px; flex:none}
+.watch svg{width:100%; height:100%; fill:none; stroke-linecap:round}
+.watch .w-face{stroke:rgba(27,58,42,.14); stroke-width:10}
+.watch .w-sweep{stroke:var(--clay); stroke-width:10; stroke-dasharray:1}
+.watch .w-btn{stroke:var(--forest); stroke-width:10}
+.watch .w-hand{stroke:var(--forest); stroke-width:6; transform-box:view-box; transform-origin:70px 90px}
+.slide.is-active .watch .w-sweep{animation:deplete 6s linear both 1.2s}
+.slide.is-active .watch .w-hand{animation:spin 6s linear 1.2s 1 both}
+@keyframes deplete{to{stroke-dashoffset:1}}
+.w-go{position:absolute; left:0; right:0; top:58px; text-align:center; font:700 34px/1 var(--f-display); color:var(--clay); opacity:0}
+.slide.is-active .w-go{animation:a-pop .7s var(--ease-spring) both 7.2s}
+
+/* ---------- 24 bubbles ---------- */
+.bubbles{position:absolute; inset:0; pointer-events:none}
+.bubbles span{position:absolute; bottom:-40px; left:var(--x); width:var(--z); height:var(--z); border-radius:50%; background:radial-gradient(circle at 30% 30%, rgba(255,255,255,.75), rgba(255,255,255,.12) 60%, rgba(255,255,255,.05)); box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.55); opacity:0}
+.slide.is-active .bubbles span{animation:bubble var(--t) var(--ease-sine) infinite; animation-delay:var(--dl)}
+@keyframes bubble{0%{opacity:0; transform:translate(0,0)} 12%{opacity:.9} 100%{opacity:0; transform:translate(var(--sx),-440px)}}
+
+/* ---------- 25 mangroves ---------- */
+.big-n{margin:0; font:600 100px/1 var(--f-display); color:var(--clay); font-variant-numeric:tabular-nums}
+.seeds{display:block; width:520px; height:90px; overflow:visible}
+.sd{transform-box:fill-box; transform-origin:50% 100%}
+.sd .st{fill:none; stroke:var(--sprout); stroke-width:4; stroke-linecap:round}
+.sd .lv{fill:var(--sprout)}
+.slide.is-active .sd{animation:a-grow .9s var(--ease-spring) both; animation-delay:calc(1.1s + var(--k) * .14s)}
+.qbox{margin:0; padding:12px 20px; border-radius:16px; background:var(--card); font:400 40px/1.3 var(--f-body); color:var(--ink); box-shadow:0 0 0 1px rgba(27,58,42,.10), 0 14px 30px -20px rgba(27,58,42,.45)}
+
+/* ---------- 26 sprout ---------- */
+.sprout{width:84px; height:110px; flex:none; overflow:visible}
+.sprout .soil{fill:rgba(240,185,90,.35)}
+.sprout .st{fill:none; stroke:#7FCB8F; stroke-width:5; stroke-linecap:round}
+.sprout .lv{fill:#7FCB8F; transform-box:fill-box}
+.sprout .lv.l{transform-origin:100% 100%} .sprout .lv.r{transform-origin:0 100%}
+.challenge{display:grid; grid-template-columns:84px 1fr; gap:18px; align-items:center; padding:22px 26px}
+
+/* ---------- 27 typing ---------- */
+.type{display:block; width:fit-content; white-space:nowrap}
+.slide.is-active .type{animation:typing 1.7s steps(30,end) both}
+.slide.is-active .type.l1{animation-delay:1.4s}
+.slide.is-active .type.l2{animation-delay:3.2s}
+@keyframes typing{from{clip-path:inset(0 100% 0 0)} to{clip-path:inset(0 0 0 0)}}
+.caret{display:inline-block; width:4px; height:.95em; margin-left:6px; vertical-align:-.1em; background:var(--amber)}
+.slide.is-active .caret{animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* ---------- 29 heart ---------- */
+.heart{width:120px; height:108px; overflow:visible}
+.heart .hp{fill:none; stroke:var(--clay); stroke-width:5; stroke-linejoin:round}
+.heart .hl .st{fill:none; stroke:var(--leaf); stroke-width:4; stroke-linecap:round}
+.heart .hl .lv{fill:var(--leaf)}
+.heart .hl{transform-box:fill-box; transform-origin:50% 100%}
+.slide.is-active .heart{animation:beat 1.6s var(--ease-sine) infinite 3.4s}
+@keyframes beat{0%,100%{transform:scale(1)} 14%{transform:scale(1.08)} 28%{transform:scale(1)} 42%{transform:scale(1.06)}}
+.reflect-card{width:700px; flex:none; display:flex; flex-direction:column; justify-content:center; gap:20px; padding:40px; background:var(--paper)}
+
+/* ---------- 30 closing ---------- */
+.challenge-pill{margin:0; align-self:flex-start; padding:18px 30px; border-radius:999px; background:var(--amber); color:var(--forest); font:600 36px/1.3 var(--f-body); box-shadow:0 0 0 8px rgba(240,185,90,.16)}
+.slide.is-active .challenge-pill{animation:a-pop .8s var(--ease-spring) both 2.2s, glow 2.6s var(--ease-sine) infinite alternate 3s}
+@keyframes glow{from{box-shadow:0 0 0 8px rgba(240,185,90,.16)} to{box-shadow:0 0 0 18px rgba(240,185,90,.04)}}
+
+/* ---------- reduced motion: show the finished state, keep simple fades ---------- */
+@media (prefers-reduced-motion: reduce){
+  .slide, .slide.is-active{transform:none !important; transition:opacity .3s, visibility 0s}
+  .slide.is-active [data-a], .slide.is-active [data-split] .sw, .slide.is-active .cell, .slide.is-active .sd, .slide.is-active .type,
+  .slide.is-active .right-c svg path, .slide.is-active .mark::after, .slide.is-active .tl::before, .slide.is-active .road::after,
+  .slide.is-active .pine.gone .crown, .slide.is-active .w-go, .slide.is-active .challenge-pill{animation:none !important}
+  .slide.is-active .kb, .slide.is-active .earth img, .slide.is-active .halo, .slide.is-active .moon, .slide.is-active .stars span,
+  .slide.is-active .rays, .slide.is-active .flow, .slide.is-active .sun-rays, .slide.is-active .mol, .slide.is-active .haze i,
+  .slide.is-active .bubbles span, .slide.is-active .shimmer, .slide.is-active .pulse::after, .slide.is-active .qmark,
+  .slide.is-active .triple g, .slide.is-active .heart, .slide.is-active .caret, .slide.is-active .watch .w-sweep, .slide.is-active .watch .w-hand{animation:none !important}
+  .w-go{opacity:1}
+  .slide [data-step]{transition:opacity .25s; transform:none !important}
+  .wipe{display:none}
+}
+</style>
+</head>
+<body>
+<div class="app" id="app">
+  <main class="deck" id="deck" aria-roledescription="presentation" aria-label="Fam Goes Green: Taking Care of Our Only Home">
+    <div class="stage" id="stage">
+
+<!-- 1 · Cover -->
+<section class="slide t-forest cover is-active" data-title="Fam Goes Green" data-credit="Photo: CEphoto, Uwe Aranas, CC BY-SA 3.0">
+  <div class="bg"><img class="kb" src="img/terraces.jpg" alt="Banaue Rice Terraces in Ifugao: green terraced hillsides under a cloudy sky"></div>
+  <div class="scrim"></div>
+  <div class="fx-slot" data-color="240,185,90"></div>
+  <div class="cover-body">
+    <p class="eyebrow" data-a="fade" style="--i:0">Values Education 9 · Term 2 · Lesson 5</p>
+    <h1 class="mega"><span class="ln"><span class="w" data-a="mask" style="--i:1">Fam</span></span> <span class="ln"><span class="w" data-a="mask" style="--i:2">Goes</span></span> <span class="ln"><span class="w hl" data-a="mask" style="--i:3">Green</span></span></h1>
+    <svg class="vine" viewBox="0 0 900 70" aria-hidden="true">
+      <path class="stem draw" data-a="draw" style="--a-base:1.05s" pathLength="1" d="M4 44 C 120 8, 220 70, 340 36 S 560 6, 680 38 S 820 62, 896 26"/>
+      <g transform="translate(170 39) rotate(-40)"><path class="lf" data-a="pop" style="--a-base:1.5s;--i:0" d="M0 0 C 8 -16, 26 -20, 40 -14 C 30 -2, 12 4, 0 0 Z"/></g>
+      <g transform="translate(340 36) rotate(38)"><path class="lf" data-a="pop" style="--a-base:1.5s;--i:1" d="M0 0 C 8 -16, 26 -20, 40 -14 C 30 -2, 12 4, 0 0 Z"/></g>
+      <g transform="translate(510 12) rotate(-30)"><path class="lf" data-a="pop" style="--a-base:1.5s;--i:2" d="M0 0 C 8 -16, 26 -20, 40 -14 C 30 -2, 12 4, 0 0 Z"/></g>
+      <g transform="translate(680 38) rotate(40)"><path class="lf" data-a="pop" style="--a-base:1.5s;--i:3" d="M0 0 C 8 -16, 26 -20, 40 -14 C 30 -2, 12 4, 0 0 Z"/></g>
+      <g transform="translate(804 57) rotate(-48)"><path class="lf" data-a="pop" style="--a-base:1.5s;--i:4" d="M0 0 C 8 -16, 26 -20, 40 -14 C 30 -2, 12 4, 0 0 Z"/></g>
+    </svg>
+    <p class="sub" data-a="rise" style="--i:5">Maka-Kalikasan: Taking Care of Our Only Home</p>
+    <p class="tag" data-a="rise" style="--i:6">Nature vibes for life: how families care for and preserve <span class="em">God’s creation</span></p>
+  </div>
+  <aside class="notes">Welcome, class. This lesson combines two textbook chapters: Lesson 6, “Fam Goes Green: Nature Vibes for Life,” from Godly Manners and Right Conduct 9, and Lesson 13, “Maka-Kalikasan: Take Care of Our Only Home,” from Character Formation for a Better World.
+
+Our essential question for today: How can families contribute to the care and preservation of nature? Keep that question in mind as we move from stories, to the science of the triple planetary crisis, to concrete things your own family can do this week.</aside>
+</section>
+
+<!-- 2 · Learning competencies -->
+<section class="slide t-paper" data-title="Learning Competencies">
+  <header class="head"><p class="eyebrow" data-a="fade">Lesson Overview</p><h2 class="title" data-a="rise" style="--i:1">Learning Competencies</h2></header>
+  <div class="row">
+    <div class="col grow between">
+      <p class="lead" data-a="fade" style="--i:2">By the end of this lesson, you will:</p>
+      <div class="card comp" data-a="rise" style="--i:3"><span class="badge">A</span><p class="ct"><span class="em">Identify</span> the family’s responsibilities in caring for and enriching nature.</p></div>
+      <div class="card comp" data-a="rise" style="--i:4"><span class="badge">B</span><p class="ct"><span class="em">Demonstrate</span> that each member’s duty in caring for nature is important.</p></div>
+      <div class="card comp" data-a="rise" style="--i:5"><span class="badge">C</span><p class="ct"><span class="em">Implement</span> personal ways of caring for nature with family support.</p></div>
+    </div>
+    <div class="card dark eq" data-a="pop" style="--i:6">
+      <span class="qmark" aria-hidden="true">?</span>
+      <p class="k">Essential Question</p>
+      <p class="qt">How can families contribute to the care and preservation of nature?</p>
+    </div>
+  </div>
+  <aside class="notes">Read the three competencies aloud and connect each to something concrete: A is about knowing what a family owes to nature, B is about showing that every member’s share matters, even the youngest, and C is about actually doing something at home with the family’s support.
+
+The textbook frames the goal as living out the value of being good stewards by regularly participating in family environmental activities. Then post the essential question and tell learners they will answer it in their own words at the end of the lesson.</aside>
+</section>
+
+<!-- 3 · Opening thought -->
+<section class="slide t-forest" data-title="Opening Thought" data-credit="Photo: NASA, Apollo 17, public domain">
+  <div class="stars" aria-hidden="true"></div>
+  <div class="row items-center">
+    <div class="quote-col">
+      <p class="eyebrow" data-a="fade">Opening Thought</p>
+      <blockquote class="qt" style="margin:0" data-split>“As people alive today, we must consider future generations: <span class="em">a clean environment is a human right</span> like any other. It is therefore part of our responsibility toward others to ensure that the world we pass on is as healthy, if not healthier, than we found it.”</blockquote>
+      <p class="cite" data-a="fade" style="--a-base:2.6s">Dalai Lama</p>
+    </div>
+    <figure class="earth" data-a="pop" style="--i:2">
+      <div class="halo"></div>
+      <div class="globe"><img src="img/earth.jpg" alt="Earth photographed from space by the Apollo 17 crew"></div>
+      <div class="orbit" aria-hidden="true"><svg viewBox="0 0 820 180" preserveAspectRatio="none"><ellipse cx="410" cy="90" rx="410" ry="90"/></svg><span class="moon"></span></div>
+    </figure>
+  </div>
+  <aside class="notes">Ask a volunteer to read the quotation. Pause on two phrases: “a clean environment is a human right like any other” and “the world we pass on.”
+
+Ask: Who are the people we are passing the world on to? What kind of world do you want them to inherit? This frames stewardship as a responsibility toward others, which we will return to when we discuss the United Nations declaration later in the lesson.</aside>
+</section>
+
+<!-- 4 · Eco Bingo -->
+<section class="slide t-moss" data-title="Activity: Eco Bingo">
+  <header class="head"><p class="eyebrow" data-a="fade">Warm-up Vibes</p><h2 class="title" data-a="rise" style="--i:1">Activity: Eco Bingo</h2></header>
+  <div class="row">
+    <ol class="steps grow between" style="flex:1">
+      <li class="step" data-a="rise" style="--i:2"><span class="badge">1</span><p>Fill each square with an <span class="em">eco-action</span> your family does.</p></li>
+      <li class="step" data-a="rise" style="--i:3"><span class="badge">2</span><p>Check off the actions you complete together at home.</p></li>
+      <li class="step" data-a="rise" style="--i:4"><span class="badge">3</span><p>Back in class, play. Call out <span class="em">“Eco Bingo!”</span> when you complete a line.</p></li>
+      <li class="step" data-a="rise" style="--i:5"><span class="badge">4</span><p>Share which actions are most common.</p></li>
+      <li class="step" data-a="rise" style="--i:6"><span class="badge">5</span><p>Set a <span class="em">family challenge</span>: one new eco-action.</p></li>
+    </ol>
+    <div class="bingo" data-a="fade" style="--i:1">
+      <p class="bingo-title">Eco Bingo Card</p>
+      <div class="bingo-grid">
+        <div class="cell" style="--c:0"></div><div class="cell" style="--c:1"></div><div class="cell" style="--c:2"></div>
+        <div class="cell" style="--c:3">Conserving water</div><div class="cell free" style="--c:4">Eco-Bingo</div><div class="cell" style="--c:5">Recycling</div>
+        <div class="cell" style="--c:6"></div><div class="cell" style="--c:7"></div><div class="cell" style="--c:8"></div>
+        <svg class="strike" viewBox="0 0 680 570" preserveAspectRatio="none" aria-hidden="true"><path class="draw" data-a="draw" style="--a-base:2.6s;--a-dur:1s" pathLength="1" d="M40 285 H640"/></svg>
+        <p class="stamp" data-a="stamp" style="--a-base:3.4s">Eco Bingo!</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">Distribute blank bingo cards. Learners fill each square with an eco-friendly action their family already practices, for example recycling, conserving water, or using reusable bags. For homework they discuss the card with their family and check off actions completed together.
+
+On the designated day, play Eco Bingo in class. Afterward, lead a short discussion on which actions are most common among families, and encourage learners to suggest new actions they might take. End by inviting each family to set a challenge for the coming weeks.</aside>
+</section>
+
+<!-- 5 · Reflection questions (click to reveal) -->
+<section class="slide t-paper" data-title="Eco Bingo: Reflection Questions">
+  <div class="head-row">
+    <header class="head"><p class="eyebrow" data-a="fade">Warm-up Vibes</p><h2 class="title" data-a="rise" style="--i:1">Eco Bingo: Reflection Questions</h2></header>
+    <div class="ring" data-a="pop" style="--i:2" aria-hidden="true"><svg viewBox="0 0 132 132"><path class="tr" d="M66 10 a56 56 0 1 1 0 112 a56 56 0 1 1 0 -112"/><path class="bar" pathLength="1" d="M66 10 a56 56 0 1 1 0 112 a56 56 0 1 1 0 -112"/></svg><b>0/5</b></div>
+  </div>
+  <ol class="qs">
+    <li data-step><span class="n">1</span><p>What eco-friendly actions do you practice at home, and which do you want to adopt next?</p></li>
+    <li data-step><span class="n">2</span><p>How do you feel when you care for the environment as a family?</p></li>
+    <li data-step><span class="n">3</span><p>What challenges have you faced in being eco-friendly at home, and how did you overcome them?</p></li>
+    <li data-step><span class="n">4</span><p>Why is it important for families to work together for the environment?</p></li>
+    <li data-step><span class="n">5</span><p>What are the most impactful changes families can make for the planet?</p></li>
+  </ol>
+  <aside class="notes">The five questions appear one per click so you can discuss each before revealing the next.
+
+Use two or three of these questions for a whole-class share after the game, and assign the rest as journal prompts. Listen for honest answers about challenges at home, such as no segregation bins, limited water, or family members who are not yet on board. These become real examples when we design the Family Eco-Plan later.</aside>
+</section>
+
+<!-- 6 · Then and now -->
+<section class="slide t-paper" data-title="Then and Now" data-section="Why We Care for Creation" data-credit="Photo: Upper Marikina River, Klienneeco, CC BY-SA 4.0">
+  <div class="row">
+    <figure class="polaroid p640" data-a="drop" style="--i:0"><div class="ph"><img class="kb" src="img/river.jpg" alt="Morning mist over the Upper Marikina River with forested cliffs and bamboo rafts"></div><figcaption>Upper Marikina River</figcaption></figure>
+    <div class="col grow between">
+      <header class="head"><p class="eyebrow" data-a="fade" style="--i:1">Take a Look</p><h2 class="title" data-a="rise" style="--i:2">Then and Now</h2></header>
+      <p class="lead" data-a="rise" style="--i:3">Your parents and grandparents can tell you stories of <span class="em">crystal-clear rivers</span>, mountains covered with trees, and vast land for planting.</p>
+      <p class="lead" data-a="rise" style="--i:4">Modern technology makes life easier, but it also harms our environment. We must act with <span class="em">urgency</span> to protect our only home.</p>
+      <div class="card dark" data-a="pop" style="--i:6"><p class="qt">Where do you still see nature’s beauty where you live?</p></div>
+    </div>
+  </div>
+  <aside class="notes">The world you know today has undergone significant changes since the time of your parents and grandparents. Invite two or three learners to share a story an elder told them about a river, a forest, or a farm that has changed.
+
+Then make the turn: modern technologies and products have advantages, but there are negative consequences for the environment. There is a sense of urgency for leaders and citizens to take action. As stewards of the Earth, we need to act quickly to ensure we can live in a clean and safe environment.</aside>
+</section>
+
+<!-- 7 · Gift from God -->
+<section class="slide t-moss" data-title="Nature Is a Gift from God">
+  <header class="head"><p class="eyebrow" data-a="fade">Nature Vibes for Life</p><h2 class="title" data-a="rise" style="--i:1">Nature Is a Gift from God</h2></header>
+  <div class="row">
+    <div class="col grow between">
+      <p class="lead" data-a="rise" style="--i:2">Nature is a beautiful <span class="em">gift from God</span>, and it is our responsibility to take care of it.</p>
+      <p class="lead" data-a="rise" style="--i:3">Just as families keep a clean and safe home, we work together to care for the environment.</p>
+      <p class="k" data-a="fade" style="--i:4">Every small effort counts</p>
+      <div class="pills">
+        <p class="pill big" data-a="pop" style="--i:5">Recycling</p>
+        <p class="pill big" data-a="pop" style="--i:6">Conserving water</p>
+        <p class="pill big" data-a="pop" style="--i:7">Planting trees</p>
+      </div>
+    </div>
+    <div class="card dark scripture" data-a="pop" style="--i:4">
+      <div class="rays" aria-hidden="true"></div>
+      <p class="k">Scripture</p>
+      <p class="qt">“The earth is the LORD’s, and the fulness thereof; the world, and they that dwell therein.”</p>
+      <p class="ref">Psalm 24:1 (KJV)</p>
+    </div>
+  </div>
+  <aside class="notes">From the textbook introduction: Nature is a beautiful gift from God, and it is our responsibility to take care of it. Just as families work together to maintain a clean and safe home, we should also work together to care for the environment.
+
+Every small effort, whether recycling, conserving water, or planting trees, contributes to preserving the earth for future generations. Psalm 24:1 reminds us that the earth belongs to the Lord; we care for it as His stewards, not as its owners.</aside>
+</section>
+
+<!-- 8 · Johnny Appleseed -->
+<section class="slide t-paper" data-title="The Man Who Planted Trees" data-credit="Drawing: H. S. Knapp, public domain">
+  <div class="row">
+    <figure class="photo apple-photo" data-a="fade">
+      <img class="kb" src="img/appleseed.jpg" alt="Nineteenth-century drawing of John Chapman, known as Johnny Appleseed">
+      <div class="bscrim"></div>
+      <svg class="trail" viewBox="0 0 520 240" aria-hidden="true">
+        <path class="path" data-a="draw" style="--a-base:1.1s;--a-dur:2.4s" pathLength="1" d="M-10 205 C 80 150, 140 232, 230 176 S 380 128, 530 164"/>
+        <g transform="translate(46 186)"><g class="tree" data-a="grow" style="--a-base:1.4s;--i:0"><rect class="tk" x="-5" y="-30" width="10" height="30" rx="3"/><circle class="cn" cx="0" cy="-48" r="24"/><circle class="cn" cx="-15" cy="-36" r="15"/><circle class="cn" cx="15" cy="-38" r="16"/><circle class="ap" cx="-8" cy="-48" r="4.5"/><circle class="ap" cx="9" cy="-40" r="4.5"/><circle class="ap" cx="2" cy="-60" r="4.5"/></g></g>
+        <g transform="translate(150 196)"><g class="tree" data-a="grow" style="--a-base:1.4s;--i:2"><rect class="tk" x="-5" y="-30" width="10" height="30" rx="3"/><circle class="cn" cx="0" cy="-48" r="24"/><circle class="cn" cx="-15" cy="-36" r="15"/><circle class="cn" cx="15" cy="-38" r="16"/><circle class="ap" cx="-6" cy="-44" r="4.5"/><circle class="ap" cx="10" cy="-52" r="4.5"/></g></g>
+        <g transform="translate(256 168)"><g class="tree" data-a="grow" style="--a-base:1.4s;--i:4"><rect class="tk" x="-5" y="-30" width="10" height="30" rx="3"/><circle class="cn" cx="0" cy="-48" r="24"/><circle class="cn" cx="-15" cy="-36" r="15"/><circle class="cn" cx="15" cy="-38" r="16"/><circle class="ap" cx="-9" cy="-50" r="4.5"/><circle class="ap" cx="7" cy="-38" r="4.5"/><circle class="ap" cx="12" cy="-56" r="4.5"/></g></g>
+        <g transform="translate(366 146)"><g class="tree" data-a="grow" style="--a-base:1.4s;--i:6"><rect class="tk" x="-5" y="-30" width="10" height="30" rx="3"/><circle class="cn" cx="0" cy="-48" r="24"/><circle class="cn" cx="-15" cy="-36" r="15"/><circle class="cn" cx="15" cy="-38" r="16"/><circle class="ap" cx="-4" cy="-56" r="4.5"/><circle class="ap" cx="11" cy="-42" r="4.5"/></g></g>
+        <g transform="translate(470 156)"><g class="tree" data-a="grow" style="--a-base:1.4s;--i:8"><rect class="tk" x="-5" y="-30" width="10" height="30" rx="3"/><circle class="cn" cx="0" cy="-48" r="24"/><circle class="cn" cx="-15" cy="-36" r="15"/><circle class="cn" cx="15" cy="-38" r="16"/><circle class="ap" cx="-10" cy="-42" r="4.5"/><circle class="ap" cx="6" cy="-54" r="4.5"/><circle class="ap" cx="13" cy="-36" r="4.5"/></g></g>
+      </svg>
+    </figure>
+    <div class="col grow between">
+      <header class="head"><p class="eyebrow" data-a="fade" style="--i:1">Opening Activity</p><h2 class="title" data-a="rise" style="--i:2">The Man Who Planted Trees</h2></header>
+      <p class="lead" data-a="rise" style="--i:3">John Chapman, <span class="em">“Johnny Appleseed,”</span> lost his mother as a child. He made it his life’s mission to plant fruit trees across the underdeveloped parts of his country, carrying leather bags of apple seeds on horseback or on foot.</p>
+      <div class="stats">
+        <div class="card stat" data-a="pop" style="--i:5"><p class="num"><span data-count="1774" data-from="1700" data-plain>1774</span></p><p class="lbl">Born in Massachusetts</p></div>
+        <div class="card stat" data-a="pop" style="--i:6"><p class="num"><span data-count="46">46</span></p><p class="lbl">Years spent planting trees</p></div>
+        <div class="card stat" data-a="pop" style="--i:7"><p class="num"><span data-count="100000">100,000</span></p><p class="lbl">Square miles covered by his trees</p></div>
+        <div class="card stat" data-a="pop" style="--i:8"><p class="num"><span data-count="1845" data-from="1774" data-plain>1845</span></p><p class="lbl">Died at the age of 72</p></div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">Open with the textbook questions: How many plants or trees have you planted in your lifetime? What difference does it make when there are trees around us? Then tell the story.
+
+Johnny Appleseed’s real name is John Chapman, born in Massachusetts in 1774. He lost his mother, Elizabeth, when he was very young and decided that his mission in life was to plant fruit trees in the underdeveloped parts of his country. He carried leather bags of apple seeds, on horseback or on his own back, and sold or gave away trees. If someone could not pay, he accepted clothing or food, or gave the trees for free; the money he earned went to planting more orchards.
+
+He died in 1845 at seventy-two, after 46 years of planting; his trees covered more than 100,000 square miles. He has inspired many people and shown that it is possible for one person to be a “good steward of the earth.”</aside>
+</section>
+
+<!-- 9 · Reflect on Johnny Appleseed -->
+<section class="slide t-paper" data-title="Reflect on Johnny Appleseed">
+  <header class="head"><p class="eyebrow" data-a="fade">Opening Activity</p><h2 class="title" data-a="rise" style="--i:1">Reflect on Johnny Appleseed</h2></header>
+  <div class="row">
+    <div class="col grow">
+      <p class="lead" data-a="rise" style="--i:2">He inspired many people to take their role in <span class="em">caring for the environment</span> seriously. Answer in two to three sentences.</p>
+      <div class="card qcard" data-a="rise" style="--i:3"><span class="n">1</span><p class="ct">What personal mission did Johnny Appleseed set for himself?</p></div>
+      <div class="card qcard" data-a="rise" style="--i:4"><span class="n">2</span><p class="ct">What is the importance of planting trees?</p></div>
+    </div>
+    <div class="card dark research" data-a="pop" style="--i:5">
+      <p class="k">3 · Research</p>
+      <p class="ct">Do you know a town, church, company, or family that plants trees as part of its mission?</p>
+      <p class="ct" style="color:var(--mist)">Research them and describe their <span class="em">advocacy</span>.</p>
+    </div>
+  </div>
+  <aside class="notes">Give learners five minutes to write. For question 3, suggest local examples they can look up: a barangay greening program, a church tree-planting drive, a school’s environment club, or a company’s reforestation project.
+
+The point is to notice that stewardship is already happening around them and that families can join in.</aside>
+</section>
+
+<!-- 10 · Defining stewardship -->
+<section class="slide t-forest" data-title="Defining Stewardship">
+  <div class="fx-slot" data-color="127,203,143"></div>
+  <header class="head"><p class="eyebrow" data-a="fade">Think and Ponder</p><h2 class="title" data-a="rise" style="--i:1">Defining Stewardship</h2></header>
+  <p class="def" data-split><span class="mark">Stewardship</span> is our responsibility to protect and take care of the earth.</p>
+  <div class="trio">
+    <div class="card glass flip-card" data-a="flip" style="--i:6"><p class="ct">Our planet is a gift from God. It feeds, nurtures, shelters, and entertains us.</p></div>
+    <div class="card glass flip-card" data-a="flip" style="--i:8"><p class="ct">We are <span class="em">temporary stewards</span>, or caretakers, of the earth.</p></div>
+    <div class="card glass flip-card" data-a="flip" style="--i:10"><p class="ct">Each of us must <span class="em">do our part</span> to care for our environment and its resources.</p></div>
+  </div>
+  <aside class="notes">Our planet is a beautiful gift from God: to feed, nurture, shelter, and even entertain us. No other creature is responsible for taking care of the earth but us, human beings.
+
+Stewardship refers to our responsibility to protect and take care of our environment. As custodians of the earth, we all have a duty to look after this planet that God has given us. We are temporary stewards or caretakers, so each one of us must do our part. Ask learners to say the definition back in their own words.</aside>
+</section>
+
+<!-- 11 · Why we cannot wait -->
+<section class="slide t-paper" data-title="Why We Cannot Wait" data-credit="Photo: Andrew Cattoir, National Park Service, public domain">
+  <div class="row">
+    <div class="col grow between">
+      <header class="head"><p class="eyebrow" data-a="fade">Think and Ponder</p><h2 class="title" data-a="rise" style="--i:1">Why We Cannot Wait</h2></header>
+      <p class="lead" data-a="rise" style="--i:2">It is easy to brush this responsibility aside when we have not yet felt the consequences.</p>
+      <p class="lead" data-a="rise" style="--i:3">But we are affected: places once warmer are getting <span class="em">colder</span>, and colder places are getting <span class="em">much warmer</span>.</p>
+      <div class="card green pulse" data-a="pop" style="--i:5"><p class="qt">Do you have to wait for a disaster before doing your share as a custodian of the earth?</p></div>
+    </div>
+    <figure class="photo drought" data-a="fade" style="--i:1"><img class="kb" src="img/drought.jpg" alt="Dry, cracked mud after a drought"><div class="shimmer"></div></figure>
+  </div>
+  <aside class="notes">Sometimes it is easy to brush this responsibility aside because we have not experienced the consequences of abusing our natural surroundings. We believe we are not significantly affected by global warming and climate change.
+
+But think again: many places on our planet that were once warmer are now getting colder, and many colder places are getting much warmer. Ask the class to name a recent typhoon, flood, or heat wave that affected their own family. Then pose the question on the slide and let it sit for a moment before moving on.</aside>
+</section>
+
+<!-- 12 · Triple planetary crisis -->
+<section class="slide t-paper" data-title="The Triple Planetary Crisis" data-section="The Triple Planetary Crisis" data-credit="Photos: Judgefloro, CC0 · brownpau, CC BY 2.0 · T. R. Shankar Raman, CC BY-SA 4.0">
+  <div class="head-row">
+    <header class="head"><p class="eyebrow" data-a="fade">Understanding the Crisis</p><h2 class="title" data-a="rise" style="--i:1">The Triple Planetary Crisis</h2></header>
+    <svg class="triple" viewBox="0 0 150 150" data-a="pop" style="--i:2" aria-hidden="true"><g><circle cx="75" cy="52" r="34" stroke="#B4531C"/><circle cx="54" cy="90" r="34" stroke="#256B43"/><circle cx="96" cy="90" r="34" stroke="#F0B95A"/></g></svg>
+  </div>
+  <p class="lead" data-a="fade" style="--i:2">Nature is being pushed to its <span class="em">breaking point</span>. UNEP names three linked threats we must address.</p>
+  <div class="trio">
+    <article class="card ccard" data-a="rise" style="--i:4"><div class="ph"><img class="kb" src="img/flood.jpg" alt="Residents wading through floodwater after Typhoon Vamco in Bulacan"></div><div class="bd"><h3>Climate Change</h3><p class="ct s40">Long-term shifts in weather patterns and temperature.</p></div></article>
+    <article class="card ccard" data-a="rise" style="--i:5"><div class="ph"><img class="kb" src="img/smog.jpg" alt="Metro Manila skyline covered in morning haze"></div><div class="bd"><h3>Air Pollution</h3><p class="ct s40">Contamination of the air by chemical, physical, or biological agents.</p></div></article>
+    <article class="card ccard" data-a="rise" style="--i:6"><div class="ph"><img class="kb" src="img/borneo.jpg" alt="Aerial view of rainforest newly cleared for plantations in Borneo"></div><div class="bd"><h3>Biodiversity Loss</h3><p class="ct s40">The worldwide decline of biological diversity and ecosystems.</p></div></article>
+  </div>
+  <aside class="notes">Our planet and all human beings are now facing a threat defined by the United Nations Environment Programme as the Triple Planetary Crisis (Mishra, 2025): climate change, air pollution, and biodiversity loss. These three global environmental crises need to be addressed by nations and by individuals if we are to have a livable future on this planet. The next three slides take each one in turn.
+
+Photo sources: flood after Typhoon Vamco in San Rafael, Bulacan (Judgefloro, CC0, Wikimedia Commons); Metro Manila haze (brownpau, CC BY 2.0, Flickr); forest clearing in Sabah, Borneo (T. R. Shankar Raman, CC BY-SA 4.0, Wikimedia Commons).</aside>
+</section>
+
+<!-- 13 · Climate change -->
+<section class="slide t-paper" data-title="Climate Change">
+  <div class="row">
+    <div class="col grow between">
+      <header class="head"><p class="eyebrow" data-a="fade">Triple Planetary Crisis · 1 of 3</p><h2 class="title" data-a="rise" style="--i:1">Climate Change</h2></header>
+      <p class="lead" data-a="rise" style="--i:2"><span class="em">Climate change</span>: long-term shifts in weather patterns and temperature that alter the ecosystems that support life.</p>
+      <p class="k" data-a="fade" style="--i:3">Who is at fault?</p>
+      <p class="lead" data-a="rise" style="--i:4"><span class="em">Human activity</span> is the main driver: energy use, factories, transport, agriculture, and buildings release greenhouse gases that trap heat.</p>
+    </div>
+    <div class="col" style="width:760px; flex:none">
+      <figure class="gh" data-a="fade" style="--i:1">
+        <svg viewBox="0 0 760 420" role="img" aria-label="Animated diagram of the greenhouse effect: sunlight passes through the atmosphere to the Earth, some heat escapes to space, and greenhouse gases trap the rest">
+          <defs>
+            <linearGradient id="ghSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0E2236"/><stop offset="1" stop-color="#21506A"/></linearGradient>
+            <linearGradient id="ghEarth" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3F8A55"/><stop offset="1" stop-color="#1B3A2A"/></linearGradient>
+            <radialGradient id="ghSun"><stop offset="0" stop-color="#FFE7B0"/><stop offset=".55" stop-color="#F0B95A" stop-opacity=".9"/><stop offset="1" stop-color="#F0B95A" stop-opacity="0"/></radialGradient>
+            <marker id="mSun" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="3.4" markerHeight="3.4" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#F7C96E"/></marker>
+            <marker id="mHeat" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="3.4" markerHeight="3.4" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#E8743B"/></marker>
+          </defs>
+          <rect width="760" height="420" fill="url(#ghSky)"/>
+          <path d="M-20 230 Q380 120 780 230 L780 272 Q380 162 -20 272 Z" fill="rgba(160,215,195,.22)"/>
+          <path d="M-20 230 Q380 120 780 230" fill="none" stroke="rgba(170,225,205,.6)" stroke-width="2" stroke-dasharray="4 8"/>
+          <g transform="translate(90 226)"><g class="mol"><circle r="8"/><circle cx="12" cy="-5" r="5.5"/><circle cx="-11" cy="-4" r="5.5"/></g></g>
+          <g transform="translate(205 205)"><g class="mol"><circle r="8"/><circle cx="12" cy="-5" r="5.5"/><circle cx="-11" cy="-4" r="5.5"/></g></g>
+          <g transform="translate(330 196)"><g class="mol"><circle r="8"/><circle cx="12" cy="-5" r="5.5"/><circle cx="-11" cy="-4" r="5.5"/></g></g>
+          <g transform="translate(455 198)"><g class="mol"><circle r="8"/><circle cx="12" cy="-5" r="5.5"/><circle cx="-11" cy="-4" r="5.5"/></g></g>
+          <g transform="translate(605 213)"><g class="mol"><circle r="8"/><circle cx="12" cy="-5" r="5.5"/><circle cx="-11" cy="-4" r="5.5"/></g></g>
+          <g transform="translate(722 236)"><g class="mol"><circle r="8"/><circle cx="12" cy="-5" r="5.5"/><circle cx="-11" cy="-4" r="5.5"/></g></g>
+          <ellipse cx="380" cy="560" rx="560" ry="240" fill="url(#ghEarth)"/>
+          <circle cx="86" cy="70" r="74" fill="url(#ghSun)"/>
+          <circle cx="86" cy="70" r="30" fill="#F7C96E"/>
+          <path class="sun-rays" d="M126 70 L140 70 M114.3 98.3 L124.2 108.2 M86 110 L86 124 M57.7 98.3 L47.8 108.2 M46 70 L32 70 M57.7 41.7 L47.8 31.8 M86 30 L86 16 M114.3 41.7 L124.2 31.8"/>
+          <path class="flow sun" marker-end="url(#mSun)" d="M110 110 L168 330"/>
+          <path class="flow sun" marker-end="url(#mSun)" d="M120 98 L248 320"/>
+          <path class="flow sun" marker-end="url(#mSun)" d="M134 86 L356 312"/>
+          <path class="flow heat" marker-end="url(#mHeat)" d="M430 321 L480 200 L528 322"/>
+          <path class="flow heat" marker-end="url(#mHeat)" d="M540 330 L590 212 L636 338"/>
+          <path class="flow heat esc" marker-end="url(#mHeat)" d="M664 346 L714 30"/>
+        </svg>
+        <p class="gh-l" style="left:136px; top:22px">Sunlight</p>
+        <p class="gh-l" style="left:376px; top:24px">Some heat escapes</p>
+        <p class="gh-l amber" style="left:236px; top:124px">Greenhouse gases</p>
+        <p class="gh-l" style="left:420px; top:356px">Heat trapped</p>
+      </figure>
+      <p class="k" data-a="fade" style="--i:3">Effects we already see</p>
+      <div class="pills">
+        <p class="pill" data-a="pop" style="--i:4">Droughts</p><p class="pill" data-a="pop" style="--i:5">Water scarcity</p><p class="pill" data-a="pop" style="--i:6">Wildfires</p><p class="pill" data-a="pop" style="--i:7">Rising sea levels</p><p class="pill" data-a="pop" style="--i:8">Flooding</p><p class="pill" data-a="pop" style="--i:9">Melting polar ice</p><p class="pill" data-a="pop" style="--i:10">Catastrophic storms</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">Use the animated diagram to explain the greenhouse effect: yellow arrows are sunlight coming in; the orange arrows are heat rising from the Earth. Some of that heat escapes to space, but greenhouse gases in the atmosphere trap much of it and send it back down, warming the planet.
+
+Nature is changing in ways that can be harmful to us and to other animals living on Earth. Who is at fault? Human beings are the main contributors to climate change: energy use, factories, transportation, agriculture, and buildings are the leading causes of greenhouse gas emissions. This is global warming, caused by the greenhouse effect. As a result, we are witnessing droughts, water scarcity, wildfires, rising sea levels, flooding, melting polar ice, and catastrophic storms. Connect this to the typhoons and floods learners experience in the Philippines every year.</aside>
+</section>
+
+<!-- 14 · Air pollution -->
+<section class="slide t-paper" data-title="Air Pollution" data-credit="Photo: Metro Manila haze, brownpau, CC BY 2.0">
+  <div class="row">
+    <div class="col grow between">
+      <header class="head"><p class="eyebrow" data-a="fade">Triple Planetary Crisis · 2 of 3</p><h2 class="title" data-a="rise" style="--i:1">Air Pollution</h2></header>
+      <p class="lead" data-a="rise" style="--i:2">WHO (2024): <span class="em">air pollution</span> is contamination of indoor or outdoor air by any chemical, physical, or biological agent that changes the atmosphere.</p>
+      <p class="lead" data-a="rise" style="--i:3">It is a leading cause of <span class="em">disease and premature death</span>, and it harms animals, plants, and even buildings.</p>
+    </div>
+    <div class="col" style="width:760px; flex:none; gap:20px">
+      <figure class="photo" style="height:300px; flex:none; --i:1" data-a="fade"><img class="kb" src="img/smog.jpg" alt="Metro Manila skyline covered in morning haze"><div class="haze" aria-hidden="true"><i></i><i></i><i></i></div></figure>
+      <div style="display:flex; gap:20px; flex:1; min-height:0">
+        <div class="card list-card" data-a="rise" style="--i:4"><h3>Where it comes from</h3><ul><li>Motor vehicles</li><li>Factories</li><li>Wildfires, volcanic ash</li><li>Cooking with kerosene, wood, coal</li><li>Cigarette smoke</li></ul></div>
+        <div class="card list-card" data-a="rise" style="--i:5"><h3>What it does to us</h3><ul><li>Stroke</li><li>Lung cancer</li><li>Heart disease</li><li>Respiratory diseases</li><li>Asthma</li></ul></div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">If you live in the city, air pollution is something you experience daily. Most air pollution is created by people using motor vehicles, by emissions from industrial facilities, and by wildfires; smoke and ash from volcanic eruptions are natural sources.
+
+Indoor household air pollution is also a concern: it comes from cooking or burning substances such as kerosene, wood, and coal, which contaminate the air inside the house, and second-hand cigarette smoke is also considered air pollution. The United Nations urges countries to take action to reduce air pollution levels, which helps prevent diseases such as stroke, lung cancer, heart disease, acute respiratory diseases, and asthma.</aside>
+</section>
+
+<!-- 15 · Biodiversity loss -->
+<section class="slide t-paper" data-title="Biodiversity Loss" data-credit="Photo: Sabah, Borneo, T. R. Shankar Raman, CC BY-SA 4.0">
+  <div class="row">
+    <div class="col grow between">
+      <header class="head"><p class="eyebrow" data-a="fade">Triple Planetary Crisis · 3 of 3</p><h2 class="title" data-a="rise" style="--i:1">Biodiversity Loss</h2></header>
+      <p class="lead" data-a="rise" style="--i:2"><span class="em">Biodiversity</span> is the variety of all living things: ecosystems, plants, animals, habitats, and genes. We depend on it for food, water, shelter, and a stable climate.</p>
+      <p class="k" data-a="fade" style="--i:3">Leading causes</p>
+      <div class="pills">
+        <p class="pill" data-a="pop" style="--i:4">Land use for food production</p><p class="pill" data-a="pop" style="--i:5">Overfishing</p><p class="pill" data-a="pop" style="--i:6">Habitat loss</p><p class="pill" data-a="pop" style="--i:7">Deforestation</p><p class="pill" data-a="pop" style="--i:8">Desertification</p>
+      </div>
+    </div>
+    <div class="col" style="width:760px; flex:none">
+      <figure class="photo" style="height:380px; flex:none; --i:1" data-a="fade">
+        <img class="kb" src="img/borneo.jpg" alt="Aerial view of rainforest newly cleared for plantations in Borneo">
+        <div class="bscrim" style="height:45%"></div>
+        <svg class="forest-strip" viewBox="0 0 760 120" aria-hidden="true">
+          <g transform="translate(27 112)"><g class="pine"><rect class="trunk" x="-5" y="-24" width="10" height="24" rx="2"/><path class="crown" d="M0 -98 L22 -52 H-22 Z M0 -76 L28 -24 H-28 Z"/></g></g>
+          <g transform="translate(81 112)"><g class="pine"><rect class="trunk" x="-5" y="-24" width="10" height="24" rx="2"/><path class="crown" d="M0 -98 L22 -52 H-22 Z M0 -76 L28 -24 H-28 Z"/></g></g>
+          <g transform="translate(135 112)"><g class="pine gone" style="--k:0"><rect class="trunk" x="-5" y="-24" width="10" height="24" rx="2"/><path class="crown" d="M0 -98 L22 -52 H-22 Z M0 -76 L28 -24 H-28 Z"/></g></g>
+          <g transform="translate(189 112)"><g class="pine"><rect class="trunk" x="-5" y="-24" width="10" height="24" rx="2"/><path class="crown" d="M0 -98 L22 -52 H-22 Z M0 -76 L28 -24 H-28 Z"/></g></g>
+          <g transform="translate(243 112)"><g class="pine gone" style="--k:1"><rect class="trunk" x="-5" y="-24" width="10" height="24" rx="2"/><path class="crown" d="M0 -98 L22 -52 H-22 Z M0 -76 L28 -24 H-28 Z"/></g></g>
+          <g transform="translate(297 112)"><g class="pine gone" style="--k:2"><rect class="trunk" x="-5" y="-24" width="10" height="24" rx="2"/><path class="crown" d="M0 -98 L22 -52 H-22 Z M0 -76 L28 -24 H-28 Z"/></g></g>
+          <g transform="translate(351 112)"><g class="pine"><rect class="trunk" x="-5" y="-24" width="10" height="24" rx="2"/><path class="crown" d="M0 -98 L22 -52 H-22 Z M0 -76 L28 -24 H-28 Z"/></g></g>
+          <g transform="translate(405 112)"><g class="pine gone" style="--k:3"><rect class="trunk" x="-5" y="-24" width="10" height="24" rx="2"/><path class="crown" d="M0 -98 L22 -52 H-22 Z M0 -76 L28 -24 H-28 Z"/></g></g>
+          <g transform="translate(459 112)"><g class="pine"><rect class="trunk" x="-5" y="-24" width="10" height="24" rx="2"/><path class="crown" d="M0 -98 L22 -52 H-22 Z M0 -76 L28 -24 H-28 Z"/></g></g>
+          <g transform="translate(513 112)"><g class="pine gone" style="--k:4"><rect class="trunk" x="-5" y="-24" width="10" height="24" rx="2"/><path class="crown" d="M0 -98 L22 -52 H-22 Z M0 -76 L28 -24 H-28 Z"/></g></g>
+          <g transform="translate(567 112)"><g class="pine gone" style="--k:5"><rect class="trunk" x="-5" y="-24" width="10" height="24" rx="2"/><path class="crown" d="M0 -98 L22 -52 H-22 Z M0 -76 L28 -24 H-28 Z"/></g></g>
+          <g transform="translate(621 112)"><g class="pine"><rect class="trunk" x="-5" y="-24" width="10" height="24" rx="2"/><path class="crown" d="M0 -98 L22 -52 H-22 Z M0 -76 L28 -24 H-28 Z"/></g></g>
+          <g transform="translate(675 112)"><g class="pine gone" style="--k:6"><rect class="trunk" x="-5" y="-24" width="10" height="24" rx="2"/><path class="crown" d="M0 -98 L22 -52 H-22 Z M0 -76 L28 -24 H-28 Z"/></g></g>
+          <g transform="translate(729 112)"><g class="pine"><rect class="trunk" x="-5" y="-24" width="10" height="24" rx="2"/><path class="crown" d="M0 -98 L22 -52 H-22 Z M0 -76 L28 -24 H-28 Z"/></g></g>
+        </svg>
+      </figure>
+      <div class="card dark" style="flex:1; display:flex; flex-direction:column; justify-content:center; gap:16px; padding:32px; --i:4" data-a="rise">
+        <p class="qt" style="font-size:36px">“Addressing the triple planetary crisis … has become our <span class="em">top development challenge</span>.”</p>
+        <p class="ref" style="font-size:28px">Karl Kendrick Chua, NEDA Secretary, 2022</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">Watch the row of trees on the photo: one by one, trees are cut down to stumps. That is what habitat loss looks like from above.
+
+Biological diversity, or biodiversity, refers to the variety of all living organisms, including ecosystems, plants, animals, their habitats, and genes. Human beings depend on biodiversity for food, water, shelter, resources, and a stable climate. The current environmental crisis has led to biodiversity loss, the worldwide decline or disappearance of biological diversity and natural ecosystem patterns. The leading cause is human land use, primarily for food production; other reasons include overfishing, habitat loss, deforestation, and desertification.
+
+One response of the Philippines, through the National Economic and Development Authority (NEDA), was to place climate change adaptation and mitigation at the heart of socioeconomic planning, to achieve its 2040 vision of eradicating poverty. Full quotation from Secretary Chua at the 2022 Philippine Environment Science Summit: “Addressing the triple planetary crisis (of climate change, biodiversity loss, and pollution) has become our top development challenge. If we are to eradicate extreme poverty in the Philippines by 2040 and hand down a better planet to our children and grandchildren, climate change adaptation and mitigation need to be placed at the heart of socioeconomic planning.”</aside>
+</section>
+
+<!-- 16 · Right to a healthy environment -->
+<section class="slide t-moss" data-title="The Right to a Healthy Environment" data-section="The Right to a Healthy Environment" data-credit="Photo: UN General Assembly Hall, Mojnsen, CC BY-SA 4.0">
+  <div class="row">
+    <div class="col" style="width:800px; flex:none">
+      <figure class="photo" style="height:180px; flex:none" data-a="fade"><img class="kb" src="img/unga.jpg" alt="The United Nations General Assembly Hall in New York"></figure>
+      <ol class="tl">
+        <li data-a="rise" style="--i:2"><span class="dot"></span><p class="tl-d">May 16, 1994</p><p class="tl-t">Experts in Geneva draft the first principles on human rights and the environment.</p></li>
+        <li data-a="rise" style="--i:5"><span class="dot"></span><p class="tl-d">July 28, 2022</p><p class="tl-t">The UN General Assembly declares a clean, healthy, and sustainable environment a universal human right.</p></li>
+        <li data-a="rise" style="--i:8"><span class="dot"></span><p class="tl-d"><span data-count="156" data-delay="1700">156</span> countries</p><p class="tl-t">now recognize the right, a key step against the triple planetary crisis.</p></li>
+      </ol>
+    </div>
+    <div class="col grow">
+      <header class="head"><p class="eyebrow" data-a="fade" style="--i:1">Taking Care of Our Common Home</p><h2 class="title" style="font-size:72px; --i:2" data-a="rise">The Right to a Healthy Environment</h2></header>
+      <p class="k" data-a="fade" style="--i:3">The right includes</p>
+      <div class="rights">
+        <div class="card right-c" data-a="pop" style="--i:4"><svg viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M6 18 H28 a5 5 0 1 0 -5 -5"/><path pathLength="1" d="M6 26 H36 a5 5 0 1 1 -5 5"/><path pathLength="1" d="M6 34 H20"/></svg><p>1. Clean air</p></div>
+        <div class="card right-c" data-a="pop" style="--i:5"><svg viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M24 17 a7 7 0 1 1 0 14 a7 7 0 1 1 0 -14"/><path pathLength="1" d="M24 5 V10 M24 38 V43 M5 24 H10 M38 24 H43 M10.6 10.6 L14 14 M34 34 L37.4 37.4 M10.6 37.4 L14 34 M34 14 L37.4 10.6"/></svg><p>2. A safe and stable climate</p></div>
+        <div class="card right-c" data-a="pop" style="--i:6"><svg viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M24 6 C24 6 12 20 12 29 a12 12 0 0 0 24 0 C36 20 24 6 24 6 Z"/><path pathLength="1" d="M18 30 a6 6 0 0 0 6 6"/></svg><p>3. Safe water and adequate sanitation</p></div>
+        <div class="card right-c" data-a="pop" style="--i:7"><svg viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M8 26 H40 a16 14 0 0 1 -32 0 Z"/><path pathLength="1" d="M24 26 V16"/><path pathLength="1" d="M24 18 c0 -6 4 -9 10 -9 c0 6 -4 9 -10 9 Z"/></svg><p>4. Healthy, sustainably produced food</p></div>
+        <div class="card right-c" data-a="pop" style="--i:8"><svg viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M7 23 L24 9 L41 23"/><path pathLength="1" d="M12 19 V39 H36 V19"/><path pathLength="1" d="M21 39 V29 H27 V39"/></svg><p>5. Nontoxic places to live, work, study, and play</p></div>
+        <div class="card right-c" data-a="pop" style="--i:9"><svg viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M10 38 C10 20 22 10 40 10 C40 28 30 40 12 38 Z"/><path pathLength="1" d="M10 38 L30 18"/></svg><p>6. Healthy biodiversity and ecosystems</p></div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">An international group of experts on human rights and environmental protection met at the United Nations in Geneva on May 16, 1994, to draft the first-ever declaration of principles on human rights and the environment. Then, on July 28, 2022, the United Nations General Assembly voted overwhelmingly to declare the ability to live in “a clean, healthy, and sustainable environment” a universal human right. The right is now recognized by 156 countries.
+
+This declaration is an essential step in addressing the alarming decline of our planet, our common home, and a powerful tool for the triple planetary crisis because it calls on countries to make policies that enhance environmental protection. The right generally includes clean air; a safe and stable climate; access to safe water and adequate sanitation; healthy and sustainably produced food; nontoxic environments in which to live, work, study, and play; and healthy biodiversity and ecosystems.</aside>
+</section>
+
+<!-- 17 · Upholding the right -->
+<section class="slide t-moss" data-title="Upholding the Right">
+  <header class="head"><p class="eyebrow" data-a="fade">Taking Care of Our Common Home</p><h2 class="title" data-a="rise" style="--i:1">Upholding the Right</h2></header>
+  <p class="qt" data-split style="--a-base:.6s">“The duty to uphold the right to a healthy environment lies first and foremost with States … At the same time, <span class="em">everyone has an important role to play</span>.”</p>
+  <p class="ref" style="color:var(--mute); --a-base:2.2s" data-a="fade">United Nations Environment Programme (UNEP)</p>
+  <div class="duo">
+    <div class="card" data-a="left" style="--a-base:2.4s"><p class="k">What this means for us</p><p class="ct">We may think there is nothing we can do, but we can. A <span class="em">true steward</span> protects and nurtures resources rather than destroying or abusing them.</p></div>
+    <div class="card dark" data-a="right" style="--a-base:2.6s"><p class="k">Activity</p><p class="ct">Scan the QR code in your book and read the Principles on Human Rights and the Environment. Which one do you see in your <span class="em">school or community</span>?</p></div>
+  </div>
+  <aside class="notes">The United Nations Environment Programme proclaims that “the duty to uphold the right to a healthy environment lies first and foremost with States who have an obligation to respect, protect, and fulfil all human rights. At the same time, everyone has an important role to play in making the right to a healthy environment a reality.”
+
+We may think that there is nothing we can do to address the triple planetary crisis, but we may be able to do something. To stop the dangerous decline of nature, we must show respect for nature and our environment. A true steward or custodian of the earth seeks ways to protect and nurture resources rather than destroy or abuse them. Activity: after reading the principles, learners copy the principle they observe in their school or community and explain how it is applied.</aside>
+</section>
+
+<!-- 18 · Nine ways (click to reveal) -->
+<section class="slide t-paper" data-title="Nine Ways Families Can Be Good Stewards">
+  <div class="head-row">
+    <header class="head"><p class="eyebrow" data-a="fade">Taking Care of Our Common Home</p><h2 class="title" data-a="rise" style="--i:1">Nine Ways Families Can Be Good Stewards</h2></header>
+    <div class="ring" data-a="pop" style="--i:2" aria-hidden="true"><svg viewBox="0 0 132 132"><path class="tr" d="M66 10 a56 56 0 1 1 0 112 a56 56 0 1 1 0 -112"/><path class="bar" pathLength="1" d="M66 10 a56 56 0 1 1 0 112 a56 56 0 1 1 0 -112"/></svg><b>0/9</b></div>
+  </div>
+  <ol class="steps" style="gap:12px">
+    <li class="step" data-step><span class="badge">1</span><p><span class="em">Reduce consumption.</span> Use less; be mindful of what we use.</p></li>
+    <li class="step" data-step><span class="badge">2</span><p><span class="em">Choose eco-friendly products.</span> Look for ecolabels.</p></li>
+    <li class="step" data-step><span class="badge">3</span><p><span class="em">Be a smart consumer.</span> Buy only what you need.</p></li>
+    <li class="step" data-step><span class="badge">4</span><p><span class="em">Walk, cycle, or take public transport.</span></p></li>
+    <li class="step" data-step><span class="badge">5</span><p><span class="em">Volunteer</span> with environmental groups.</p></li>
+    <li class="step" data-step><span class="badge">6</span><p><span class="em">Recycle.</span> It saves energy, water, and resources.</p></li>
+    <li class="step" data-step><span class="badge">7</span><p><span class="em">Plant trees.</span> They clean the air and create habitats.</p></li>
+    <li class="step" data-step><span class="badge">8</span><p><span class="em">Avoid burning</span> trash, leaves, and branches.</p></li>
+    <li class="step" data-step><span class="badge">9</span><p><span class="em">Segregate waste</span> at home.</p></li>
+  </ol>
+  <aside class="notes">The nine ways appear one per click; the ring at the top right counts them off. Ask learners to raise a hand for each one their family already does.
+
+Reduce consumption, since consumption of resources is a major cause of biodiversity loss. Consume products with ecolabels that show minimal harm to the environment. Be a smart consumer and do not waste Earth’s precious resources on unnecessary items. Walk, cycle, or use public transportation, since most vehicles burn diesel or petrol. Volunteer with environmental organizations. Recycle to save energy, electricity, water, and other resources. Plant trees to cleanse the air, remove carbon, and create habitat for organisms and animals. Avoid burning trash, leaves, and branches, which pollutes the air. Practice waste segregation at home; it seems simple, but it reduces waste in dump sites.</aside>
+</section>
+
+<!-- 19 · River clean-up story -->
+<section class="slide t-paper" data-title="The River Clean-Up" data-section="Families in Action" data-credit="Photo: U.S. Forest Service, public domain">
+  <div class="row">
+    <figure class="polaroid p600" data-a="drop"><div class="ph"><img class="kb" src="img/rivercleanup.jpg" alt="Volunteers standing behind bags of trash collected during a river clean-up"></div><figcaption>A community river clean-up</figcaption></figure>
+    <div class="col grow between">
+      <header class="head"><p class="eyebrow" data-a="fade" style="--i:1">Character Quest</p><h2 class="title" data-a="rise" style="--i:2">The River Clean-Up</h2></header>
+      <div class="step" data-a="rise" style="--i:4"><span class="badge">1</span><p>Rafael’s family loved weekend <span class="em">picnics by the river</span>.</p></div>
+      <div class="step" data-a="rise" style="--i:6"><span class="badge">2</span><p>They found the riverbank full of trash and organized a <span class="em">clean-up</span> with neighbors.</p></div>
+      <div class="step" data-a="rise" style="--i:8"><span class="badge">3</span><p>Together they picked up trash and sorted recyclables: a <span class="em">community effort</span>.</p></div>
+      <div class="step" data-a="rise" style="--i:10"><span class="badge">4</span><p>By day’s end the river looked pristine. <span class="em">Small acts</span>, done together, matter.</p></div>
+    </div>
+  </div>
+  <aside class="notes">Read or retell the full story. Rafael’s family cherished their weekend picnics by the river, a place where they connected with nature and each other. One day, they arrived at their favorite spot only to find the riverbank littered with trash: plastic bottles, wrappers, and bags polluting the area.
+
+Instead of being discouraged, Rafael’s parents suggested turning their disappointment into action. They decided, as a family, to organize a clean-up effort and invited their neighbors to join in. With gloves, bags, and determination, Rafael and his family worked together to pick up the trash, sort out recyclables, and clear the riverbank. The activity became more than just a clean-up; it transformed into a community effort, with everyone doing their part to restore the beauty of the river.
+
+By the end of the day, the riverbank looked as pristine as it had before. Rafael realized that even small acts of care for the environment could have a big impact. His family’s teamwork taught him that taking care of the earth is everyone’s duty, and when people work together, the results can be amazing.</aside>
+</section>
+
+<!-- 20 · Discussion questions (click to reveal) -->
+<section class="slide t-paper" data-title="Discussion Questions">
+  <div class="head-row">
+    <header class="head"><p class="eyebrow" data-a="fade">Character Quest</p><h2 class="title" data-a="rise" style="--i:1">Discussion Questions</h2></header>
+    <div class="ring" data-a="pop" style="--i:2" aria-hidden="true"><svg viewBox="0 0 132 132"><path class="tr" d="M66 10 a56 56 0 1 1 0 112 a56 56 0 1 1 0 -112"/><path class="bar" pathLength="1" d="M66 10 a56 56 0 1 1 0 112 a56 56 0 1 1 0 -112"/></svg><b>0/5</b></div>
+  </div>
+  <ol class="qs">
+    <li data-step><span class="n">1</span><p>How did Rafael’s family respond when they saw the littered riverbank?</p></li>
+    <li data-step><span class="n">2</span><p>What did the clean-up teach the family about responsibility toward the environment?</p></li>
+    <li data-step><span class="n">3</span><p>How did inviting neighbors help make a bigger impact on the community?</p></li>
+    <li data-step><span class="n">4</span><p>What did Rafael learn about the importance of small actions in caring for nature?</p></li>
+    <li data-step><span class="n">5</span><p>How can families and communities keep working together to protect the environment?</p></li>
+  </ol>
+  <aside class="notes">The five questions appear one per click. Pair-share first, then open the floor.
+
+Draw out the three ideas the story carries: a family turning disappointment into action, teamwork that multiplies when neighbors join in, and the lesson that caring for the earth is everyone’s duty.</aside>
+</section>
+
+<!-- 21 · Family Eco-Plan -->
+<section class="slide t-moss" data-title="Family Eco-Plan">
+  <header class="head"><p class="eyebrow" data-a="fade">Connect &amp; Explore · Group Activity</p><h2 class="title" data-a="rise" style="--i:1">Family Eco-Plan</h2></header>
+  <ol class="steps road">
+    <li class="step" data-a="rise" style="--i:2"><span class="badge">1</span><p><span class="em">Group Discussion.</span> Brainstorm three actions families can take, like composting or saving energy.</p></li>
+    <li class="step" data-a="rise" style="--i:4"><span class="badge">2</span><p><span class="em">Create Your Eco-Plan.</span> For each action: a brief description, why it matters, and how your family will do it.</p></li>
+    <li class="step" data-a="rise" style="--i:6"><span class="badge">3</span><p><span class="em">Prepare Your Presentation.</span> Focus on the one action you are most excited to start, and its challenges.</p></li>
+    <li class="step" data-a="rise" style="--i:8"><span class="badge">4</span><p><span class="em">Class Presentations.</span> Share your three actions and the one you will start first.</p></li>
+    <li class="step" data-a="rise" style="--i:10"><span class="badge">5</span><p><span class="em">Reflection.</span> How do individual actions add up? How can we support one another?</p></li>
+  </ol>
+  <aside class="notes">Families can make a significant impact on the environment by working together to protect and preserve it. From small actions like recycling and planting trees to bigger efforts like reducing energy use, each family member has a role to play in ensuring nature’s balance and sustainability.
+
+Run the five steps as written in the textbook: group brainstorm of three specific actions (composting, reducing plastic usage, conserving energy, using public transportation, or planting a garden); individual Eco-Plan (three actions, each with a brief description, why it matters, and how the family will implement it); a presentation focused on the one action the learner is most excited about and the challenges they anticipate; class presentations; and a reflection discussion on how individual actions add up and how classmates can support one another.</aside>
+</section>
+
+<!-- 22 · Recycling Race -->
+<section class="slide t-paper" data-title="Recycling Race" data-credit="Photo: epSos.de, CC BY 2.0">
+  <div class="row">
+    <div class="col grow">
+      <div class="head-row" style="align-items:center">
+        <header class="head"><p class="eyebrow" data-a="fade">Value Boosters · Activity 1</p><h2 class="title" data-a="rise" style="--i:1">Recycling Race</h2></header>
+        <div class="watch" data-a="pop" style="--i:2" aria-hidden="true">
+          <svg viewBox="0 0 140 160"><path class="w-btn" d="M58 8 H82 M70 8 V22"/><path class="w-face" d="M70 30 a60 60 0 1 1 0 120 a60 60 0 1 1 0 -120"/><path class="w-sweep" pathLength="1" d="M70 30 a60 60 0 1 1 0 120 a60 60 0 1 1 0 -120"/><path class="w-hand" d="M70 90 V50"/></svg>
+          <b class="w-go">Go!</b>
+        </div>
+      </div>
+      <ol class="steps grow between">
+        <li class="step" data-a="rise" style="--i:3"><span class="badge">1</span><p>Bring <span class="em">recyclables</span> from home: bottles, cans, paper, glass.</p></li>
+        <li class="step" data-a="rise" style="--i:4"><span class="badge">2</span><p>Sort them: plastic, paper, glass, metal.</p></li>
+        <li class="step" data-a="rise" style="--i:5"><span class="badge">3</span><p>In teams, sort and categorize the items.</p></li>
+        <li class="step" data-a="rise" style="--i:6"><span class="badge">4</span><p>Find the correct bin for each material.</p></li>
+        <li class="step" data-a="rise" style="--i:7"><span class="badge">5</span><p><span class="em">Relay:</span> run to the right bin; most items before time is up wins.</p></li>
+      </ol>
+    </div>
+    <div class="col" style="width:620px; flex:none; gap:20px">
+      <figure class="photo" style="height:380px; flex:none" data-a="fade"><img class="kb" src="img/recycling.jpg" alt="Yellow, red, and blue recycling bins labeled for cans, glass and plastic bottles, and paper"></figure>
+      <div class="card dark" style="flex:1; display:flex; flex-direction:column; justify-content:center; gap:14px; padding:28px; --i:8" data-a="rise">
+        <p class="k">Discussion</p>
+        <p class="ct s34">1. How did you feel during the relay?</p>
+        <p class="ct s34">2. What did you learn about recycling?</p>
+        <p class="ct s34">3. How can your family reduce, reuse, and recycle?</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">Set up three or four labeled bins (plastic, paper, glass, metal) at one end of the room. Teams line up at the other end with their sorted items. On the signal, one member at a time runs to deposit an item in the correct bin and tags the next runner. The team that correctly deposits the most items within the time limit wins.
+
+Discussion questions from the textbook: How did you feel about participating in the recycling relay? What did you learn about recycling and its importance? How can you apply what you learned to your daily life and help your family reduce, reuse, and recycle?</aside>
+</section>
+
+<!-- 23 · Recycling outline -->
+<section class="slide t-paper" data-title="Outlining a Recycling Practice">
+  <header class="head"><p class="eyebrow" data-a="fade">Value Boosters · Activity 2</p><h2 class="title" data-a="rise" style="--i:1">Outlining a Recycling Practice</h2></header>
+  <p class="lead" data-a="fade" style="--i:2"><span class="em">Pair up.</span> Discuss why recycling matters for families and the challenges they face, then draft this outline and present it.</p>
+  <div class="row" style="gap:48px">
+    <ol class="qs" style="flex:1">
+      <li data-a="rise" style="--i:3; grid-template-columns:1fr; padding:12px 0"><p style="font-size:40px"><span class="em">I. Introduction:</span> definition, importance, benefits.</p></li>
+      <li data-a="rise" style="--i:4; grid-template-columns:1fr; padding:12px 0"><p style="font-size:40px"><span class="em">II. Current Practices:</span> evaluate habits; find areas to improve.</p></li>
+      <li data-a="rise" style="--i:5; grid-template-columns:1fr; padding:12px 0"><p style="font-size:40px"><span class="em">III. Educating the Family:</span> recycling facts; reducing waste.</p></li>
+      <li data-a="rise" style="--i:6; grid-template-columns:1fr; padding:12px 0"><p style="font-size:40px"><span class="em">IV. Recycling System:</span> designate, label, and place bins.</p></li>
+    </ol>
+    <ol class="qs" style="flex:1">
+      <li data-a="rise" style="--i:7; grid-template-columns:1fr; padding:12px 0"><p style="font-size:40px"><span class="em">V. Routines:</span> sorting routines; roles for each member.</p></li>
+      <li data-a="rise" style="--i:8; grid-template-columns:1fr; padding:12px 0"><p style="font-size:40px"><span class="em">VI. Monitoring Progress:</span> review, celebrate, adjust.</p></li>
+      <li data-a="rise" style="--i:9; grid-template-columns:1fr; padding:12px 0"><p style="font-size:40px"><span class="em">VII. Community Involvement:</span> local programs and events.</p></li>
+      <li data-a="rise" style="--i:10; grid-template-columns:1fr; padding:12px 0"><p style="font-size:40px"><span class="em">VIII. Conclusion:</span> key points; keep learning about recycling.</p></li>
+    </ol>
+  </div>
+  <aside class="notes">Pair learners and make sure both partners are engaged. Give them a few minutes to discuss: Why is recycling important for families? What common recyclable materials do families use? What challenges do families face when recycling?
+
+Then each pair drafts the eight-part outline from the textbook: I. Introduction to Recycling (definition and importance; environmental benefits). II. Assessing Current Practices (evaluate existing habits; identify areas for improvement). III. Educating Family Members (discuss key recycling facts; importance of reducing waste). IV. Setting Up a Recycling System (designate and label recycling bins; placement of bins in the home). V. Developing Recycling Routines (establish sorting routines; assign roles to family members). VI. Monitoring Progress (regularly review recycling efforts; celebrate successes and identify challenges). VII. Community Involvement (research local recycling programs; encourage participation in community events). VIII. Conclusion (summarize key points; encourage ongoing recycling education). Once all pairs are done, each pair presents its outline.</aside>
+</section>
+
+<!-- 24 · Nature Art -->
+<section class="slide t-paper" data-title="Nature Art" data-credit="Photo: Verde Island reef, Dmitry Domrin, CC BY 4.0">
+  <div class="row">
+    <div class="col grow">
+      <header class="head"><p class="eyebrow" data-a="fade">Value Boosters · Activity 3</p><h2 class="title" data-a="rise" style="--i:1">Nature Art</h2></header>
+      <ol class="steps grow between">
+        <li class="step" data-a="rise" style="--i:2"><span class="badge">1</span><p>Collect leaves, twigs, rocks, flowers, or recycled scraps.</p></li>
+        <li class="step" data-a="rise" style="--i:3"><span class="badge">2</span><p>Choose a <span class="em">theme</span>: your family and nature, or why conservation matters.</p></li>
+        <li class="step" data-a="rise" style="--i:4"><span class="badge">3</span><p>Make a collage, sculpture, or painting.</p></li>
+        <li class="step" data-a="rise" style="--i:5"><span class="badge">4</span><p>Add a <span class="em">message</span> about your family’s commitment to stewardship.</p></li>
+        <li class="step" data-a="rise" style="--i:6"><span class="badge">5</span><p>Display it where family and friends can see it.</p></li>
+      </ol>
+    </div>
+    <div class="col" style="width:620px; flex:none; gap:20px">
+      <figure class="photo" style="height:380px; flex:none" data-a="fade"><img class="kb" src="img/reef.jpg" alt="Butterfly fish swimming over a coral reef at Verde Island, Philippines"><div class="bubbles" aria-hidden="true"></div></figure>
+      <div class="card dark" style="flex:1; display:flex; flex-direction:column; justify-content:center; gap:14px; padding:28px; --i:7" data-a="rise">
+        <p class="k">Reflect</p>
+        <p class="ct s34">1. What inspired your artwork?</p>
+        <p class="ct s34">2. How does it show your family’s connection to nature?</p>
+        <p class="ct s34">3. What message do you hope to convey?</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">This is a take-home family activity. Learners collect natural materials such as leaves, twigs, rocks, and flowers, or recycled materials like paper, cardboard, and fabric scraps. They decide what to represent: the family’s relationship with nature, favorite outdoor activities, or the importance of environmental conservation.
+
+They create a collage, sculpture, or painting that includes a message or quote reflecting the family’s commitment to environmental stewardship, and display it where it can be seen and appreciated by family and friends. Collect the three reflection answers in the next session.</aside>
+</section>
+
+<!-- 25 · Mangroves -->
+<section class="slide t-moss" data-title="The Man Who Planted 10,000 Mangroves" data-credit="Photos: Peter Snoball · Rodel L. Bartolome Jr., CC BY-SA 4.0">
+  <header class="head"><p class="eyebrow" data-a="fade">A Story to Inspire</p><h2 class="title" data-a="rise" style="--i:1">The Man Who Planted 10,000 Mangroves</h2></header>
+  <div style="display:flex; gap:24px; height:240px; flex:none">
+    <figure class="photo" style="flex:1; --i:2" data-a="fade"><img class="kb" src="img/mangrove-planting.jpg" alt="Hundreds of volunteers planting mangrove seedlings on a tidal flat"></figure>
+    <figure class="photo" style="flex:1; --i:3" data-a="fade"><img class="kb" src="img/mangroves.jpg" alt="Boardwalk through a mature mangrove forest at Bakhawan Eco-Park, Aklan"></figure>
+  </div>
+  <div class="row" style="gap:40px; align-items:center">
+    <div class="col" style="width:520px; flex:none; gap:12px; --i:4" data-a="pop">
+      <p class="big-n"><span data-count="10000" data-delay="900">10,000</span></p>
+      <svg class="seeds" viewBox="0 0 520 90" aria-hidden="true">
+        <g transform="translate(26 86)"><g class="sd" style="--k:0"><path class="st" d="M0 0 V-42"/><path class="lv" d="M0 -30 C -14 -34, -24 -48, -22 -58 C -8 -54, 0 -44, 0 -30 Z"/><path class="lv" d="M0 -38 C 12 -46, 24 -54, 28 -50 C 22 -38, 10 -36, 0 -38 Z"/></g></g>
+        <g transform="translate(78 86)"><g class="sd" style="--k:1"><path class="st" d="M0 0 V-42"/><path class="lv" d="M0 -30 C -14 -34, -24 -48, -22 -58 C -8 -54, 0 -44, 0 -30 Z"/><path class="lv" d="M0 -38 C 12 -46, 24 -54, 28 -50 C 22 -38, 10 -36, 0 -38 Z"/></g></g>
+        <g transform="translate(130 86)"><g class="sd" style="--k:2"><path class="st" d="M0 0 V-42"/><path class="lv" d="M0 -30 C -14 -34, -24 -48, -22 -58 C -8 -54, 0 -44, 0 -30 Z"/><path class="lv" d="M0 -38 C 12 -46, 24 -54, 28 -50 C 22 -38, 10 -36, 0 -38 Z"/></g></g>
+        <g transform="translate(182 86)"><g class="sd" style="--k:3"><path class="st" d="M0 0 V-42"/><path class="lv" d="M0 -30 C -14 -34, -24 -48, -22 -58 C -8 -54, 0 -44, 0 -30 Z"/><path class="lv" d="M0 -38 C 12 -46, 24 -54, 28 -50 C 22 -38, 10 -36, 0 -38 Z"/></g></g>
+        <g transform="translate(234 86)"><g class="sd" style="--k:4"><path class="st" d="M0 0 V-42"/><path class="lv" d="M0 -30 C -14 -34, -24 -48, -22 -58 C -8 -54, 0 -44, 0 -30 Z"/><path class="lv" d="M0 -38 C 12 -46, 24 -54, 28 -50 C 22 -38, 10 -36, 0 -38 Z"/></g></g>
+        <g transform="translate(286 86)"><g class="sd" style="--k:5"><path class="st" d="M0 0 V-42"/><path class="lv" d="M0 -30 C -14 -34, -24 -48, -22 -58 C -8 -54, 0 -44, 0 -30 Z"/><path class="lv" d="M0 -38 C 12 -46, 24 -54, 28 -50 C 22 -38, 10 -36, 0 -38 Z"/></g></g>
+        <g transform="translate(338 86)"><g class="sd" style="--k:6"><path class="st" d="M0 0 V-42"/><path class="lv" d="M0 -30 C -14 -34, -24 -48, -22 -58 C -8 -54, 0 -44, 0 -30 Z"/><path class="lv" d="M0 -38 C 12 -46, 24 -54, 28 -50 C 22 -38, 10 -36, 0 -38 Z"/></g></g>
+        <g transform="translate(390 86)"><g class="sd" style="--k:7"><path class="st" d="M0 0 V-42"/><path class="lv" d="M0 -30 C -14 -34, -24 -48, -22 -58 C -8 -54, 0 -44, 0 -30 Z"/><path class="lv" d="M0 -38 C 12 -46, 24 -54, 28 -50 C 22 -38, 10 -36, 0 -38 Z"/></g></g>
+        <g transform="translate(442 86)"><g class="sd" style="--k:8"><path class="st" d="M0 0 V-42"/><path class="lv" d="M0 -30 C -14 -34, -24 -48, -22 -58 C -8 -54, 0 -44, 0 -30 Z"/><path class="lv" d="M0 -38 C 12 -46, 24 -54, 28 -50 C 22 -38, 10 -36, 0 -38 Z"/></g></g>
+        <g transform="translate(494 86)"><g class="sd" style="--k:9"><path class="st" d="M0 0 V-42"/><path class="lv" d="M0 -30 C -14 -34, -24 -48, -22 -58 C -8 -54, 0 -44, 0 -30 Z"/><path class="lv" d="M0 -38 C 12 -46, 24 -54, 28 -50 C 22 -38, 10 -36, 0 -38 Z"/></g></g>
+      </svg>
+      <p class="ct s34" style="color:var(--ink-soft)">mangroves planted by <span class="em">Gary Dabasol</span>, 65, from Leyte, in his own village.</p>
+    </div>
+    <div class="col grow" style="gap:16px">
+      <p class="ct s40" style="color:var(--ink-soft); --i:5" data-a="rise">Scan the QR code in your book to read his story, then answer:</p>
+      <p class="qbox" data-a="rise" style="--i:6">1. Why did he decide to plant mangroves in his village?</p>
+      <p class="qbox" data-a="rise" style="--i:7">2. How does his story inspire people to act for the environment?</p>
+    </div>
+  </div>
+  <aside class="notes">Countries all over the world, including the Philippines, have taken concrete steps to help mitigate the triple planetary crises. Individuals have too. The textbook’s QR code leads to the story of Gary Dabasol, a sixty-five-year-old man from Leyte who planted 10,000 mangroves in his village.
+
+Mangroves protect coasts from storm surges, shelter fish nurseries, and store carbon, which matters in a province hit hard by Typhoon Yolanda. Have learners read the story and answer the two questions in their notebooks. Photos: a mangrove planting day in Sabang (Peter Snoball) and the Bakhawan Eco-Park in Kalibo, Aklan (Rodel L. Bartolome Jr.), both CC BY-SA 4.0 on Wikimedia Commons.</aside>
+</section>
+
+<!-- 26 · Take Action -->
+<section class="slide t-paper" data-title="Take Action" data-credit="Photo: Kauswagan NHS tree planting, Miconex, CC BY-SA 3.0">
+  <div class="row">
+    <div class="col grow" style="gap:20px">
+      <div class="card" style="flex:1; display:flex; flex-direction:column; justify-content:center; gap:14px; --i:2" data-a="rise">
+        <h3 class="title" style="font-size:44px; color:var(--clay)">Activity 1: Surveying the Environment</h3>
+        <p class="ct s40" style="color:var(--ink-soft)">On your way to school, spot an action for the environment: a project, slogan, poster, or rule.</p>
+        <p class="ct s40" style="color:var(--ink-soft)">Take a picture and explain how it helps the environment and the community.</p>
+      </div>
+      <div class="card" style="flex:1; display:flex; flex-direction:column; justify-content:center; gap:14px; --i:3" data-a="rise">
+        <h3 class="title" style="font-size:44px; color:var(--clay)">Activity 2: Go Plant a Tree!</h3>
+        <p class="ct s40" style="color:var(--ink-soft)"><b>Option 1.</b> Join a tree-planting by your municipality, school, or an NGO. Document it with a photo and a one-paragraph insight.</p>
+        <p class="ct s40" style="color:var(--ink-soft)"><b>Option 2.</b> Organize a family tree-planting at home. Photograph each member planting a tree.</p>
+      </div>
+    </div>
+    <div class="col between" style="width:520px; flex:none; gap:20px">
+      <header class="head"><p class="eyebrow" data-a="fade">Journal</p><h2 class="title" data-a="rise" style="--i:1">Take Action</h2></header>
+      <figure class="photo" style="height:380px; flex:none; --i:2" data-a="fade"><img class="kb" src="img/treeplanting.jpg" alt="High school students gathered on a grassy slope after a tree-planting activity"></figure>
+      <div class="card dark challenge" data-a="pop" style="--i:4">
+        <svg class="sprout" viewBox="0 0 84 110" aria-hidden="true">
+          <ellipse class="soil" cx="42" cy="102" rx="38" ry="8"/>
+          <path class="st draw" data-a="draw" style="--a-base:1.6s;--a-dur:1.2s" pathLength="1" d="M42 100 C 42 82, 39 62, 42 40"/>
+          <path class="lv l" data-a="grow" style="--a-base:2.4s" d="M41 62 C 26 62, 12 52, 8 38 C 24 36, 38 46, 41 62 Z"/>
+          <path class="lv r" data-a="grow" style="--a-base:2.7s" d="M42 48 C 52 34, 68 26, 80 28 C 76 44, 60 52, 42 48 Z"/>
+        </svg>
+        <p class="ct s36"><span class="em">Family challenge:</span> choose one eco-action to start this week.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">Both activities come from the Take Action section of the textbook. Activity 1: on the way to school, observe actions done for the environment; it can be a project, slogan, poster, rules, or any action aimed at protecting or caring for the environment. Take a picture of this action and paste it in the book, then explain what the action is, how it helps the environment, and its effect on the community.
+
+Activity 2, Option 1: volunteer in a tree-planting activity spearheaded by the local municipality, the school, or a nongovernment organization; document participation with a picture of the tree or seedling planted and write a one-paragraph insight. Option 2: if there is space in the backyard or front lawn, organize a tree-planting activity for the family and document it by taking pictures of each family member planting a tree.</aside>
+</section>
+
+<!-- 27 · Journal poem -->
+<section class="slide t-moss" data-title="A Poem for Nature" data-credit="Photo: Bakhawan Eco-Park, Rodel L. Bartolome Jr., CC BY-SA 4.0">
+  <div class="row">
+    <figure class="photo" style="width:600px; height:864px; flex:none" data-a="fade"><img class="kb" src="img/mangroves.jpg" alt="Boardwalk through a mature mangrove forest at Bakhawan Eco-Park, Aklan"></figure>
+    <div class="col grow between">
+      <header class="head"><p class="eyebrow" data-a="fade" style="--i:1">Journal</p><h2 class="title" data-a="rise" style="--i:2">A Poem for Nature</h2></header>
+      <p class="lead" data-a="rise" style="--i:3">Compose a <span class="em">poem</span> on love for nature or Mother Earth that includes:</p>
+      <ol class="steps" style="gap:14px">
+        <li class="step s40" data-a="rise" style="--i:4"><span class="badge">a</span><p style="color:var(--ink)">why we should take care of Mother Earth;</p></li>
+        <li class="step s40" data-a="rise" style="--i:5"><span class="badge">b</span><p style="color:var(--ink)">an appreciation of what nature gives us; and</p></li>
+        <li class="step s40" data-a="rise" style="--i:6"><span class="badge">c</span><p style="color:var(--ink)">an invitation for others to be custodians of the Earth.</p></li>
+      </ol>
+      <div class="card dark" style="display:flex; flex-direction:column; gap:12px; --i:7" data-a="fade">
+        <p class="qt" style="font-size:40px"><span class="type l1">“I think that I shall never see</span><span class="type l2">A poem lovely as a tree.”<span class="caret" aria-hidden="true"></span></span></p>
+        <p class="ref">Joyce Kilmer, “Trees” (scan the QR code in your book)</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">Journal task from the textbook: compose a poem on love for nature or Mother Earth that includes why we should take care of Mother Earth, an appreciation of what nature gives us, and an invitation for others to be custodians of the Earth.
+
+To inspire learners, read Joyce Kilmer’s poem “Trees” (1913), which is in the public domain; its opening couplet types itself out on the slide, and the QR code in the book leads to the full text. Encourage learners to write in English or Filipino.</aside>
+</section>
+
+<!-- 28 · Summary (click to reveal) -->
+<section class="slide t-paper" data-title="Summary" data-section="Wrap-up">
+  <div class="head-row">
+    <header class="head"><p class="eyebrow" data-a="fade">Wrap-up</p><h2 class="title" data-a="rise" style="--i:1">Summary</h2></header>
+    <div class="ring" data-a="pop" style="--i:2" aria-hidden="true"><svg viewBox="0 0 132 132"><path class="tr" d="M66 10 a56 56 0 1 1 0 112 a56 56 0 1 1 0 -112"/><path class="bar" pathLength="1" d="M66 10 a56 56 0 1 1 0 112 a56 56 0 1 1 0 -112"/></svg><b>0/8</b></div>
+  </div>
+  <div class="row">
+    <ol class="steps grow between" style="flex:1">
+      <li class="step" data-step><span class="badge">1</span><p><span class="em">Stewardship</span>: our duty to protect and care for the environment.</p></li>
+      <li class="step" data-step><span class="badge">2</span><p>Abusing nature leads to the <span class="em">triple planetary crisis</span>.</p></li>
+      <li class="step" data-step><span class="badge">3</span><p><span class="em">Climate change</span>: long-term shifts in weather and temperature.</p></li>
+      <li class="step" data-step><span class="badge">4</span><p><span class="em">Air pollution</span>: contamination of the air we breathe.</p></li>
+    </ol>
+    <ol class="steps grow between" style="flex:1" start="5">
+      <li class="step" data-step><span class="badge">5</span><p><span class="em">Biodiversity loss</span>: the decline of living things and ecosystems.</p></li>
+      <li class="step" data-step><span class="badge">6</span><p>In 2022 the UN declared a healthy environment a <span class="em">universal human right</span>.</p></li>
+      <li class="step" data-step><span class="badge">7</span><p>States hold the first duty, but <span class="em">everyone has a role</span>.</p></li>
+      <li class="step" data-step><span class="badge">8</span><p>The Philippines has acted; <span class="em">families</span> can act too.</p></li>
+    </ol>
+  </div>
+  <aside class="notes">The eight points appear one per click. Read them with the class, or ask eight volunteers to read one each.
+
+Full textbook summary: 1. Stewardship refers to our responsibility to protect and care for our environment. 2. Utter disregard and abuse of nature can lead to what the United Nations calls the triple planetary crises: climate change, air pollution, and biodiversity loss. 3. Climate change means those changes in our weather patterns and long-term shifts in temperature that eventually alter the ecosystems that support life on our planet. 4. Air pollution is the contamination of the indoor or outdoor environment by any chemical, physical, or biological agent that modifies the natural characteristics of the atmosphere. 5. Biodiversity loss refers to the worldwide decline or disappearance of biological diversity and the natural ecosystem patterns. 6. The United Nations General Assembly voted overwhelmingly to declare the ability to live in “a clean, healthy, and sustainable environment” a universal human right. 7. According to the UN, those responsible for realizing the right to a healthy environment are first the State and then everyone. 8. Countries all over the world, including the Philippines, have taken concrete steps to help mitigate the triple planetary crises; we, together with our families, can take specific actions too. Then return to the essential question.</aside>
+</section>
+
+<!-- 29 · Heart in Action -->
+<section class="slide t-leaf" data-title="A Gift and a Responsibility">
+  <div class="fx-slot" data-color="240,185,90"></div>
+  <div class="row">
+    <div class="col grow between">
+      <header class="head"><p class="eyebrow" data-a="fade">Heart in Action</p><h2 class="title" data-a="rise" style="--i:1">A Gift and a Responsibility</h2></header>
+      <p class="lead" style="color:var(--paper); --i:2" data-a="rise">The world around us, forests, rivers, and the air we breathe, is a <span class="em">precious gift from God</span>. With this gift comes a responsibility.</p>
+      <p class="lead soft" data-a="rise" style="--i:3"><span class="em">Change begins at home.</span> Small actions make a difference: recycling, conserving water, planting trees.</p>
+    </div>
+    <div class="card reflect-card" data-a="pop" style="--i:4">
+      <svg class="heart" viewBox="0 0 120 108" aria-hidden="true">
+        <path class="hp draw" data-a="draw" style="--a-base:1.4s;--a-dur:1.6s" pathLength="1" d="M60 100 C 20 70, 4 48, 4 30 C 4 14, 16 4, 32 4 C 44 4, 54 11, 60 22 C 66 11, 76 4, 88 4 C 104 4, 116 14, 116 30 C 116 48, 100 70, 60 100 Z"/>
+        <g class="hl" data-a="grow" style="--a-base:2.8s"><path class="st" d="M60 80 V44"/><path class="lv" d="M60 58 C 48 54, 42 44, 44 36 C 54 38, 60 46, 60 58 Z"/><path class="lv" d="M60 52 C 70 46, 80 44, 84 48 C 80 58, 70 60, 60 52 Z"/></g>
+      </svg>
+      <p class="k">Reflection Moment</p>
+      <p class="ct" style="color:var(--ink)">Write a reflection: how can your family care for the environment?</p>
+      <p class="ct" style="color:var(--ink-soft)">1. What actions can you take together?</p>
+      <p class="ct" style="color:var(--ink-soft)">2. How does caring for nature strengthen your bond with <span class="em">God and each other</span>?</p>
+    </div>
+  </div>
+  <aside class="notes">Heart in Action, from the textbook: The world around us, lush forests, sparkling rivers, and the air we breathe, is a precious gift from God. But with this gift comes a responsibility to protect and care for it. While the challenges facing the environment may seem overwhelming, the truth is that change begins at home. Every family has the power to make a difference by taking small but impactful actions, whether through recycling, conserving water, or planting trees.
+
+Reflection Moment: take a moment to reflect on what you have learned today. Write a reflection on how your family can take steps to care for the environment. What actions can you take together to make a difference? How does being responsible for nature strengthen your connection with God and each other? Give learners quiet time to write; invite two or three to share.</aside>
+</section>
+
+<!-- 30 · Closing -->
+<section class="slide t-forest" data-title="Our Only Home" data-credit="Photo: NASA, Apollo 17, public domain">
+  <div class="stars" aria-hidden="true"></div>
+  <div class="fx-slot" data-color="127,203,143"></div>
+  <div class="row items-center" style="gap:40px">
+    <div class="col center-y" style="flex:1; gap:22px">
+      <p class="eyebrow" data-a="fade">Our Only Home</p>
+      <h2 class="title" style="font-size:72px; --i:1" data-a="rise">How can families care for and preserve nature?</h2>
+      <p class="lead" style="color:var(--mist); --i:2" data-a="rise">By being <span class="em">stewards together</span>: reduce, reuse, recycle, conserve water, plant trees, and invite others to join.</p>
+      <div class="card glass" style="display:flex; flex-direction:column; gap:12px; --i:4" data-a="rise">
+        <p class="qt" style="font-size:38px">“And the LORD God took the man, and put him into the garden of Eden to dress it and to keep it.”</p>
+        <p class="ref">Genesis 2:15 (KJV)</p>
+      </div>
+      <p class="challenge-pill">Family challenge: choose one eco-action to start this week.</p>
+    </div>
+    <figure class="earth sm" data-a="pop" style="--i:3">
+      <div class="halo"></div>
+      <div class="globe"><img src="img/earth.jpg" alt="Earth photographed from space by the Apollo 17 crew"></div>
+      <div class="orbit" aria-hidden="true"><svg viewBox="0 0 740 180" preserveAspectRatio="none"><ellipse cx="370" cy="90" rx="370" ry="90"/></svg><span class="moon"></span></div>
+    </figure>
+  </div>
+  <aside class="notes">Close by returning to the essential question and letting learners answer it in their own words. Genesis 2:15 shows that caring for creation was humanity’s first assignment: to work the garden and to keep it.
+
+End with the family challenge: every learner names one eco-action their family will begin this week, and we check in on it at the start of the next lesson.</aside>
+</section>
+
+      <div class="wipe" id="wipe" aria-hidden="true"><p class="wipe-k">Next section</p><p class="wipe-t" id="wipeT"></p></div>
+      <div class="progress" aria-hidden="true"><i id="bar"></i></div>
+    </div>
+
+    <p class="hint" id="hint">Click or press <kbd>→</kbd> to move · <kbd>N</kbd> notes · <kbd>F</kbd> full screen</p>
+    <nav class="island" id="island" aria-label="Presentation controls">
+      <button type="button" id="prevBtn" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <span class="count" id="count" aria-hidden="true">1 / 30</span>
+      <button type="button" id="nextBtn" aria-label="Next"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+      <span class="sep" aria-hidden="true"></span>
+      <button type="button" id="notesBtn" aria-label="Speaker notes" aria-pressed="false"><svg viewBox="0 0 24 24"><path d="M5 7h14M5 12h14M5 17h9"/></svg></button>
+      <button type="button" id="fsBtn" aria-label="Full screen" aria-pressed="false"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+    </nav>
+    <p class="sr" id="live" aria-live="polite"></p>
+  </main>
+
+  <aside class="notes-panel" id="notesPanel" aria-label="Speaker notes">
+    <div class="notes-inner">
+      <p class="notes-k" id="notesK">Slide 1 of 30</p>
+      <h2 class="notes-title" id="notesTitle"></h2>
+      <p class="notes-body" id="notesBody"></p>
+      <p class="notes-next" id="notesNext"></p>
+    </div>
+  </aside>
+</div>
+
+<script>
+(() => {
+  'use strict';
+  const app = document.getElementById('app');
+  const deck = document.getElementById('deck');
+  const stage = document.getElementById('stage');
+  const slides = Array.from(stage.querySelectorAll('.slide'));
+  const total = slides.length;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const $ = (id) => document.getElementById(id);
+  const wipe = $('wipe'), wipeT = $('wipeT'), bar = $('bar'), count = $('count'), live = $('live');
+  const prevBtn = $('prevBtn'), nextBtn = $('nextBtn'), notesBtn = $('notesBtn'), fsBtn = $('fsBtn');
+  const notesK = $('notesK'), notesTitle = $('notesTitle'), notesBody = $('notesBody'), notesNext = $('notesNext');
+  let idx = 0, busy = false;
+
+  /* ---------- one-time setup ---------- */
+  slides.forEach((s, i) => {
+    const f = document.createElement('footer');
+    f.className = 'foot';
+    const a = document.createElement('span'); a.textContent = 'Values Education 9_Term 2_Lesson 5';
+    const b = document.createElement('span'); b.textContent = (s.dataset.credit ? s.dataset.credit + ' · ' : '') + (i + 1);
+    f.append(a, b);
+    s.appendChild(f);
+    s.setAttribute('aria-roledescription', 'slide');
+    s.setAttribute('aria-label', 'Slide ' + (i + 1) + ' of ' + total + ': ' + s.dataset.title);
+  });
+
+  // kinetic typography: wrap each word so it can rise in sequence
+  document.querySelectorAll('[data-split]').forEach((root) => {
+    let w = 0;
+    const walk = (node) => {
+      Array.from(node.childNodes).forEach((ch) => {
+        if (ch.nodeType === 3) {
+          const frag = document.createDocumentFragment();
+          ch.textContent.split(/(\s+)/).forEach((p) => {
+            if (!p) return;
+            if (/^\s+$/.test(p)) { frag.appendChild(document.createTextNode(p)); return; }
+            const sp = document.createElement('span');
+            sp.className = 'sw'; sp.style.setProperty('--w', w++); sp.textContent = p;
+            frag.appendChild(sp);
+          });
+          ch.replaceWith(frag);
+        } else if (ch.nodeType === 1) walk(ch);
+      });
+    };
+    walk(root);
+  });
+
+  const rnd = (a, b) => a + Math.random() * (b - a);
+  document.querySelectorAll('.stars').forEach((box) => {
+    for (let i = 0; i < 70; i++) {
+      const s = document.createElement('span');
+      s.style.cssText = `--x:${rnd(0, 100).toFixed(2)}%;--y:${rnd(0, 100).toFixed(2)}%;--z:${rnd(1.5, 4.2).toFixed(1)}px;--t:${rnd(2, 5.5).toFixed(2)}s;--dl:${(-rnd(0, 5)).toFixed(2)}s`;
+      box.appendChild(s);
+    }
+  });
+  document.querySelectorAll('.bubbles').forEach((box) => {
+    for (let i = 0; i < 16; i++) {
+      const s = document.createElement('span');
+      s.style.cssText = `--x:${rnd(4, 94).toFixed(1)}%;--z:${rnd(10, 32).toFixed(0)}px;--t:${rnd(5.5, 10).toFixed(2)}s;--dl:${(-rnd(0, 10)).toFixed(2)}s;--sx:${rnd(-40, 40).toFixed(0)}px`;
+      box.appendChild(s);
+    }
+  });
+
+  /* ---------- falling-leaf canvas (moves into the active slide's .fx-slot) ---------- */
+  const canvas = document.createElement('canvas');
+  canvas.width = 1920; canvas.height = 1080;
+  const ctx = canvas.getContext('2d');
+  let leaves = [], raf = 0, lastT = 0, leafColor = '240,185,90';
+  const makeLeaf = (anywhere) => ({ x: rnd(0, 1920), y: anywhere ? rnd(-60, 1080) : rnd(-140, -40), s: rnd(12, 26), vy: rnd(28, 62), sway: rnd(18, 56), ph: rnd(0, 6.28), rot: rnd(0, 6.28), vr: rnd(-.6, .6), a: rnd(.22, .5) });
+  function frame(ts) {
+    const t = ts / 1000, dt = Math.min(0.05, (ts - lastT) / 1000 || 0);
+    lastT = ts;
+    ctx.clearRect(0, 0, 1920, 1080);
+    for (const l of leaves) {
+      l.y += l.vy * dt; l.rot += l.vr * dt;
+      if (l.y > 1140) Object.assign(l, makeLeaf(false));
+      const x = l.x + Math.sin(t * 0.8 + l.ph) * l.sway;
+      ctx.save();
+      ctx.translate(x, l.y);
+      ctx.rotate(l.rot + Math.sin(t + l.ph) * 0.4);
+      ctx.globalAlpha = l.a;
+      ctx.fillStyle = `rgb(${leafColor})`;
+      ctx.beginPath(); ctx.moveTo(0, -l.s);
+      ctx.quadraticCurveTo(l.s * 0.75, 0, 0, l.s); ctx.quadraticCurveTo(-l.s * 0.75, 0, 0, -l.s);
+      ctx.fill();
+      ctx.globalAlpha = l.a * 0.7; ctx.strokeStyle = 'rgba(16,36,26,.5)'; ctx.lineWidth = 1.2;
+      ctx.beginPath(); ctx.moveTo(0, -l.s * 0.85); ctx.lineTo(0, l.s * 0.85); ctx.stroke();
+      ctx.restore();
+    }
+    raf = requestAnimationFrame(frame);
+  }
+  function leavesFor(slide) {
+    cancelAnimationFrame(raf); raf = 0;
+    const slot = slide.querySelector('.fx-slot');
+    if (!slot || reduce.matches || document.hidden) { if (canvas.parentNode) canvas.remove(); return; }
+    leafColor = slot.dataset.color || leafColor;
+    slot.appendChild(canvas);
+    if (!leaves.length) leaves = Array.from({ length: 18 }, () => makeLeaf(true));
+    lastT = performance.now();
+    raf = requestAnimationFrame(frame);
+  }
+
+  /* ---------- counters ---------- */
+  function runCounters(slide) {
+    slide.querySelectorAll('[data-count]').forEach((el) => {
+      const to = +el.dataset.count, from = +(el.dataset.from || 0), plain = 'plain' in el.dataset;
+      const fmt = (n) => plain ? String(n) : n.toLocaleString('en-US');
+      if (reduce.matches) { el.textContent = fmt(to); return; }
+      const dur = 1900, t0 = performance.now() + +(el.dataset.delay || 700);
+      el.textContent = fmt(from);
+      const tick = (t) => {
+        if (!slide.classList.contains('is-active')) { el.textContent = fmt(to); return; }
+        const p = Math.min(1, Math.max(0, (t - t0) / dur));
+        el.textContent = fmt(Math.round(from + (to - from) * (1 - Math.pow(1 - p, 4))));
+        if (p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    });
+  }
+
+  /* ---------- fragments + rings ---------- */
+  const frags = (s) => Array.from(s.querySelectorAll('[data-step]'));
+  function updateRing(s) {
+    const ring = s.querySelector('.ring');
+    if (!ring) return;
+    const all = frags(s), shown = all.filter((e) => e.classList.contains('is-shown')).length;
+    ring.querySelector('.bar').style.strokeDashoffset = String(1 - (all.length ? shown / all.length : 0));
+    ring.querySelector('b').textContent = shown + '/' + all.length;
+  }
+
+  /* ---------- scaling ---------- */
+  function fit() {
+    const s = Math.min(deck.clientWidth / 1920, deck.clientHeight / 1080);
+    stage.style.setProperty('--s', Math.max(0.05, s).toFixed(4));
+  }
+  if ('ResizeObserver' in window) new ResizeObserver(fit).observe(deck); else window.addEventListener('resize', fit);
+  fit();
+
+  /* ---------- navigation ---------- */
+  function update() {
+    const s = slides[idx], all = frags(s), hidden = all.filter((e) => !e.classList.contains('is-shown')).length;
+    count.textContent = (idx + 1) + ' / ' + total;
+    bar.style.transform = 'scaleX(' + ((idx + 1) / total) + ')';
+    prevBtn.disabled = idx === 0 && hidden === all.length;
+    nextBtn.disabled = idx === total - 1 && hidden === 0;
+    notesK.textContent = 'Slide ' + (idx + 1) + ' of ' + total;
+    notesTitle.textContent = s.dataset.title;
+    const n = s.querySelector('aside.notes');
+    notesBody.textContent = n ? n.textContent.trim() : 'No notes for this slide.';
+    notesNext.textContent = idx < total - 1 ? 'Next: ' + slides[idx + 1].dataset.title : 'Last slide';
+    try { history.replaceState(null, '', '#s' + (idx + 1)); } catch (e) { /* ignore */ }
+  }
+  function activate(n, revealAll) {
+    const prev = slides[idx], next = slides[n];
+    if (prev !== next) {
+      prev.classList.remove('is-active');
+      prev.classList.add('is-leaving');
+      prev.setAttribute('aria-hidden', 'true');
+      prev.inert = true;
+      setTimeout(() => prev.classList.remove('is-leaving'), 900);
+    }
+    frags(next).forEach((e) => e.classList.toggle('is-shown', !!revealAll));
+    next.classList.remove('is-active', 'is-leaving');
+    void next.offsetWidth; // restart CSS animations
+    next.classList.add('is-active');
+    next.removeAttribute('aria-hidden');
+    next.inert = false;
+    idx = n;
+    updateRing(next);
+    runCounters(next);
+    leavesFor(next);
+    live.textContent = 'Slide ' + (n + 1) + ' of ' + total + ': ' + next.dataset.title;
+    update();
+  }
+  function show(n, opts) {
+    opts = opts || {};
+    n = Math.max(0, Math.min(total - 1, n));
+    if (busy || (n === idx && !opts.force)) return;
+    const target = slides[n];
+    if (opts.wipe && target.dataset.section && !reduce.matches) {
+      busy = true;
+      wipeT.textContent = target.dataset.section;
+      wipe.classList.remove('run'); void wipe.offsetWidth; wipe.classList.add('run');
+      setTimeout(() => activate(n, false), 540);
+      setTimeout(() => { busy = false; wipe.classList.remove('run'); }, 1320);
+    } else activate(n, !!opts.revealAll);
+  }
+  function next() {
+    if (busy) return;
+    const s = slides[idx], hidden = frags(s).filter((e) => !e.classList.contains('is-shown'));
+    if (hidden.length) { hidden[0].classList.add('is-shown'); updateRing(s); update(); return; }
+    if (idx < total - 1) show(idx + 1, { wipe: true });
+  }
+  function prev() {
+    if (busy) return;
+    const s = slides[idx], shown = frags(s).filter((e) => e.classList.contains('is-shown'));
+    if (shown.length) { shown[shown.length - 1].classList.remove('is-shown'); updateRing(s); update(); return; }
+    if (idx > 0) show(idx - 1, { revealAll: true });
+  }
+
+  /* ---------- chrome: notes, full screen, idle ---------- */
+  function toggleNotes() {
+    const open = app.classList.toggle('notes-open');
+    notesBtn.setAttribute('aria-pressed', String(open));
+  }
+  function toggleFull() {
+    try {
+      if (!document.fullscreenElement) {
+        const p = document.documentElement.requestFullscreen && document.documentElement.requestFullscreen();
+        if (p && p.catch) p.catch(() => {});
+      } else if (document.exitFullscreen) {
+        const p = document.exitFullscreen(); if (p && p.catch) p.catch(() => {});
+      }
+    } catch (e) { /* not available here */ }
+  }
+  document.addEventListener('fullscreenchange', () => fsBtn.setAttribute('aria-pressed', String(!!document.fullscreenElement)));
+  prevBtn.addEventListener('click', (e) => { e.stopPropagation(); prev(); });
+  nextBtn.addEventListener('click', (e) => { e.stopPropagation(); next(); });
+  notesBtn.addEventListener('click', (e) => { e.stopPropagation(); toggleNotes(); });
+  fsBtn.addEventListener('click', (e) => { e.stopPropagation(); toggleFull(); });
+
+  let idleT = 0;
+  const island = $('island');
+  function wake() {
+    app.classList.remove('idle');
+    clearTimeout(idleT);
+    idleT = setTimeout(() => {
+      if (!island.matches(':hover') && !island.contains(document.activeElement)) app.classList.add('idle');
+    }, 2800);
+  }
+  ['mousemove', 'pointerdown', 'keydown', 'touchstart'].forEach((ev) => window.addEventListener(ev, wake, { passive: true }));
+  wake();
+  setTimeout(() => $('hint').classList.add('gone'), 5200);
+
+  /* ---------- input ---------- */
+  window.addEventListener('keydown', (e) => {
+    if (e.altKey || e.ctrlKey || e.metaKey) return;
+    const k = e.key;
+    if ((k === ' ' || k === 'Enter') && e.target.closest && e.target.closest('button')) return;
+    if (['ArrowRight', 'ArrowDown', 'PageDown', ' ', 'Enter'].includes(k)) { e.preventDefault(); next(); }
+    else if (['ArrowLeft', 'ArrowUp', 'PageUp', 'Backspace'].includes(k)) { e.preventDefault(); prev(); }
+    else if (k === 'Home') { e.preventDefault(); show(0, { force: true }); }
+    else if (k === 'End') { e.preventDefault(); show(total - 1, { revealAll: true }); }
+    else if (k === 'n' || k === 'N') toggleNotes();
+    else if (k === 'f' || k === 'F') toggleFull();
+  });
+  let swiped = false, tx = 0, ty = 0;
+  deck.addEventListener('touchstart', (e) => { const t = e.changedTouches[0]; tx = t.clientX; ty = t.clientY; swiped = false; }, { passive: true });
+  deck.addEventListener('touchend', (e) => {
+    const t = e.changedTouches[0], dx = t.clientX - tx, dy = t.clientY - ty;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) { swiped = true; if (dx < 0) next(); else prev(); }
+  }, { passive: true });
+  stage.addEventListener('click', (e) => { if (swiped) { swiped = false; return; } if (e.shiftKey) prev(); else next(); });
+  let wAcc = 0, wLast = 0;
+  deck.addEventListener('wheel', (e) => {
+    wAcc += e.deltaY;
+    const now = performance.now();
+    if (Math.abs(wAcc) > 60 && now - wLast > 700) { if (wAcc > 0) next(); else prev(); wAcc = 0; wLast = now; }
+  }, { passive: true });
+  document.addEventListener('visibilitychange', () => leavesFor(slides[idx]));
+  if (reduce.addEventListener) reduce.addEventListener('change', () => leavesFor(slides[idx]));
+
+  /* ---------- start (keeps the current slide across live updates) ---------- */
+  slides.forEach((s, i) => { if (i !== 0) { s.setAttribute('aria-hidden', 'true'); s.inert = true; } });
+  function start(data) {
+    let first = 0;
+    const m = /^#s(\d{1,2})$/.exec(location.hash || '');
+    if (data && Number.isInteger(data.idx)) first = data.idx;
+    else if (m) first = Math.min(total, Math.max(1, +m[1])) - 1;
+    if (first !== 0) activate(first, false);
+    else { updateRing(slides[0]); runCounters(slides[0]); leavesFor(slides[0]); update(); }
+  }
+  try { if (window.claude && window.claude.hot && window.claude.hot.snapshot) window.claude.hot.snapshot(() => ({ idx })); } catch (e) { /* ignore */ }
+  if (window.claude && window.claude.hot && window.claude.hot.ready) window.claude.hot.ready(start);
+  else start((window.claude && window.claude.hot && window.claude.hot.data) || {});
+})();
+</script>
+</body>
+</html>
